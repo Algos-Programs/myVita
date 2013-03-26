@@ -1,0 +1,488 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A9A3144B17023A7C0081BC88 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9A3144A17023A7C0081BC88 /* UIKit.framework */; };
+		A9A3144D17023A7C0081BC88 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9A3144C17023A7C0081BC88 /* Foundation.framework */; };
+		A9A3144F17023A7C0081BC88 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9A3144E17023A7C0081BC88 /* CoreGraphics.framework */; };
+		A9A3145517023A7C0081BC88 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A9A3145317023A7C0081BC88 /* InfoPlist.strings */; };
+		A9A3145717023A7C0081BC88 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A9A3145617023A7C0081BC88 /* main.m */; };
+		A9A3145B17023A7C0081BC88 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A9A3145A17023A7C0081BC88 /* AppDelegate.m */; };
+		A9A3145D17023A7C0081BC88 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = A9A3145C17023A7C0081BC88 /* Default.png */; };
+		A9A3145F17023A7C0081BC88 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A9A3145E17023A7C0081BC88 /* Default@2x.png */; };
+		A9A3146117023A7C0081BC88 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A9A3146017023A7C0081BC88 /* Default-568h@2x.png */; };
+		A9A3146417023A7C0081BC88 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9A3146217023A7C0081BC88 /* MainStoryboard.storyboard */; };
+		A9A3146717023A7C0081BC88 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9A3146617023A7C0081BC88 /* FirstViewController.m */; };
+		A9A3146917023A7C0081BC88 /* first.png in Resources */ = {isa = PBXBuildFile; fileRef = A9A3146817023A7C0081BC88 /* first.png */; };
+		A9A3146B17023A7C0081BC88 /* first@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A9A3146A17023A7C0081BC88 /* first@2x.png */; };
+		A9A3146E17023A7C0081BC88 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9A3146D17023A7C0081BC88 /* SecondViewController.m */; };
+		A9A3147017023A7C0081BC88 /* second.png in Resources */ = {isa = PBXBuildFile; fileRef = A9A3146F17023A7C0081BC88 /* second.png */; };
+		A9A3147217023A7C0081BC88 /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A9A3147117023A7C0081BC88 /* second@2x.png */; };
+		A9A3147A17023A7C0081BC88 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9A3147917023A7C0081BC88 /* SenTestingKit.framework */; };
+		A9A3147B17023A7C0081BC88 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9A3144A17023A7C0081BC88 /* UIKit.framework */; };
+		A9A3147C17023A7C0081BC88 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9A3144C17023A7C0081BC88 /* Foundation.framework */; };
+		A9A3148417023A7C0081BC88 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A9A3148217023A7C0081BC88 /* InfoPlist.strings */; };
+		A9A3148717023A7C0081BC88 /* myVitaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A9A3148617023A7C0081BC88 /* myVitaTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A9A3147D17023A7C0081BC88 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A9A3143F17023A7C0081BC88 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A9A3144617023A7C0081BC88;
+			remoteInfo = myVita;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		A9A3144717023A7C0081BC88 /* myVita.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = myVita.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9A3144A17023A7C0081BC88 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		A9A3144C17023A7C0081BC88 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		A9A3144E17023A7C0081BC88 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		A9A3145217023A7C0081BC88 /* myVita-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "myVita-Info.plist"; sourceTree = "<group>"; };
+		A9A3145417023A7C0081BC88 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A9A3145617023A7C0081BC88 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		A9A3145817023A7C0081BC88 /* myVita-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "myVita-Prefix.pch"; sourceTree = "<group>"; };
+		A9A3145917023A7C0081BC88 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		A9A3145A17023A7C0081BC88 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		A9A3145C17023A7C0081BC88 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		A9A3145E17023A7C0081BC88 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		A9A3146017023A7C0081BC88 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		A9A3146317023A7C0081BC88 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		A9A3146517023A7C0081BC88 /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
+		A9A3146617023A7C0081BC88 /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
+		A9A3146817023A7C0081BC88 /* first.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first.png; sourceTree = "<group>"; };
+		A9A3146A17023A7C0081BC88 /* first@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "first@2x.png"; sourceTree = "<group>"; };
+		A9A3146C17023A7C0081BC88 /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
+		A9A3146D17023A7C0081BC88 /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
+		A9A3146F17023A7C0081BC88 /* second.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = second.png; sourceTree = "<group>"; };
+		A9A3147117023A7C0081BC88 /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
+		A9A3147817023A7C0081BC88 /* myVitaTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = myVitaTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9A3147917023A7C0081BC88 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		A9A3148117023A7C0081BC88 /* myVitaTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "myVitaTests-Info.plist"; sourceTree = "<group>"; };
+		A9A3148317023A7C0081BC88 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A9A3148517023A7C0081BC88 /* myVitaTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = myVitaTests.h; sourceTree = "<group>"; };
+		A9A3148617023A7C0081BC88 /* myVitaTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = myVitaTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A9A3144417023A7C0081BC88 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A9A3144B17023A7C0081BC88 /* UIKit.framework in Frameworks */,
+				A9A3144D17023A7C0081BC88 /* Foundation.framework in Frameworks */,
+				A9A3144F17023A7C0081BC88 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9A3147417023A7C0081BC88 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A9A3147A17023A7C0081BC88 /* SenTestingKit.framework in Frameworks */,
+				A9A3147B17023A7C0081BC88 /* UIKit.framework in Frameworks */,
+				A9A3147C17023A7C0081BC88 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A9A3143E17023A7C0081BC88 = {
+			isa = PBXGroup;
+			children = (
+				A9A3145017023A7C0081BC88 /* myVita */,
+				A9A3147F17023A7C0081BC88 /* myVitaTests */,
+				A9A3144917023A7C0081BC88 /* Frameworks */,
+				A9A3144817023A7C0081BC88 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A9A3144817023A7C0081BC88 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A9A3144717023A7C0081BC88 /* myVita.app */,
+				A9A3147817023A7C0081BC88 /* myVitaTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A9A3144917023A7C0081BC88 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A9A3144A17023A7C0081BC88 /* UIKit.framework */,
+				A9A3144C17023A7C0081BC88 /* Foundation.framework */,
+				A9A3144E17023A7C0081BC88 /* CoreGraphics.framework */,
+				A9A3147917023A7C0081BC88 /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A9A3145017023A7C0081BC88 /* myVita */ = {
+			isa = PBXGroup;
+			children = (
+				A9A3145917023A7C0081BC88 /* AppDelegate.h */,
+				A9A3145A17023A7C0081BC88 /* AppDelegate.m */,
+				A9A3146217023A7C0081BC88 /* MainStoryboard.storyboard */,
+				A9A3146517023A7C0081BC88 /* FirstViewController.h */,
+				A9A3146617023A7C0081BC88 /* FirstViewController.m */,
+				A9A3146817023A7C0081BC88 /* first.png */,
+				A9A3146A17023A7C0081BC88 /* first@2x.png */,
+				A9A3146C17023A7C0081BC88 /* SecondViewController.h */,
+				A9A3146D17023A7C0081BC88 /* SecondViewController.m */,
+				A9A3146F17023A7C0081BC88 /* second.png */,
+				A9A3147117023A7C0081BC88 /* second@2x.png */,
+				A9A3145117023A7C0081BC88 /* Supporting Files */,
+			);
+			path = myVita;
+			sourceTree = "<group>";
+		};
+		A9A3145117023A7C0081BC88 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A9A3145217023A7C0081BC88 /* myVita-Info.plist */,
+				A9A3145317023A7C0081BC88 /* InfoPlist.strings */,
+				A9A3145617023A7C0081BC88 /* main.m */,
+				A9A3145817023A7C0081BC88 /* myVita-Prefix.pch */,
+				A9A3145C17023A7C0081BC88 /* Default.png */,
+				A9A3145E17023A7C0081BC88 /* Default@2x.png */,
+				A9A3146017023A7C0081BC88 /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A9A3147F17023A7C0081BC88 /* myVitaTests */ = {
+			isa = PBXGroup;
+			children = (
+				A9A3148517023A7C0081BC88 /* myVitaTests.h */,
+				A9A3148617023A7C0081BC88 /* myVitaTests.m */,
+				A9A3148017023A7C0081BC88 /* Supporting Files */,
+			);
+			path = myVitaTests;
+			sourceTree = "<group>";
+		};
+		A9A3148017023A7C0081BC88 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A9A3148117023A7C0081BC88 /* myVitaTests-Info.plist */,
+				A9A3148217023A7C0081BC88 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A9A3144617023A7C0081BC88 /* myVita */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A9A3148A17023A7C0081BC88 /* Build configuration list for PBXNativeTarget "myVita" */;
+			buildPhases = (
+				A9A3144317023A7C0081BC88 /* Sources */,
+				A9A3144417023A7C0081BC88 /* Frameworks */,
+				A9A3144517023A7C0081BC88 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = myVita;
+			productName = myVita;
+			productReference = A9A3144717023A7C0081BC88 /* myVita.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A9A3147717023A7C0081BC88 /* myVitaTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A9A3148D17023A7C0081BC88 /* Build configuration list for PBXNativeTarget "myVitaTests" */;
+			buildPhases = (
+				A9A3147317023A7C0081BC88 /* Sources */,
+				A9A3147417023A7C0081BC88 /* Frameworks */,
+				A9A3147517023A7C0081BC88 /* Resources */,
+				A9A3147617023A7C0081BC88 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A9A3147E17023A7C0081BC88 /* PBXTargetDependency */,
+			);
+			name = myVitaTests;
+			productName = myVitaTests;
+			productReference = A9A3147817023A7C0081BC88 /* myVitaTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A9A3143F17023A7C0081BC88 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = Algos;
+			};
+			buildConfigurationList = A9A3144217023A7C0081BC88 /* Build configuration list for PBXProject "myVita" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = A9A3143E17023A7C0081BC88;
+			productRefGroup = A9A3144817023A7C0081BC88 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A9A3144617023A7C0081BC88 /* myVita */,
+				A9A3147717023A7C0081BC88 /* myVitaTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A9A3144517023A7C0081BC88 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A9A3145517023A7C0081BC88 /* InfoPlist.strings in Resources */,
+				A9A3145D17023A7C0081BC88 /* Default.png in Resources */,
+				A9A3145F17023A7C0081BC88 /* Default@2x.png in Resources */,
+				A9A3146117023A7C0081BC88 /* Default-568h@2x.png in Resources */,
+				A9A3146417023A7C0081BC88 /* MainStoryboard.storyboard in Resources */,
+				A9A3146917023A7C0081BC88 /* first.png in Resources */,
+				A9A3146B17023A7C0081BC88 /* first@2x.png in Resources */,
+				A9A3147017023A7C0081BC88 /* second.png in Resources */,
+				A9A3147217023A7C0081BC88 /* second@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9A3147517023A7C0081BC88 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A9A3148417023A7C0081BC88 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A9A3147617023A7C0081BC88 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A9A3144317023A7C0081BC88 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A9A3145717023A7C0081BC88 /* main.m in Sources */,
+				A9A3145B17023A7C0081BC88 /* AppDelegate.m in Sources */,
+				A9A3146717023A7C0081BC88 /* FirstViewController.m in Sources */,
+				A9A3146E17023A7C0081BC88 /* SecondViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9A3147317023A7C0081BC88 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A9A3148717023A7C0081BC88 /* myVitaTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A9A3147E17023A7C0081BC88 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A9A3144617023A7C0081BC88 /* myVita */;
+			targetProxy = A9A3147D17023A7C0081BC88 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		A9A3145317023A7C0081BC88 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A9A3145417023A7C0081BC88 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		A9A3146217023A7C0081BC88 /* MainStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A9A3146317023A7C0081BC88 /* en */,
+			);
+			name = MainStoryboard.storyboard;
+			sourceTree = "<group>";
+		};
+		A9A3148217023A7C0081BC88 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A9A3148317023A7C0081BC88 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A9A3148817023A7C0081BC88 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		A9A3148917023A7C0081BC88 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A9A3148B17023A7C0081BC88 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "myVita/myVita-Prefix.pch";
+				INFOPLIST_FILE = "myVita/myVita-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		A9A3148C17023A7C0081BC88 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "myVita/myVita-Prefix.pch";
+				INFOPLIST_FILE = "myVita/myVita-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		A9A3148E17023A7C0081BC88 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/myVita.app/myVita";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "myVita/myVita-Prefix.pch";
+				INFOPLIST_FILE = "myVitaTests/myVitaTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		A9A3148F17023A7C0081BC88 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/myVita.app/myVita";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "myVita/myVita-Prefix.pch";
+				INFOPLIST_FILE = "myVitaTests/myVitaTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A9A3144217023A7C0081BC88 /* Build configuration list for PBXProject "myVita" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A9A3148817023A7C0081BC88 /* Debug */,
+				A9A3148917023A7C0081BC88 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A9A3148A17023A7C0081BC88 /* Build configuration list for PBXNativeTarget "myVita" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A9A3148B17023A7C0081BC88 /* Debug */,
+				A9A3148C17023A7C0081BC88 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		A9A3148D17023A7C0081BC88 /* Build configuration list for PBXNativeTarget "myVitaTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A9A3148E17023A7C0081BC88 /* Debug */,
+				A9A3148F17023A7C0081BC88 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A9A3143F17023A7C0081BC88 /* Project object */;
+}

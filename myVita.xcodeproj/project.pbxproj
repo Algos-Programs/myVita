@@ -28,6 +28,10 @@
 		A9A3147C17023A7C0081BC88 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9A3144C17023A7C0081BC88 /* Foundation.framework */; };
 		A9A3148417023A7C0081BC88 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A9A3148217023A7C0081BC88 /* InfoPlist.strings */; };
 		A9A3148717023A7C0081BC88 /* myVitaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A9A3148617023A7C0081BC88 /* myVitaTests.m */; };
+		A9A3149117023B240081BC88 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9A3149017023B240081BC88 /* MapKit.framework */; };
+		A9A3149317023B900081BC88 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9A3149217023B900081BC88 /* CoreLocation.framework */; };
+		A9A3149617023D130081BC88 /* LibLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = A9A3149517023D130081BC88 /* LibLocation.m */; };
+		A9A314CA17023E810081BC88 /* LibMap.m in Sources */ = {isa = PBXBuildFile; fileRef = A9A314C917023E810081BC88 /* LibMap.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +73,12 @@
 		A9A3148317023A7C0081BC88 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A9A3148517023A7C0081BC88 /* myVitaTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = myVitaTests.h; sourceTree = "<group>"; };
 		A9A3148617023A7C0081BC88 /* myVitaTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = myVitaTests.m; sourceTree = "<group>"; };
+		A9A3149017023B240081BC88 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		A9A3149217023B900081BC88 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		A9A3149417023D130081BC88 /* LibLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LibLocation.h; sourceTree = "<group>"; };
+		A9A3149517023D130081BC88 /* LibLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LibLocation.m; sourceTree = "<group>"; };
+		A9A314C817023E810081BC88 /* LibMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LibMap.h; sourceTree = "<group>"; };
+		A9A314C917023E810081BC88 /* LibMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LibMap.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +86,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A9A3149317023B900081BC88 /* CoreLocation.framework in Frameworks */,
+				A9A3149117023B240081BC88 /* MapKit.framework in Frameworks */,
 				A9A3144B17023A7C0081BC88 /* UIKit.framework in Frameworks */,
 				A9A3144D17023A7C0081BC88 /* Foundation.framework in Frameworks */,
 				A9A3144F17023A7C0081BC88 /* CoreGraphics.framework in Frameworks */,
@@ -117,6 +129,8 @@
 		A9A3144917023A7C0081BC88 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A9A3149217023B900081BC88 /* CoreLocation.framework */,
+				A9A3149017023B240081BC88 /* MapKit.framework */,
 				A9A3144A17023A7C0081BC88 /* UIKit.framework */,
 				A9A3144C17023A7C0081BC88 /* Foundation.framework */,
 				A9A3144E17023A7C0081BC88 /* CoreGraphics.framework */,
@@ -128,6 +142,7 @@
 		A9A3145017023A7C0081BC88 /* myVita */ = {
 			isa = PBXGroup;
 			children = (
+				A9A3149717023D160081BC88 /* Lib */,
 				A9A3145917023A7C0081BC88 /* AppDelegate.h */,
 				A9A3145A17023A7C0081BC88 /* AppDelegate.m */,
 				A9A3146217023A7C0081BC88 /* MainStoryboard.storyboard */,
@@ -175,6 +190,17 @@
 				A9A3148217023A7C0081BC88 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A9A3149717023D160081BC88 /* Lib */ = {
+			isa = PBXGroup;
+			children = (
+				A9A3149417023D130081BC88 /* LibLocation.h */,
+				A9A3149517023D130081BC88 /* LibLocation.m */,
+				A9A314C817023E810081BC88 /* LibMap.h */,
+				A9A314C917023E810081BC88 /* LibMap.m */,
+			);
+			name = Lib;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -295,6 +321,8 @@
 				A9A3145B17023A7C0081BC88 /* AppDelegate.m in Sources */,
 				A9A3146717023A7C0081BC88 /* FirstViewController.m in Sources */,
 				A9A3146E17023A7C0081BC88 /* SecondViewController.m in Sources */,
+				A9A3149617023D130081BC88 /* LibLocation.m in Sources */,
+				A9A314CA17023E810081BC88 /* LibMap.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

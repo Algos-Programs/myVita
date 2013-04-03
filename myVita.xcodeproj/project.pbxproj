@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A95089041703474B006AC00F /* Annotation.m in Sources */ = {isa = PBXBuildFile; fileRef = A95089031703474B006AC00F /* Annotation.m */; };
+		A950890A17034EF9006AC00F /* InfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A950890917034EF9006AC00F /* InfoViewController.m */; };
+		A950890E17035A9F006AC00F /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A950890D17035A9F006AC00F /* DetailViewController.m */; };
+		A98DE3811702430D00604EEF /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A98DE3801702430D00604EEF /* libsqlite3.0.dylib */; };
+		A98DE3841702431D00604EEF /* Database.m in Sources */ = {isa = PBXBuildFile; fileRef = A98DE3831702431D00604EEF /* Database.m */; };
+		A99F523F170C261000EB15E4 /* Database.rtf in Resources */ = {isa = PBXBuildFile; fileRef = A99F523E170C261000EB15E4 /* Database.rtf */; };
 		A9A3144B17023A7C0081BC88 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9A3144A17023A7C0081BC88 /* UIKit.framework */; };
 		A9A3144D17023A7C0081BC88 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9A3144C17023A7C0081BC88 /* Foundation.framework */; };
 		A9A3144F17023A7C0081BC88 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9A3144E17023A7C0081BC88 /* CoreGraphics.framework */; };
@@ -45,6 +51,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A95089021703474B006AC00F /* Annotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Annotation.h; sourceTree = "<group>"; };
+		A95089031703474B006AC00F /* Annotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Annotation.m; sourceTree = "<group>"; };
+		A950890817034EF9006AC00F /* InfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoViewController.h; sourceTree = "<group>"; };
+		A950890917034EF9006AC00F /* InfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoViewController.m; sourceTree = "<group>"; };
+		A950890C17035A9F006AC00F /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
+		A950890D17035A9F006AC00F /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		A98DE3801702430D00604EEF /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
+		A98DE3821702431D00604EEF /* Database.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Database.h; sourceTree = "<group>"; };
+		A98DE3831702431D00604EEF /* Database.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Database.m; sourceTree = "<group>"; };
+		A99F523E170C261000EB15E4 /* Database.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = Database.rtf; sourceTree = "<group>"; };
 		A9A3144717023A7C0081BC88 /* myVita.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = myVita.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9A3144A17023A7C0081BC88 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A9A3144C17023A7C0081BC88 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -86,6 +102,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A98DE3811702430D00604EEF /* libsqlite3.0.dylib in Frameworks */,
 				A9A3149317023B900081BC88 /* CoreLocation.framework in Frameworks */,
 				A9A3149117023B240081BC88 /* MapKit.framework in Frameworks */,
 				A9A3144B17023A7C0081BC88 /* UIKit.framework in Frameworks */,
@@ -107,9 +124,49 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A950890517034757006AC00F /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				A95089021703474B006AC00F /* Annotation.h */,
+				A95089031703474B006AC00F /* Annotation.m */,
+			);
+			name = Location;
+			sourceTree = "<group>";
+		};
+		A950890717034EDC006AC00F /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				A9A3146217023A7C0081BC88 /* MainStoryboard.storyboard */,
+				A9A3146517023A7C0081BC88 /* FirstViewController.h */,
+				A9A3146617023A7C0081BC88 /* FirstViewController.m */,
+				A950890817034EF9006AC00F /* InfoViewController.h */,
+				A950890917034EF9006AC00F /* InfoViewController.m */,
+				A950890C17035A9F006AC00F /* DetailViewController.h */,
+				A950890D17035A9F006AC00F /* DetailViewController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		A98DE3851702432200604EEF /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				A98DE3821702431D00604EEF /* Database.h */,
+				A98DE3831702431D00604EEF /* Database.m */,
+			);
+			name = Database;
+			sourceTree = "<group>";
+		};
+		A98DE389170247F400604EEF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		A9A3143E17023A7C0081BC88 = {
 			isa = PBXGroup;
 			children = (
+				A98DE3801702430D00604EEF /* libsqlite3.0.dylib */,
 				A9A3145017023A7C0081BC88 /* myVita */,
 				A9A3147F17023A7C0081BC88 /* myVitaTests */,
 				A9A3144917023A7C0081BC88 /* Frameworks */,
@@ -142,12 +199,13 @@
 		A9A3145017023A7C0081BC88 /* myVita */ = {
 			isa = PBXGroup;
 			children = (
+				A950890717034EDC006AC00F /* Controllers */,
+				A950890517034757006AC00F /* Location */,
+				A98DE3851702432200604EEF /* Database */,
+				A98DE389170247F400604EEF /* Model */,
 				A9A3149717023D160081BC88 /* Lib */,
 				A9A3145917023A7C0081BC88 /* AppDelegate.h */,
 				A9A3145A17023A7C0081BC88 /* AppDelegate.m */,
-				A9A3146217023A7C0081BC88 /* MainStoryboard.storyboard */,
-				A9A3146517023A7C0081BC88 /* FirstViewController.h */,
-				A9A3146617023A7C0081BC88 /* FirstViewController.m */,
 				A9A3146817023A7C0081BC88 /* first.png */,
 				A9A3146A17023A7C0081BC88 /* first@2x.png */,
 				A9A3146C17023A7C0081BC88 /* SecondViewController.h */,
@@ -162,6 +220,7 @@
 		A9A3145117023A7C0081BC88 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A99F523E170C261000EB15E4 /* Database.rtf */,
 				A9A3145217023A7C0081BC88 /* myVita-Info.plist */,
 				A9A3145317023A7C0081BC88 /* InfoPlist.strings */,
 				A9A3145617023A7C0081BC88 /* main.m */,
@@ -283,6 +342,7 @@
 				A9A3146B17023A7C0081BC88 /* first@2x.png in Resources */,
 				A9A3147017023A7C0081BC88 /* second.png in Resources */,
 				A9A3147217023A7C0081BC88 /* second@2x.png in Resources */,
+				A99F523F170C261000EB15E4 /* Database.rtf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -323,6 +383,10 @@
 				A9A3146E17023A7C0081BC88 /* SecondViewController.m in Sources */,
 				A9A3149617023D130081BC88 /* LibLocation.m in Sources */,
 				A9A314CA17023E810081BC88 /* LibMap.m in Sources */,
+				A98DE3841702431D00604EEF /* Database.m in Sources */,
+				A95089041703474B006AC00F /* Annotation.m in Sources */,
+				A950890A17034EF9006AC00F /* InfoViewController.m in Sources */,
+				A950890E17035A9F006AC00F /* DetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -501,6 +565,7 @@
 				A9A3148C17023A7C0081BC88 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A9A3148D17023A7C0081BC88 /* Build configuration list for PBXNativeTarget "myVitaTests" */ = {
 			isa = XCConfigurationList;
@@ -509,6 +574,7 @@
 				A9A3148F17023A7C0081BC88 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

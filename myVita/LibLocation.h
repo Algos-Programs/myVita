@@ -15,6 +15,17 @@
  Restituisce la localizzazione attuale.
  */
 + (CLLocation*)findCurrentLocation;
++ (CLLocation*)location;
 
+/**
+ Calcola la distanza tra la posizione attuale e la posizione passata
+ */
++ (float)calcoloDistanza:(CLLocation *)location;
+
+/**
+ Calcola la distanza tra la posizione A e la posizione B
+ */
++ (float)calcoloDistanzaWithALocation:(CLLocation *)aLocation andBLocation:(CLLocation *)bLocation;
+    
 
 @end

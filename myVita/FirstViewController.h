@@ -25,7 +25,7 @@
     NSString *state;
     NSString *ZIPCode;
     NSString *country;
-
+    
 }
 
 @property (retain, nonatomic) IBOutlet MKMapView *mapView;
@@ -37,6 +37,10 @@
 @property (nonatomic, strong)NSString *state;
 @property (nonatomic, strong)NSString *ZIPCode;
 @property (nonatomic, strong)NSString *country;
+
+@property (nonatomic, strong)NSArray *posizionrDef;
+
+@property (nonatomic, strong)NSMutableArray *arr;
 
 @property (nonatomic)double latitude;
 @property (nonatomic)double longitude;

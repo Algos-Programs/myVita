@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "Database.h"
 
 @implementation AppDelegate
 
@@ -18,7 +19,26 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    /*
+    Database *db = [[Database alloc] init];
+    [db openDB];
+    [db createTableNamedDefibrillatori];
+    
+        MDefibrillatore *def = [[MDefibrillatore alloc] initWithCap:20090
+                                                           withProv:@"Milano"
+                                                         withComune:@"Buccinasco"
+                                                       withFrazione:@""
+                                                      withIndirizzo:@"Via Marzabotto 10"
+                                                           withNome:@"Palazzo"
+                                                         withOrario:@"H24"
+                                                        withAccesso:@"Privato"
+                                                    withRiferimento:@"Marco"
+                                                            withTel:@"346 0602722"
+                                                     withLatitudine:45.421261
+                                                    withLongitudine:9.123877
+                                                              andOK:true];
+        [db insertRecordWithDefibrillatore:def];
+*/
     return YES;
 }
 							

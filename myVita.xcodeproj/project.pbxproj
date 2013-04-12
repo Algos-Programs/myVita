@@ -10,6 +10,7 @@
 		A95089041703474B006AC00F /* Annotation.m in Sources */ = {isa = PBXBuildFile; fileRef = A95089031703474B006AC00F /* Annotation.m */; };
 		A950890A17034EF9006AC00F /* InfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A950890917034EF9006AC00F /* InfoViewController.m */; };
 		A950890E17035A9F006AC00F /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A950890D17035A9F006AC00F /* DetailViewController.m */; };
+		A97E39C9170D82F90089F4A7 /* ProvaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A97E39C8170D82F90089F4A7 /* ProvaViewController.m */; };
 		A98DE3811702430D00604EEF /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A98DE3801702430D00604EEF /* libsqlite3.0.dylib */; };
 		A98DE3841702431D00604EEF /* Database.m in Sources */ = {isa = PBXBuildFile; fileRef = A98DE3831702431D00604EEF /* Database.m */; };
 		A99F523F170C261000EB15E4 /* Database.rtf in Resources */ = {isa = PBXBuildFile; fileRef = A99F523E170C261000EB15E4 /* Database.rtf */; };
@@ -57,6 +58,8 @@
 		A950890917034EF9006AC00F /* InfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoViewController.m; sourceTree = "<group>"; };
 		A950890C17035A9F006AC00F /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		A950890D17035A9F006AC00F /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		A97E39C7170D82F90089F4A7 /* ProvaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProvaViewController.h; sourceTree = "<group>"; };
+		A97E39C8170D82F90089F4A7 /* ProvaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProvaViewController.m; sourceTree = "<group>"; };
 		A98DE3801702430D00604EEF /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		A98DE3821702431D00604EEF /* Database.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Database.h; sourceTree = "<group>"; };
 		A98DE3831702431D00604EEF /* Database.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Database.m; sourceTree = "<group>"; };
@@ -143,6 +146,8 @@
 				A950890917034EF9006AC00F /* InfoViewController.m */,
 				A950890C17035A9F006AC00F /* DetailViewController.h */,
 				A950890D17035A9F006AC00F /* DetailViewController.m */,
+				A97E39C7170D82F90089F4A7 /* ProvaViewController.h */,
+				A97E39C8170D82F90089F4A7 /* ProvaViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -387,6 +392,7 @@
 				A95089041703474B006AC00F /* Annotation.m in Sources */,
 				A950890A17034EF9006AC00F /* InfoViewController.m in Sources */,
 				A950890E17035A9F006AC00F /* DetailViewController.m in Sources */,
+				A97E39C9170D82F90089F4A7 /* ProvaViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

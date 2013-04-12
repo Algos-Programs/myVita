@@ -13,7 +13,11 @@
     NSMutableArray *arrayInfo; //Contiene i valori (es. 20090 ect.)
     NSMutableArray *arrayNameInfo; //Contiene i nomi dei valori (es. Cap etc.)
     NSMutableArray *arrayValueTV; //Contiene i due array precedenti.
+    
 }
+
+@property (nonatomic, strong)NSMutableArray *arrayInfo; //Contiene i valori (es. 20090 ect.)
+
 
 
 @end

@@ -45,4 +45,7 @@
 @property (nonatomic)double latitude;
 @property (nonatomic)double longitude;
 
+@property (retain, nonatomic) IBOutlet UIActivityIndicatorView *progressIndicatorView;
+@property (retain, nonatomic) IBOutlet UIProgressView *progressBar;
+
 @end

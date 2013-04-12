@@ -7,6 +7,7 @@
 //
 
 #import "DetailViewController.h"
+#import "Database.h"
 
 @interface DetailViewController ()
 
@@ -30,8 +31,26 @@
     [super viewDidLoad];
     
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Cell"];
+    
+    arrayNameInfo = [[[NSMutableArray alloc] init] autorelease];
+    [arrayNameInfo addObject:@"Nome"];
+    [arrayNameInfo addObject:@"Disponibilità"];
+    [arrayNameInfo addObject:@"Posizione"];
+    [arrayNameInfo addObject:@"Indirizzo"];
+    [arrayNameInfo addObject:@"Riferimento"];
+    [arrayNameInfo addObject:@"Telefono Punto Blu"];
+    
+    arrayValueTV = [[[NSMutableArray alloc] init] autorelease];
+    [arrayValueTV addObject:[_arrayInfo objectAtIndex:14]];
+    [arrayValueTV addObject:[_arrayInfo objectAtIndex:6]];
+    [arrayValueTV addObject:[_arrayInfo objectAtIndex:4]];
+    [arrayValueTV addObject:[_arrayInfo objectAtIndex:8]];
+    [arrayValueTV addObject:[_arrayInfo objectAtIndex:18]];
+    [arrayValueTV addObject:[_arrayInfo objectAtIndex:24]];
 
 
+
+    int k =0;
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -69,7 +88,8 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 10;
+    //return _arrayInfo.count;
+    return arrayValueTV.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -81,8 +101,17 @@
         [cell setEditing:NO];
         [cell setSelected:NO];
     }
-    cell.detailTextLabel.text = [[arrayValueTV objectAtIndex:0] objectAtIndex:indexPath.row];
-    cell.textLabel.text = [[arrayValueTV objectAtIndex:1] objectAtIndex:indexPath.row];
+    
+    //cell.detailTextLabel.text = [_arrayInfo objectAtIndex:indexPath.row];
+    cell.detailTextLabel.text = [arrayNameInfo objectAtIndex:indexPath.row];
+    cell.textLabel.text = [arrayValueTV objectAtIndex:indexPath.row];
+    
+    /*
+    if (indexPath.row < arrayNameInfo.count) {
+        cell.textLabel.text = [arrayNameInfo objectAtIndex:indexPath.row];
+
+    }
+     */
     return cell;
 }
 

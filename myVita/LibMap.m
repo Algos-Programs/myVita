@@ -37,8 +37,8 @@
     MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(coordinate2D, latitudinalMeters, longitudinalMeters);
     MKCoordinateRegion adjustingRegion = [mapView regionThatFits:viewRegion];
     [mapView setRegion:adjustingRegion animated:YES];
+    
 }
-
 /**
  Fa uno zoom PERSONALIZZATO sulla mappa nel punto passato tramite location.
  */

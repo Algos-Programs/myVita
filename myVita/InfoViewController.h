@@ -11,6 +11,7 @@
 @interface InfoViewController : UITableViewController {
     
     NSMutableArray *arrayDefibrillatori;
+    NSMutableArray *arrayDefibrillatoriToView;
 }
 
 @end

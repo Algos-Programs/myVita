@@ -37,19 +37,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	
-    self.mapView.mapType = MKMapTypeStandard;
     
+    self.mapView.mapType = MKMapTypeStandard;
+    //[self.progressIndicatorView setHidesWhenStopped:YES];
+
     
     [self.mapView setDelegate:self];
     //Request
     
     // Mostro all'utente la sua posizione sulla mappa.
     self.mapView.showsUserLocation = YES;
-    
-    Database *db = [[Database alloc] init];
-    [db openDB];
-    [db createTableNamedDefibrillatore];
     
     dispatch_async(kBgQueue, ^{
         
@@ -58,92 +55,115 @@
         [self performSelectorOnMainThread:@selector(fetchedData:)
                                withObject:data waitUntilDone:YES];
     });
-    
-    
-    
 }
 
 - (void)fetchedData:(NSData *)responseData {
-    //parse out the json data
-    NSError* error;
-    NSArray* json = [NSJSONSerialization
-                          JSONObjectWithData:responseData //1
-                          
-                          options:kNilOptions
-                          error:&error];
+
+    if (responseData) {
+        //parse out the json data
+        NSError* error;
+        //Array di Dictionary.
+        NSArray* json = [NSJSONSerialization
+                         JSONObjectWithData:responseData //1
+                         options:kNilOptions
+                         error:&error];
+        
+        NSLog(@"DESCR_JSON: %@", [json description]); //3
+        NSLog(@"COUNT_JSON: %lu", (unsigned long)[json count]); //3
+        NSLog(@"COUNT_KEY_JSON: %i", [[[json objectAtIndex:0] allKeys] count]);
+        
+        Database *db = [[Database alloc] init];
+        [db openDB];
+        [db DeleteTable:@"Defibrillatore"];
+        [db createTableDefibrillatore];
+                
+        NSLog(@"-.- Inzio Carico Dati -.-");
+        
+        CGFloat progressBarCount = 1.0000 / json.count;
+        
+        int c =0;
+        for (int i=0; i<json.count; i++) {
+            [self.progressBar setProgress:progressBarCount * i];
+
+            if (![db insertRecordWithDefibrillatore:[json objectAtIndex:i]]) {
+                NSLog(@"--- i = %i", i);
+                c++;
+            }
+        }
+        
+        
+        //[db popolaTabellaWithArray:json];
+        
+        NSLog(@"-.- Fine Carico Dati -.-");
+        //NSLog(@"c = %i", c);
+
+    }
     
-    //NSArray* latestLoans = [json objectForKey:@"loans"]; //2
-    
-    NSDictionary *dic = [json objectAtIndex:0];
-    NSLog(@"nome: %@", [dic objectForKey:@"nome"]); //3
+    [self.progressIndicatorView stopAnimating];
+    [self.progressIndicatorView setHidesWhenStopped:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    
+    [self.progressIndicatorView startAnimating];
+
     // Init Geocoder.
     gecoder = [[CLGeocoder alloc] init];
     
     [self localizedMe]; //init manager.
-    
-    Annotation *myAnnotation = [Annotation alloc];
-    
-    NSMutableArray *arr = [[NSMutableArray alloc] init];
-    [arr addObject:@"Scarica"]; //stato-batteria
-    [arr addObject:@"bho"]; //cartelli
-    [arr addObject:@"B"]; //categoria
-    [arr addObject:@"vicino alla fontana"]; //collocazione
-    [arr addObject:@"crescenza"]; //comune
-    [arr addObject:@"12"]; //corso
-    [arr addObject:@"H24"]; //disponibilita
-    [arr addObject:@"scaduti"]; //scadenza elettrodi
-    [arr addObject:@"via pippoz 99"]; //indirizzo
-    [arr addObject:@"99.4536123"]; //*-*latitudine
-    [arr addObject:@"Nel deserto del sahara"]; //posizione
-    [arr addObject:@"9.9837482"]; //*-* longitudine
-    [arr addObject:@"velluto88.gml.com"]; //mail
-    [arr addObject:@"che ne so"]; //modello
-    [arr addObject:@"Marco"]; //nome
-    [arr addObject:@"nessuna"]; //note
-    [arr addObject:@"YES"]; //+_+ ok
-    [arr addObject:@"Roma"]; //provincia
-    [arr addObject:@"BHO"]; //riferimento
-    [arr addObject:@"o.O"]; //serie
-    [arr addObject:@"Italia"]; //stato
-    [arr addObject:@"Vetro"]; //teca
-    [arr addObject:@"345-998462"]; //telefono
-    [arr addObject:@"999-987-321"]; //telefono-punto-blu
-    [arr addObject:@"NO"]; //verifica
-    
-    Database *db = [[Database alloc] init];
-    [db openDB];
-    [db createTableNamedDefibrillatore];
-    [db insertRecordWithDefibrillatore:arr];
 
-    
-    for (int i=0; i<self.posizionrDef.count; i++) {
-        
-/*
-        MDefibrillatore *defibrillatore = [[MDefibrillatore alloc] init];
-        defibrillatore = [self.posizionrDef objectAtIndex:i];
-        
-        CLLocationCoordinate2D coordiante;
-        coordiante.latitude = defibrillatore.latitudine;
-        coordiante.longitude = defibrillatore.longitudine;
-        
-        myAnnotation = [[Annotation alloc] init];
-        myAnnotation.coordinate = coordiante;
-        myAnnotation.title = defibrillatore.nome;
-        myAnnotation.subtitle = defibrillatore.indirizzo;
-        
-        MKAnnotationView *customPinView = [[MKAnnotationView alloc] initWithAnnotation:myAnnotation reuseIdentifier:nil];
-        customPinView.image = [UIImage imageNamed:@"pin1.png"];
-
-        //[self mapView:self.mapView viewForAnnotation:myAnnotation];
-        [self.mapView addAnnotation:myAnnotation
-         ];
- */
-    }
 }
+- (void)viewDidAppear:(BOOL)animated {
+    
+    [self zoom];
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+- (void)dealloc {
+    [self.mapView release];
+    [self.streetAdress release];
+    [self.streetAdressSecondLine release];
+    [self.city release];
+    [self.state release];
+    [self.ZIPCode release];
+    [self.country release];
+    [_progressIndicatorView release];
+    [_progressBar release];
+    [super dealloc];
+}
+
+
+
+//************************************
+#pragma mark - Localization Methods
+//************************************
+
+- (void)zoom {
+    
+    [LibMap zoomMap:self.mapView withLatitudinalMeters:800 andLongitudinalMeters:800];
+    [self.progressIndicatorView stopAnimating];
+}
+
+- (void)localizedMe {
+    
+    if (manager == nil)
+        manager = [[CLLocationManager alloc] init];
+    
+    manager.delegate = self;
+    manager.desiredAccuracy = kCLLocationAccuracyBest;
+    [manager startUpdatingLocation];
+    [self.progressIndicatorView stopAnimating];
+
+}
+
+//************************************
+#pragma mark - Map Methods
+//************************************
+
 
 
 - (MKAnnotationView *) mapView:(MKMapView *)aMapView viewForAnnotation:(id <MKAnnotation>) annotation{
@@ -173,7 +193,7 @@
     //-- Posizione Attuale.
     CLLocation *location = [LibLocation location];
     CLLocationCoordinate2D coordinate = [location coordinate];
-
+    
     
     CLLocationCoordinate2D coord[2];
     coord[0].latitude = 45.421961;
@@ -189,50 +209,9 @@
     polyLineView.strokeColor = [UIColor blueColor];
     polyLineView.lineWidth = 7;
     return polyLineView;
-
-
-}
-- (void)viewDidAppear:(BOOL)animated {
     
-    [LibMap zoomMap:self.mapView withLatitudinalMeters:800 andLongitudinalMeters:800];
-
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-- (void)dealloc {
-    [self.mapView release];
-    [self.streetAdress release];
-    [self.streetAdressSecondLine release];
-    [self.city release];
-    [self.state release];
-    [self.ZIPCode release];
-    [self.country release];
-    [super dealloc];
-}
-
-//************************************
-#pragma mark - Localization Methods
-//************************************
-
-
-- (void)localizedMe {
     
-    if (manager == nil)
-        manager = [[CLLocationManager alloc] init];
-    
-    manager.delegate = self;
-    manager.desiredAccuracy = kCLLocationAccuracyBest;
-    [manager startUpdatingLocation];
 }
-
-//************************************
-#pragma mark - Map Methods
-//************************************
 
 -(void)drawPolylineWithALocation:(CLLocation *)aLocation withBLocation:(CLLocation *)bLocation {
     

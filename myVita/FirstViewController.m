@@ -31,7 +31,7 @@
 @synthesize ZIPCode;
 @synthesize country;
 
-
+static BOOL const WITH_REFRESH = YES;
 
 
 - (void)viewDidLoad
@@ -41,20 +41,38 @@
     self.mapView.mapType = MKMapTypeStandard;
     //[self.progressIndicatorView setHidesWhenStopped:YES];
 
+    Database *db = [[Database alloc] init];
+    NSArray *locationArray = [db allLocation];
     
     [self.mapView setDelegate:self];
-    //Request
+    int distanceMin = MAXFLOAT;
+    for (CLLocation *location in locationArray) {
+        Annotation *newAnnotation = [[Annotation alloc] init];
+        newAnnotation.title = @"CIAO";
+        newAnnotation.coordinate = location.coordinate;
+        
+        int distance = [location distanceFromLocation:[LibLocation location]];
+        if (distance < distanceMin) {
+            distanceMin = distance;
+        }
+        [self.mapView addAnnotation:newAnnotation];
+    }
     
+    self.distanceLabel.text = [NSString stringWithFormat:@"%i m", distanceMin];
+
     // Mostro all'utente la sua posizione sulla mappa.
     self.mapView.showsUserLocation = YES;
     
-    dispatch_async(kBgQueue, ^{
-        
-        NSData* data = [NSData dataWithContentsOfURL:
-                        kLatestKivaLoansURL];
-        [self performSelectorOnMainThread:@selector(fetchedData:)
-                               withObject:data waitUntilDone:YES];
-    });
+    if (WITH_REFRESH) {
+        dispatch_async(kBgQueue, ^{
+            
+            NSData* data = [NSData dataWithContentsOfURL:
+                            kLatestKivaLoansURL];
+            [self performSelectorOnMainThread:@selector(fetchedData:)
+                                   withObject:data waitUntilDone:YES];
+        });
+
+    }
 }
 
 - (void)fetchedData:(NSData *)responseData {
@@ -101,6 +119,7 @@
     
     [self.progressIndicatorView stopAnimating];
     [self.progressIndicatorView setHidesWhenStopped:YES];
+    self.loadImage.hidden = YES;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -133,9 +152,10 @@
     [self.country release];
     [_progressIndicatorView release];
     [_progressBar release];
+    [_distanceLabel release];
+    [_loadImage release];
     [super dealloc];
 }
-
 
 
 //************************************
@@ -248,4 +268,7 @@
 
 }
 
+- (IBAction)pressButtonZoom:(id)sender {
+    [self zoom];
+}
 @end

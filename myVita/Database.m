@@ -8,6 +8,7 @@
 //
 
 #import "Database.h"
+#import <CoreLocation/CoreLocation.h>
 
 @implementation Database
 
@@ -139,38 +140,7 @@ static NSString * const TABLE_NAME_DEFIBRILLATORE = @"Defibrillatore";
                      KEY_ULTIMA_VERIFICA, //28
                      KEY_ULTIMO_CORSO, // 29
     
-                     /*
-                     countOfDb, //0-id
-                     [dicDefibrillatori objectForKey:KEY_CARTELLI], //1
-                     [dicDefibrillatori objectForKey:KEY_CATEGORIA], //2
-                     [[dicDefibrillatori objectForKey:KEY_CODICE] integerValue], //3
-                     [dicDefibrillatori objectForKey:KEY_COLLOCAZIONE], //4
-                     [dicDefibrillatori objectForKey:KEY_COMUNE], //5
-                     [dicDefibrillatori objectForKey:KEY_DISPONIBILITA], //6
-                     [dicDefibrillatori objectForKey:KEY_IMMAGINE], //7
-                     [dicDefibrillatori objectForKey:KEY_INDIRIZZO], //8
-                     [[dicDefibrillatori objectForKey:KEY_LATITUDINE] floatValue], //9
-                     [dicDefibrillatori objectForKey:KEY_LOCALITA], //10
-                     [[dicDefibrillatori objectForKey:KEY_LONGITUDINE] floatValue],//11
-                     [dicDefibrillatori objectForKey:KEY_MAIL],//12
-                     [dicDefibrillatori objectForKey:KEY_MODELLO],//13
-                     [dicDefibrillatori objectForKey:KEY_NOME],//14
-                     [dicDefibrillatori objectForKey:KEY_NOTE],//15
-                     [dicDefibrillatori objectForKey:KEY_OK],//16
-                     [dicDefibrillatori objectForKey:KEY_PROVINCIA],//17
-                     [dicDefibrillatori objectForKey:KEY_RIFERIMENTO],//18
-                     [dicDefibrillatori objectForKey:KEY_SCAD_BATT],//19
-                     [dicDefibrillatori objectForKey:KEY_SCAD_ELET],//20
-                     [dicDefibrillatori objectForKey:KEY_SERIE],//21
-                     str, //22
-                     [dicDefibrillatori objectForKey:KEY_TECA], //23
-                     [dicDefibrillatori objectForKey:KEY_TEL_PUNTO_BLU], //24
-                     [dicDefibrillatori objectForKey:KEY_TELEFONO], //25
-                     ultimaModifica,
-                     0.0, //(long)[[dicDefibrillatori objectForKey:KEY_ULTIMA_VERIFICA] integerValue]
-                     [dicDefibrillatori objectForKey:KEY_ULTIMO_CORSO]];
-                      */
-                     
+                                        
                      countOfDb, //0-id
                      [[dicDefibrillatori objectForKey:KEY_CARTELLI] stringByReplacingOccurrencesOfString:@"'" withString:@""], //1
                      [[dicDefibrillatori objectForKey:KEY_CATEGORIA] stringByReplacingOccurrencesOfString:@"'" withString:@""], //2
@@ -348,6 +318,7 @@ static NSString * const TABLE_NAME_DEFIBRILLATORE = @"Defibrillatore";
 #pragma mark - Get Oggetti
 //************************************
 
+
 - (NSArray *)allObjects{
     
     NSString * qsql = [NSString stringWithFormat:@"SELECT * FROM '%@'", TABLE_NAME_DEFIBRILLATORE];
@@ -517,6 +488,42 @@ static NSString * const TABLE_NAME_DEFIBRILLATORE = @"Defibrillatore";
     }
     return returnArray;
 }
+
+/**
+    Ritorna un array di CLLoation con tutte le coordinate inserite (!= 0)
+ */
+- (NSArray *)allLocation{
+    [self openDB];
+    
+    NSString * qsql = [NSString stringWithFormat:@"SELECT %@,%@ FROM '%@'", KEY_LATITUDINE, KEY_LONGITUDINE, TABLE_NAME_DEFIBRILLATORE];
+    sqlite3_stmt *statment;
+    NSMutableArray *returnArray = [[NSMutableArray alloc] init];
+    
+    if (sqlite3_prepare_v2(db, [qsql UTF8String], -1, &statment, nil) == SQLITE_OK) {
+        
+        while (sqlite3_step(statment) == SQLITE_ROW) {
+
+            double latitude = sqlite3_column_double(statment, 0);
+            double longitude = sqlite3_column_double(statment, 1);
+
+            if ((latitude && longitude) != 0) {
+                CLLocation *location = [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];
+                [returnArray addObject:location];
+            }
+
+        }//end while
+        sqlite3_finalize(statment);
+    }//end if
+    else
+        NSLog(@"***** Error do not possible get all objs");
+    
+    if ([returnArray count] == 0) {
+        
+        NSLog(@"Non ci sono elementi nella tabella %@", TABLE_NAME_DEFIBRILLATORI);
+    }
+    return returnArray;
+}
+
 
 - (NSArray *)dictionaryWithAllObjects{
     

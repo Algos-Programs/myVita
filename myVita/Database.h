@@ -49,6 +49,7 @@ static NSString * const KEY_LAST_UPDATE = @"lastUpdated";
 - (void)createTableDefibrillatore;
 - (void)riempiTabella:(NSArray *)array;
 - (NSArray *)allObjects;
+- (NSArray *)allLocation;
 - (char *)DeleteTable:(NSString *)table;
 //- (void)insertRecordWithDefibrillatore:(NSDictionary *)dicDefibrillatori;
 - (BOOL)insertRecordWithDefibrillatore:(NSDictionary *)dicDefibrillatori;

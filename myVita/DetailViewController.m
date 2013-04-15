@@ -32,7 +32,7 @@
     
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Cell"];
     
-    arrayNameInfo = [[[NSMutableArray alloc] init] autorelease];
+    arrayNameInfo = [[NSMutableArray alloc] init];
     [arrayNameInfo addObject:@"Nome"];
     [arrayNameInfo addObject:@"Disponibilità"];
     [arrayNameInfo addObject:@"Posizione"];
@@ -40,13 +40,13 @@
     [arrayNameInfo addObject:@"Riferimento"];
     [arrayNameInfo addObject:@"Telefono Punto Blu"];
     
-    arrayValueTV = [[[NSMutableArray alloc] init] autorelease];
-    [arrayValueTV addObject:[_arrayInfo objectAtIndex:14]];
-    [arrayValueTV addObject:[_arrayInfo objectAtIndex:6]];
-    [arrayValueTV addObject:[_arrayInfo objectAtIndex:4]];
-    [arrayValueTV addObject:[_arrayInfo objectAtIndex:8]];
-    [arrayValueTV addObject:[_arrayInfo objectAtIndex:18]];
-    [arrayValueTV addObject:[_arrayInfo objectAtIndex:24]];
+    arrayValueTV = [[NSMutableArray alloc] init];
+    [arrayValueTV addObject:[_arrayInfo objectAtIndex:13]];
+    [arrayValueTV addObject:[_arrayInfo objectAtIndex:5]];
+    [arrayValueTV addObject:[_arrayInfo objectAtIndex:3]];
+    [arrayValueTV addObject:[_arrayInfo objectAtIndex:7]];
+    [arrayValueTV addObject:[_arrayInfo objectAtIndex:17]];
+    [arrayValueTV addObject:[_arrayInfo objectAtIndex:23]];
 
 
 

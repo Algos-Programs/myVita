@@ -47,5 +47,8 @@
 
 @property (retain, nonatomic) IBOutlet UIActivityIndicatorView *progressIndicatorView;
 @property (retain, nonatomic) IBOutlet UIProgressView *progressBar;
+@property (retain, nonatomic) IBOutlet UILabel *distanceLabel;
+@property (retain, nonatomic) IBOutlet UIImageView *loadImage;
 
+- (IBAction)pressButtonZoom:(id)sender;
 @end

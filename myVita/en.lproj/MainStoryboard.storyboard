@@ -146,7 +146,17 @@
                             </tableViewCell>
                         </prototypes>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="Ak9-FE-9aR"/>
+                    <navigationItem key="navigationItem" title="Root View Controller" id="Ak9-FE-9aR">
+                        <barButtonItem key="rightBarButtonItem" title="&lt; 1 km " id="8Vs-nq-FGx">
+                            <color key="tintColor" red="0.39642889095644457" green="0.47390396659707723" blue="0.32258497255770607" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="pressButtonSelect:" destination="nMg-eQ-byl" id="z5h-Cf-ZBG"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="buttonSelect" destination="8Vs-nq-FGx" id="61C-z8-a5k"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zli-Kc-oIl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -278,6 +288,10 @@
         </class>
         <class className="InfoViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/InfoViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="pressButtonSelect:"/>
+                <relationship kind="outlet" name="buttonSelect" candidateClass="UIBarButtonItem"/>
+            </relationships>
         </class>
         <class className="NSLayoutConstraint" superclassName="NSObject">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>

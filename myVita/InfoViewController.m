@@ -18,6 +18,9 @@
 
 @implementation InfoViewController
 
+NSString *titleFooter = @"";
+
+BOOL viewAll = YES;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -32,8 +35,10 @@
 {
     [super viewDidLoad];
     
+    [self.navigationController.navigationBar setTintColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"greenColor1.png"]]]; //Red as an example.
+
     arrayDefibrillatori = [[[NSMutableArray alloc] init] autorelease];
-    
+    arraySort = [[[NSMutableArray alloc] init] autorelease];
     FirstViewController *fvc = [self.tabBarController.viewControllers objectAtIndex:0];
     arrayDefibrillatori = [fvc.posizionrDef copy];
     
@@ -53,41 +58,24 @@
         coordinate.longitude = [[tempArray objectAtIndex:10] doubleValue];
         
         if ((coordinate.longitude || coordinate.longitude) != 0) {
-            CLLocation *tempLocation = [[CLLocation alloc] initWithLatitude:coordinate.latitude longitude:coordinate.longitude];
-            if ([[LibLocation location] distanceFromLocation:tempLocation] < 100000) {
-                [arrayDefibrillatoriToView addObject:tempArray];
+            CLLocation *tempLocation = [[CLLocation alloc] initWithLatitude:
+                                        coordinate.latitude longitude:coordinate.longitude];
+            if (viewAll) {
+                if ([[LibLocation location] distanceFromLocation:tempLocation] < 100000) {
+                    [arrayDefibrillatoriToView addObject:tempArray];
+                }
             }
         }
-
-
     }
-    self.navigationItem.title = [NSString stringWithFormat:@"%i/%i su 356 - <100.000 km", arrayDefibrillatoriToView.count,arrayDefibrillatori.count];
-
-    
-    //-- Ordinamento
-    /*
-    NSMutableArray *rerturnArray = [[NSMutableArray alloc] init];
-    double min = MAXFLOAT;
-    int index = -1;
-    for (int j=0; j<arrayDefibrillatori.count; j++) {
-        for (int i=0; i<arrayDefibrillatori.count; i++) {
-            NSMutableArray *tempArray = [arrayDefibrillatori objectAtIndex:i];
-            CLLocationCoordinate2D coordinate;
-            coordinate.latitude = [[tempArray objectAtIndex:8] doubleValue];
-            coordinate.longitude = [[tempArray objectAtIndex:10] doubleValue];
-            
-            CLLocation *tempLocation = [[CLLocation alloc] initWithLatitude:coordinate.latitude longitude:coordinate.longitude];
-            double dist = [[LibLocation location] distanceFromLocation:tempLocation];
-            if (dist < min) {
-                min = dist;
-                index = i;
-            }
-        }//end for interno
+    self.navigationItem.title = @"Lista Defibrillatori";
+    titleFooter = [NSString stringWithFormat:@"%i/%i su 356 - <100.000 km", arrayDefibrillatoriToView.count,arrayDefibrillatori.count];
         
-        [rerturnArray addObject:[arrayDefibrillatori objectAtIndex:index]];
-    }
-     */
-int k =0;
+    int k =0;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    
+    arraySort = [self sortWithArray:arrayDefibrillatoriToView];
 }
 
 
@@ -98,10 +86,59 @@ int k =0;
 }
 
 - (void)dealloc {
+    [_buttonSelect release];
     [super dealloc];
     [arrayDefibrillatoriToView release];
     [arrayDefibrillatori release];
 }
+
+- (NSMutableArray *)sortWithArray:(NSMutableArray *)mArray {
+    
+    NSMutableArray *returnArray = [[[NSMutableArray alloc] init] autorelease];
+    NSMutableArray *tempArray = [[[NSMutableArray alloc] initWithArray:mArray.copy] autorelease];
+    CLLocation *location = [LibLocation location];
+    NSLog(@"INIZIO");
+    while (tempArray.count != 0) {
+        int index = [self minInArray:tempArray withI:0 withZ:tempArray.count - 1 withCurrentPosition:location];
+        [returnArray addObject:[tempArray objectAtIndex:index]];
+        [tempArray removeObjectAtIndex:index];
+    }
+    NSLog(@"FINE");
+    
+    return returnArray;
+}
+
+- (int)minInArray:(NSArray *)array withI:(int)i withZ:(int)z withCurrentPosition:(CLLocation *)currentPosition{
+    
+    if (i==z) {
+        return i;
+    }
+    if (z == i+1) {
+        CLLocation *location1 = [[CLLocation alloc] initWithLatitude:[[[array objectAtIndex:i] objectAtIndex:8] doubleValue] longitude:[[[array objectAtIndex:i] objectAtIndex:10] doubleValue]];
+        CLLocation *location2 = [[CLLocation alloc] initWithLatitude:[[[array objectAtIndex:i+1] objectAtIndex:8] doubleValue] longitude:[[[array objectAtIndex:i+1] objectAtIndex:10] doubleValue]];
+        
+        if ([currentPosition distanceFromLocation:location1] < [currentPosition distanceFromLocation:location2]){
+            return i;
+        }
+        else {
+            return i+1;
+        }
+    }
+    else {
+        int m = (i + z) / 2;
+        int sx = [self minInArray:array withI:i withZ:m withCurrentPosition:currentPosition];
+        int dx = [self minInArray:array withI:m+1 withZ:z withCurrentPosition:currentPosition];
+        
+        CLLocation *locationDX = [[CLLocation alloc] initWithLatitude:[[[array objectAtIndex:dx] objectAtIndex:8] doubleValue] longitude:[[[array objectAtIndex:dx] objectAtIndex:10] doubleValue]];
+        CLLocation *locationSX = [[CLLocation alloc] initWithLatitude:[[[array objectAtIndex:sx] objectAtIndex:8] doubleValue] longitude:[[[array objectAtIndex:sx] objectAtIndex:10] doubleValue]];
+
+        if ([currentPosition distanceFromLocation:locationDX] < [currentPosition distanceFromLocation:locationSX])
+            return dx;
+        else
+            return sx;
+    }
+}
+
 
 #pragma mark - Table view data source
 
@@ -110,7 +147,10 @@ int k =0;
     // Return the number of sections.
     return 1;
 }
-
+- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
+    return titleFooter;
+    
+}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
@@ -181,11 +221,7 @@ int k =0;
 
 - (float)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (indexPath.row == 0) {
-        return 89;
-    }
-    else
-        return 50;
+    return 50;
 }
 
 /*
@@ -255,4 +291,15 @@ int k =0;
     return f;
 }
 
+- (IBAction)pressButtonSelect:(id)sender {
+    if ([self.buttonSelect.title isEqual: @"Tutti"]) {
+        self.buttonSelect.title = @"< 1 km";
+        viewAll = NO;
+    }
+    else {
+        self.buttonSelect.title = @"Tutti";
+        viewAll = YES;
+    }
+    [self.tableView reloadData];
+}
 @end

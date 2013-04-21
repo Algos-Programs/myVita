@@ -8,6 +8,7 @@
 //
 
 #import "Database.h"
+#import "LibLocation.h"
 #import <CoreLocation/CoreLocation.h>
 
 @implementation Database
@@ -207,8 +208,8 @@ static NSString * const TABLE_NAME_DEFIBRILLATORE = @"Defibrillatore";
         
         //-- Controllo
         
-        NSString *sql = [NSString stringWithFormat:@"INSERT OR REPLACE INTO '%@' ('%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@')"
-                         "VALUES ('%d','%@','%@','%d','%@','%@','%@','%@','%@','%f','%@','%f','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%d','%f','%@')",
+        NSString *sql = [NSString stringWithFormat:@"INSERT OR REPLACE INTO '%@' ('%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@')"
+                         "VALUES ('%d','%@','%@','%d','%@','%@','%@','%@','%@','%f','%@','%f','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%d','%f','%@','%@')",
                          TABLE_NAME_DEFIBRILLATORE,
                          @"id", //1
                          KEY_CARTELLI,//2
@@ -239,6 +240,7 @@ static NSString * const TABLE_NAME_DEFIBRILLATORE = @"Defibrillatore";
                          KEY_ULTIMA_MODIFICA, //27
                          KEY_ULTIMA_VERIFICA, //28
                          KEY_ULTIMO_CORSO, // 29
+                         KEY_LAST_UPDATE,
                          
                          
                          index, //0-id
@@ -269,7 +271,8 @@ static NSString * const TABLE_NAME_DEFIBRILLATORE = @"Defibrillatore";
                          [dicDefibrillatori objectForKey:KEY_TELEFONO], //25
                          ultimaModifica,
                          0.0, //(long)[[dicDefibrillatori objectForKey:KEY_ULTIMA_VERIFICA] integerValue]
-                         [dicDefibrillatori objectForKey:KEY_ULTIMO_CORSO]];
+                         [dicDefibrillatori objectForKey:KEY_ULTIMO_CORSO],
+                         [dicDefibrillatori objectForKey:KEY_LAST_UPDATE]];
         
         char *err;
         if (sqlite3_exec(db, [sql UTF8String], NULL, NULL, &err) != SQLITE_OK) {
@@ -295,7 +298,7 @@ static NSString * const TABLE_NAME_DEFIBRILLATORE = @"Defibrillatore";
 }
 
 - (int)countOfDbFromTableNamed:(NSString *)tableName {
-    
+    [self openDB];
     NSString * qsql = [NSString stringWithFormat:@"SELECT * FROM '%@'", tableName];
     sqlite3_stmt *statment;
     
@@ -479,6 +482,7 @@ static NSString * const TABLE_NAME_DEFIBRILLATORE = @"Defibrillatore";
         }//end while
         sqlite3_finalize(statment);
     }//end if
+    
     else
         NSLog(@"***** Error do not possible get all objs");
     
@@ -486,8 +490,93 @@ static NSString * const TABLE_NAME_DEFIBRILLATORE = @"Defibrillatore";
         
         NSLog(@"Non ci sono elementi nella tabella %@", TABLE_NAME_DEFIBRILLATORI);
     }
+    //sort
+    return [self sortWithArray1:returnArray];
+
+    //return returnArray;
+}
+
+- (NSMutableArray *)sortWithArray:(NSMutableArray *)mArray {
+    
+    NSMutableArray *returnArray = [[[NSMutableArray alloc] init] autorelease];
+    NSMutableArray *tempArray = [[[NSMutableArray alloc] initWithArray:mArray.copy] autorelease];
+    CLLocation *location = [LibLocation location];
+    
+    NSLog(@"INIZIO");
+    while (tempArray.count != 0) {
+        int index = [self minInArray:tempArray withI:0 withZ:tempArray.count - 1 withCurrentPosition:location];
+        [returnArray addObject:[tempArray objectAtIndex:index]];
+        [tempArray removeObjectAtIndex:index];
+    }
+    NSLog(@"FINE");
+    
     return returnArray;
 }
+
+- (NSMutableArray *)sortWithArray1:(NSMutableArray *)mArray {
+    
+    NSMutableArray *returnArray = [[NSMutableArray alloc] init];
+    NSMutableArray *tempArray = [[NSMutableArray alloc] initWithArray:mArray];
+    CLLocation *location = [LibLocation location];
+    
+    NSLog(@"INIZIO");
+    for (int i=0; tempArray.count != 0; i++){
+        int index = [self minInArray:tempArray withI:0 withZ:tempArray.count - 1 withCurrentPosition:location];
+        [returnArray addObject:[tempArray objectAtIndex:index]];
+        [tempArray removeObjectAtIndex:index];
+    }
+    NSLog(@"FINE");
+    
+    return returnArray;
+}
+
+- (NSMutableArray *)sortWithArray2:(NSMutableArray *)mArray {
+    
+    NSMutableArray *returnArray = [[[NSMutableArray alloc] init] autorelease];
+    NSMutableArray *tempArray = [[[NSMutableArray alloc] initWithArray:mArray.copy] autorelease];
+    CLLocation *location = [LibLocation location];
+    
+    NSLog(@"INIZIO");
+    for (int i=0; i<tempArray.count; i++){
+        int index = [self minInArray:tempArray withI:0 withZ:tempArray.count - 1 withCurrentPosition:location];
+        [returnArray addObject:[tempArray objectAtIndex:index]];
+    }
+    NSLog(@"FINE");
+    
+    return returnArray;
+}
+
+- (int)minInArray:(NSArray *)array withI:(int)i withZ:(int)z withCurrentPosition:(CLLocation *)currentPosition{
+    
+    if (i==z) {
+        return i;
+    }
+    if (z == i+1) {
+        CLLocation *location1 = [[CLLocation alloc] initWithLatitude:[[[array objectAtIndex:i] objectAtIndex:8] doubleValue] longitude:[[[array objectAtIndex:i] objectAtIndex:10] doubleValue]];
+        CLLocation *location2 = [[CLLocation alloc] initWithLatitude:[[[array objectAtIndex:i+1] objectAtIndex:8] doubleValue] longitude:[[[array objectAtIndex:i+1] objectAtIndex:10] doubleValue]];
+        
+        if ([currentPosition distanceFromLocation:location1] < [currentPosition distanceFromLocation:location2]){
+            return i;
+        }
+        else {
+            return i+1;
+        }
+    }
+    else {
+        int m = (i + z) / 2;
+        int sx = [self minInArray:array withI:i withZ:m withCurrentPosition:currentPosition];
+        int dx = [self minInArray:array withI:m+1 withZ:z withCurrentPosition:currentPosition];
+        
+        CLLocation *locationDX = [[CLLocation alloc] initWithLatitude:[[[array objectAtIndex:dx] objectAtIndex:8] doubleValue] longitude:[[[array objectAtIndex:dx] objectAtIndex:10] doubleValue]];
+        CLLocation *locationSX = [[CLLocation alloc] initWithLatitude:[[[array objectAtIndex:sx] objectAtIndex:8] doubleValue] longitude:[[[array objectAtIndex:sx] objectAtIndex:10] doubleValue]];
+        
+        if ([currentPosition distanceFromLocation:locationDX] < [currentPosition distanceFromLocation:locationSX])
+            return dx;
+        else
+            return sx;
+    }
+}
+
 
 /**
     Ritorna un array di CLLoation con tutte le coordinate inserite (!= 0)
@@ -525,9 +614,9 @@ static NSString * const TABLE_NAME_DEFIBRILLATORE = @"Defibrillatore";
 }
 
 
-- (NSArray *)dictionaryWithAllObjects{
+- (NSArray *)allObjectsInDictionary{
     
-    NSString * qsql = [NSString stringWithFormat:@"SELECT * FROM '%@'", TABLE_NAME_DEFIBRILLATORE];
+    NSString * qsql = [NSString stringWithFormat:@"SELECT %@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@ FROM '%@'", KEY_CARTELLI, KEY_CATEGORIA, KEY_CODICE, KEY_COLLOCAZIONE, KEY_COMUNE, KEY_DISPONIBILITA, KEY_IMMAGINE, KEY_INDIRIZZO, KEY_LAST_UPDATE, KEY_LATITUDINE, KEY_LOCALITA, KEY_LONGITUDINE, KEY_MAIL, KEY_MODELLO, KEY_NOME, KEY_NOTE, KEY_OK, KEY_PROVINCIA, KEY_RIFERIMENTO, KEY_SCAD_BATT, KEY_SCAD_ELET, KEY_SERIE, KEY_STATO, KEY_TECA, KEY_TEL_PUNTO_BLU, KEY_TELEFONO, KEY_ULTIMA_MODIFICA, KEY_ULTIMA_VERIFICA, KEY_ULTIMO_CORSO,TABLE_NAME_DEFIBRILLATORE];
     sqlite3_stmt *statment;
     
     NSMutableArray *returnArray = [[NSMutableArray alloc] init];
@@ -535,152 +624,132 @@ static NSString * const TABLE_NAME_DEFIBRILLATORE = @"Defibrillatore";
     if (sqlite3_prepare_v2(db, [qsql UTF8String], -1, &statment, nil) == SQLITE_OK) {
         
         while (sqlite3_step(statment) == SQLITE_ROW) {
-            NSMutableArray *tempArray = [[[NSMutableArray alloc] init] autorelease];
+            NSMutableDictionary *tempDic = [[[NSMutableDictionary alloc] init] autorelease];
             
             char *charValue;
             NSString *strValue = [[NSString alloc] autorelease];
             
-            //Cartelli
-            charValue = (char *) sqlite3_column_text(statment, 1);
+            charValue = (char *)sqlite3_column_text(statment, 0);
             strValue = [strValue initWithUTF8String:charValue];
-            [tempArray addObject:strValue];
-            
-            //Categoria
-            charValue = (char *) sqlite3_column_text(statment, 2);
+            [tempDic setValue:strValue forKey:KEY_CARTELLI];
+
+            charValue = (char *)sqlite3_column_text(statment, 1);
             strValue = [strValue initWithUTF8String:charValue];
-            [tempArray addObject:strValue];
-            
-            //Codice
-            charValue = (char *) sqlite3_column_text(statment, 3);
+            [tempDic setValue:strValue forKey:KEY_CATEGORIA];
+
+            charValue = (char *)sqlite3_column_text(statment, 2); //INT
             strValue = [strValue initWithUTF8String:charValue];
-            [tempArray addObject:strValue];
-            
-            //Collocazione
-            charValue = (char *) sqlite3_column_text(statment, 4);
+            [tempDic setValue:strValue forKey:KEY_CODICE];
+
+            charValue = (char *)sqlite3_column_text(statment, 3);
             strValue = [strValue initWithUTF8String:charValue];
-            [tempArray addObject:strValue];
-            
-            //Comune
-            charValue = (char *) sqlite3_column_text(statment, 5);
+            [tempDic setValue:strValue forKey:KEY_COLLOCAZIONE];
+
+            charValue = (char *)sqlite3_column_text(statment, 4);
             strValue = [strValue initWithUTF8String:charValue];
-            [tempArray addObject:strValue];
-            
-            //Disponibilità
-            charValue = (char *) sqlite3_column_text(statment, 6);
+            [tempDic setValue:strValue forKey:KEY_COMUNE];
+
+            charValue = (char *)sqlite3_column_text(statment, 5);
             strValue = [strValue initWithUTF8String:charValue];
-            [tempArray addObject:strValue];
-            
-            //Immagine
-            charValue = (char *) sqlite3_column_text(statment, 7);
+            [tempDic setValue:strValue forKey:KEY_DISPONIBILITA];
+
+            charValue = (char *)sqlite3_column_text(statment, 6); //BLOB
             strValue = [strValue initWithUTF8String:charValue];
-            [tempArray addObject:strValue];
-            
-            //Indirizzo
-            charValue = (char *) sqlite3_column_text(statment, 8);
+            [tempDic setValue:strValue forKey:KEY_IMMAGINE];
+
+            charValue = (char *)sqlite3_column_text(statment, 7);
             strValue = [strValue initWithUTF8String:charValue];
-            [tempArray addObject:strValue];
-            
-            //Latitudine
-            charValue = (char *) sqlite3_column_text(statment, 9);
+            [tempDic setValue:strValue forKey:KEY_INDIRIZZO];
+
+            charValue = (char *)sqlite3_column_text(statment, 8); //TIMESTAMP
             strValue = [strValue initWithUTF8String:charValue];
-            [tempArray addObject:strValue];
-            
-            //Localita
-            charValue = (char *) sqlite3_column_text(statment, 10);
+            [tempDic setValue:strValue forKey:KEY_LAST_UPDATE];
+
+            charValue = (char *)sqlite3_column_text(statment, 9); //REAL
             strValue = [strValue initWithUTF8String:charValue];
-            [tempArray addObject:strValue];
-            
-            //Longitudine
-            charValue = (char *) sqlite3_column_text(statment, 11);
+            [tempDic setValue:strValue forKey:KEY_LATITUDINE];
+
+            charValue = (char *)sqlite3_column_text(statment, 10);
             strValue = [strValue initWithUTF8String:charValue];
-            [tempArray addObject:strValue];
-            
-            //Mail
-            charValue = (char *) sqlite3_column_text(statment, 12);
+            [tempDic setValue:strValue forKey:KEY_LOCALITA];
+
+            charValue = (char *)sqlite3_column_text(statment, 11); //REAL
             strValue = [strValue initWithUTF8String:charValue];
-            [tempArray addObject:strValue];
-            
-            //Modello
-            charValue = (char *) sqlite3_column_text(statment, 13);
+            [tempDic setValue:strValue forKey:KEY_LONGITUDINE];
+
+            charValue = (char *)sqlite3_column_text(statment, 12);
             strValue = [strValue initWithUTF8String:charValue];
-            [tempArray addObject:strValue];
-            
-            //Nome
-            charValue = (char *) sqlite3_column_text(statment, 14);
+            [tempDic setValue:strValue forKey:KEY_MAIL];
+
+            charValue = (char *)sqlite3_column_text(statment, 13); 
             strValue = [strValue initWithUTF8String:charValue];
-            [tempArray addObject:strValue];
-            
-            //Note
-            charValue = (char *) sqlite3_column_text(statment, 15);
+            [tempDic setValue:strValue forKey:KEY_MODELLO];
+
+            charValue = (char *)sqlite3_column_text(statment, 14);
             strValue = [strValue initWithUTF8String:charValue];
-            [tempArray addObject:strValue];
-            
-            //OK
-            charValue = (char *) sqlite3_column_text(statment, 16);
+            [tempDic setValue:strValue forKey:KEY_NOME];
+
+            charValue = (char *)sqlite3_column_text(statment, 15);
             strValue = [strValue initWithUTF8String:charValue];
-            [tempArray addObject:strValue];
+            [tempDic setValue:strValue forKey:KEY_NOTE];
             
-            //Provincia
-            charValue = (char *) sqlite3_column_text(statment, 17);
+            charValue = (char *)sqlite3_column_text(statment, 16); //INT -> BOOL
             strValue = [strValue initWithUTF8String:charValue];
-            [tempArray addObject:strValue];
+            [tempDic setValue:strValue forKey:KEY_OK];
             
-            //Riferimento
-            charValue = (char *) sqlite3_column_text(statment, 18);
+            charValue = (char *)sqlite3_column_text(statment, 17);
             strValue = [strValue initWithUTF8String:charValue];
-            [tempArray addObject:strValue];
+            [tempDic setValue:strValue forKey:KEY_PROVINCIA];
             
-            //Scandenza Batteria
-            charValue = (char *) sqlite3_column_text(statment, 19);
+            charValue = (char *)sqlite3_column_text(statment, 18);
             strValue = [strValue initWithUTF8String:charValue];
-            [tempArray addObject:strValue];
+            [tempDic setValue:strValue forKey:KEY_RIFERIMENTO];
             
-            //Scadenza Elettrodi
-            charValue = (char *) sqlite3_column_text(statment, 20);
+            charValue = (char *)sqlite3_column_text(statment, 19);
             strValue = [strValue initWithUTF8String:charValue];
-            [tempArray addObject:strValue];
+            [tempDic setValue:strValue forKey:KEY_SCAD_BATT];
             
-            //Serie
-            charValue = (char *) sqlite3_column_text(statment, 21);
+            charValue = (char *)sqlite3_column_text(statment, 20);
             strValue = [strValue initWithUTF8String:charValue];
-            [tempArray addObject:strValue];
+            [tempDic setValue:strValue forKey:KEY_SCAD_ELET];
             
-            //Stato
-            charValue = (char *) sqlite3_column_text(statment, 22);
+            charValue = (char *)sqlite3_column_text(statment, 21);
             strValue = [strValue initWithUTF8String:charValue];
-            [tempArray addObject:strValue];
+            [tempDic setValue:strValue forKey:KEY_SERIE];
             
-            //Teca
-            charValue = (char *) sqlite3_column_text(statment, 23);
+            charValue = (char *)sqlite3_column_text(statment, 22);
             strValue = [strValue initWithUTF8String:charValue];
-            [tempArray addObject:strValue];
+            [tempDic setValue:strValue forKey:KEY_STATO];
             
-            //Telefono Punto Blu
-            charValue = (char *) sqlite3_column_text(statment, 24);
+            charValue = (char *)sqlite3_column_text(statment, 23);
             strValue = [strValue initWithUTF8String:charValue];
-            [tempArray addObject:strValue];
+            [tempDic setValue:strValue forKey:KEY_TECA];
             
-            //Telefono
-            charValue = (char *) sqlite3_column_text(statment, 25);
+            charValue = (char *)sqlite3_column_text(statment, 24);
             strValue = [strValue initWithUTF8String:charValue];
-            [tempArray addObject:strValue];
+            [tempDic setValue:strValue forKey:KEY_TEL_PUNTO_BLU];
             
-            //Ultima Modifica
-            charValue = (char *) sqlite3_column_text(statment, 26);
+            charValue = (char *)sqlite3_column_text(statment, 25);
             strValue = [strValue initWithUTF8String:charValue];
-            [tempArray addObject:strValue];
+            [tempDic setValue:strValue forKey:KEY_TELEFONO];
             
-            //Ultima Verifica
-            charValue = (char *) sqlite3_column_text(statment, 27);
+            charValue = (char *)sqlite3_column_text(statment, 26);
             strValue = [strValue initWithUTF8String:charValue];
-            [tempArray addObject:strValue];
+            [tempDic setValue:strValue forKey:KEY_ULTIMA_MODIFICA];
             
-            //Ultimo Corso
-            charValue = (char *) sqlite3_column_text(statment, 28);
+            charValue = (char *)sqlite3_column_text(statment, 16);
             strValue = [strValue initWithUTF8String:charValue];
-            [tempArray addObject:strValue];
+            [tempDic setValue:strValue forKey:KEY_ULTIMA_VERIFICA];
             
-            [returnArray addObject:tempArray];
+            charValue = (char *)sqlite3_column_text(statment, 27);
+            strValue = [strValue initWithUTF8String:charValue];
+            [tempDic setValue:strValue forKey:KEY_OK];
+            
+            charValue = (char *)sqlite3_column_text(statment, 28);
+            strValue = [strValue initWithUTF8String:charValue];
+            [tempDic setValue:strValue forKey:KEY_ULTIMO_CORSO];
+
+            [returnArray addObject:tempDic];
             
         }//end while
         sqlite3_finalize(statment);

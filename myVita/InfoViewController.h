@@ -12,6 +12,9 @@
     
     NSMutableArray *arrayDefibrillatori;
     NSMutableArray *arrayDefibrillatoriToView;
+    NSMutableArray *arraySort;
 }
+@property (retain, nonatomic) IBOutlet UIBarButtonItem *buttonSelect;
 
+- (IBAction)pressButtonSelect:(id)sender;
 @end

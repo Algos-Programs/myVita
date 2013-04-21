@@ -46,6 +46,7 @@
 		A998119F171AF48100DA20AC /* dae57x57.png in Resources */ = {isa = PBXBuildFile; fileRef = A998117D171AF46800DA20AC /* dae57x57.png */; };
 		A99811A6171C044200DA20AC /* loadingView.png in Resources */ = {isa = PBXBuildFile; fileRef = A99811A5171C044200DA20AC /* loadingView.png */; };
 		A99F523F170C261000EB15E4 /* Database.rtf in Resources */ = {isa = PBXBuildFile; fileRef = A99F523E170C261000EB15E4 /* Database.rtf */; };
+		A9A1F7A8171DF629008401FD /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9A3149217023B900081BC88 /* CoreLocation.framework */; };
 		A9A3144B17023A7C0081BC88 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9A3144A17023A7C0081BC88 /* UIKit.framework */; };
 		A9A3144D17023A7C0081BC88 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9A3144C17023A7C0081BC88 /* Foundation.framework */; };
 		A9A3144F17023A7C0081BC88 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9A3144E17023A7C0081BC88 /* CoreGraphics.framework */; };
@@ -71,6 +72,8 @@
 		A9A3149317023B900081BC88 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9A3149217023B900081BC88 /* CoreLocation.framework */; };
 		A9A3149617023D130081BC88 /* LibLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = A9A3149517023D130081BC88 /* LibLocation.m */; };
 		A9A314CA17023E810081BC88 /* LibMap.m in Sources */ = {isa = PBXBuildFile; fileRef = A9A314C917023E810081BC88 /* LibMap.m */; };
+		A9C580BA171C663300F60071 /* greenColor.png in Resources */ = {isa = PBXBuildFile; fileRef = A9C580B9171C663300F60071 /* greenColor.png */; };
+		A9C580C5171C67C500F60071 /* greenColor1.png in Resources */ = {isa = PBXBuildFile; fileRef = A9C580C4171C67C500F60071 /* greenColor1.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -135,6 +138,8 @@
 		A9A3149517023D130081BC88 /* LibLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LibLocation.m; sourceTree = "<group>"; };
 		A9A314C817023E810081BC88 /* LibMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LibMap.h; sourceTree = "<group>"; };
 		A9A314C917023E810081BC88 /* LibMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LibMap.m; sourceTree = "<group>"; };
+		A9C580B9171C663300F60071 /* greenColor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = greenColor.png; sourceTree = "<group>"; };
+		A9C580C4171C67C500F60071 /* greenColor1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = greenColor1.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +173,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A9A1F7A8171DF629008401FD /* CoreLocation.framework in Frameworks */,
 				A9A3147A17023A7C0081BC88 /* SenTestingKit.framework in Frameworks */,
 				A9A3147B17023A7C0081BC88 /* UIKit.framework in Frameworks */,
 				A9A3147C17023A7C0081BC88 /* Foundation.framework in Frameworks */,
@@ -224,6 +230,8 @@
 				A998117D171AF46800DA20AC /* dae57x57.png */,
 				A998117B171AF42F00DA20AC /* dae114x114.png */,
 				A99811A5171C044200DA20AC /* loadingView.png */,
+				A9C580B9171C663300F60071 /* greenColor.png */,
+				A9C580C4171C67C500F60071 /* greenColor1.png */,
 				A98DE3801702430D00604EEF /* libsqlite3.0.dylib */,
 				A9A3145017023A7C0081BC88 /* myVita */,
 				A9A3147F17023A7C0081BC88 /* myVitaTests */,
@@ -443,6 +451,8 @@
 				A998117C171AF42F00DA20AC /* dae114x114.png in Resources */,
 				A998117E171AF46800DA20AC /* dae57x57.png in Resources */,
 				A99811A6171C044200DA20AC /* loadingView.png in Resources */,
+				A9C580BA171C663300F60071 /* greenColor.png in Resources */,
+				A9C580C5171C67C500F60071 /* greenColor1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

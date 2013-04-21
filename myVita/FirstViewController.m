@@ -31,7 +31,7 @@
 @synthesize ZIPCode;
 @synthesize country;
 
-static BOOL const WITH_REFRESH = YES;
+static BOOL WITH_REFRESH = NO;
 
 
 - (void)viewDidLoad
@@ -42,7 +42,11 @@ static BOOL const WITH_REFRESH = YES;
     //[self.progressIndicatorView setHidesWhenStopped:YES];
 
     Database *db = [[Database alloc] init];
+    if ([db countOfDbFromTableNamed:@"Defibrillatore"] == 0) {
+        WITH_REFRESH = YES;
+    }
     NSArray *locationArray = [db allLocation];
+    NSArray *array2 = [db allObjectsInDictionary];
     
     [self.mapView setDelegate:self];
     int distanceMin = MAXFLOAT;
@@ -71,8 +75,9 @@ static BOOL const WITH_REFRESH = YES;
             [self performSelectorOnMainThread:@selector(fetchedData:)
                                    withObject:data waitUntilDone:YES];
         });
-
     }
+    else
+        [self.loadImage setHidden:YES];
 }
 
 - (void)fetchedData:(NSData *)responseData {
@@ -121,6 +126,32 @@ static BOOL const WITH_REFRESH = YES;
     [self.progressIndicatorView setHidesWhenStopped:YES];
     self.loadImage.hidden = YES;
 }
+
+
+- (int)maxInArray:(NSArray *)array withI:(int)i withZ:(int)z {
+    
+    if (i==z) {
+        return i;
+    }
+    if (z == i+1) {
+        if ([array objectAtIndex:i] > [array objectAtIndex:i+1])
+            return i;
+        else
+            return i+1;
+    }
+    else {
+        int m = (i + z) / 2;
+        int sx = [self maxInArray:array withI:i withZ:m];
+        int dx = [self maxInArray:array withI:m+1 withZ:z];
+        
+        if (dx > sx)
+            return dx;
+        
+        else
+            return sx;
+    }
+}
+
 
 - (void)viewWillAppear:(BOOL)animated {
     [self.progressIndicatorView startAnimating];

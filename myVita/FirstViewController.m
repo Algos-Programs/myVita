@@ -31,7 +31,7 @@
 @synthesize ZIPCode;
 @synthesize country;
 
-static BOOL WITH_REFRESH = NO;
+static BOOL WITH_REFRESH = YES;
 
 
 - (void)viewDidLoad {
@@ -41,30 +41,61 @@ static BOOL WITH_REFRESH = NO;
     //[self.progressIndicatorView setHidesWhenStopped:YES];
 
     Database *db = [[Database alloc] init];
-    if ([db countOfDbFromTableNamed:@"Defibrillatore"] == 0) {
+    if ([db allObjects].count == 0) {
         WITH_REFRESH = YES;
     }
+    else {
+        WITH_REFRESH = NO;
+    }
     NSArray *locationArray = [db allLocation];
+    NSArray *daeArray = [db allObjects];
+   
+#warning dont works NSArray *array2 = [db allObjectsInDictionary];
     NSArray *array2 = [db allObjectsInDictionary];
-    
     [self.mapView setDelegate:self];
     int distanceMin = MAXFLOAT;
-    for (CLLocation *location in locationArray) {
+//    for (CLLocation *location in locationArray) {
+//        Annotation *newAnnotation = [[Annotation alloc] init];
+//        //int distance = [location distanceFromLocation:[LibLocation location]];
+//        NSNumber *distance = [[[NSNumber alloc] initWithFloat:[[LibLocation location] distanceFromLocation:location]] autorelease];
+//
+//        //-- Indirizzo
+//        NSString *str1 = [[daeArray objectAtIndex:8] objectAtIndex:7];
+//        
+//        //-- Disponibilità
+//        NSString *str3 = [daeArray objectAtIndex:6];
+//        
+//        newAnnotation.title = [NSString stringWithFormat:@"%i metri", [distance intValue]];
+//        newAnnotation.subtitle = [NSString stringWithFormat:@"%@ - %@", str1, str3];
+//        newAnnotation.coordinate = location.coordinate;
+//        
+//
+//        if ([distance intValue] < distanceMin) {
+//            distanceMin = [distance intValue];
+//            daePiuVicino = location;
+//        }
+//        [self.mapView addAnnotation:newAnnotation];
+//    }
+    
+    for (int i=0; i<locationArray.count; i++) {
+        
+        CLLocation *location = [[locationArray objectAtIndex:i] autorelease];
         Annotation *newAnnotation = [[Annotation alloc] init];
-        newAnnotation.title = @"CIAO";
+        NSNumber *distance = [[[NSNumber alloc] initWithFloat:[[LibLocation location] distanceFromLocation:location]] autorelease];
+        NSString *indirizzo = [[daeArray objectAtIndex:i] objectAtIndex:7];
+        NSString *disponibilita = [[daeArray objectAtIndex:i] objectAtIndex:5];
+        newAnnotation.title = [NSString stringWithFormat:@"%i metri", [distance intValue]];
+        newAnnotation.subtitle = [NSString stringWithFormat:@"%@ - %@", disponibilita, indirizzo];
         newAnnotation.coordinate = location.coordinate;
-        
-        
-        int distance = [location distanceFromLocation:[LibLocation location]];
-        if (distance < distanceMin) {
-            CLLocationCoordinate2D coordinate = location.coordinate;
-            distanceMin = distance;
+        if ([distance intValue] < distanceMin) {
+            distanceMin = [distance intValue];
             daePiuVicino = location;
         }
         [self.mapView addAnnotation:newAnnotation];
+
     }
     
-    self.distanceLabel.text = [NSString stringWithFormat:@"%i m", distanceMin];
+    self.distanceLabel.text = [NSString stringWithFormat:@"%i metri", distanceMin];
 
     // Mostro all'utente la sua posizione sulla mappa.
     self.mapView.showsUserLocation = YES;
@@ -289,13 +320,5 @@ static BOOL WITH_REFRESH = NO;
 
 - (IBAction)pressButtonSeeDaeAndActualPosition:(id)sender {
     [LibMap zoomMapMiddlePoint:self.mapView witLocationA:daePiuVicino withLocationB:[LibLocation location]];
-    /*
-    CLLocation *actualPosition = [LibLocation location];
-    double distance = [daePiuVicino distanceFromLocation:actualPosition];
-    double latidude = (daePiuVicino.coordinate.latitude +actualPosition.coordinate.latitude) / 2;
-    double longitude = (daePiuVicino.coordinate.longitude + actualPosition.coordinate.longitude) / 2;
-    CLLocation *newLocation = [[CLLocation alloc] initWithLatitude:latidude longitude:longitude];
-    [LibMap zoomMap:self.mapView withLocation:newLocation withLatitudinalMeters:distance andLongitudinalMeters:distance];
-     */
 }
 @end

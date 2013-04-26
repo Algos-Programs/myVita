@@ -75,7 +75,7 @@ BOOL viewAll = YES;
 
 - (void)viewWillAppear:(BOOL)animated {
     
-    arraySort = [self sortWithArray:arrayDefibrillatoriToView];
+    arraySort = [Database sortWithArray:arrayDefibrillatoriToView];
 }
 
 
@@ -97,7 +97,7 @@ BOOL viewAll = YES;
     NSMutableArray *returnArray = [[[NSMutableArray alloc] init] autorelease];
     NSMutableArray *tempArray = [[[NSMutableArray alloc] initWithArray:mArray.copy] autorelease];
     CLLocation *location = [LibLocation location];
-    NSLog(@"INIZIO");
+    NSLog(@"INIZIO + sortWithArray Info");
     while (tempArray.count != 0) {
         int index = [self minInArray:tempArray withI:0 withZ:tempArray.count - 1 withCurrentPosition:location];
         [returnArray addObject:[tempArray objectAtIndex:index]];
@@ -186,8 +186,8 @@ BOOL viewAll = YES;
         
         
         CellIdentifier = @"Cell";
-        cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-        NSArray *tempArray = [arrayDefibrillatoriToView objectAtIndex:indexPath.row - 1];
+        cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath]; //arrayDefibrillatoriToView
+        NSArray *tempArray = [arraySort objectAtIndex:indexPath.row - 1];
         
         CLLocationCoordinate2D coordinate;
         coordinate.latitude = [[tempArray objectAtIndex:8] doubleValue];

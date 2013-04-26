@@ -323,7 +323,7 @@ static NSString * const TABLE_NAME_DEFIBRILLATORE = @"Defibrillatore";
 
 
 - (NSArray *)allObjects{
-    
+    [self openDB];
     NSString * qsql = [NSString stringWithFormat:@"SELECT * FROM '%@'", TABLE_NAME_DEFIBRILLATORE];
     sqlite3_stmt *statment;
     
@@ -491,35 +491,18 @@ static NSString * const TABLE_NAME_DEFIBRILLATORE = @"Defibrillatore";
         NSLog(@"Non ci sono elementi nella tabella %@", TABLE_NAME_DEFIBRILLATORI);
     }
     //sort
-    return [self sortWithArray1:returnArray];
+    //return [Database sortWithArray:returnArray];
 
-    //return returnArray;
-}
-
-- (NSMutableArray *)sortWithArray:(NSMutableArray *)mArray {
-    
-    NSMutableArray *returnArray = [[[NSMutableArray alloc] init] autorelease];
-    NSMutableArray *tempArray = [[[NSMutableArray alloc] initWithArray:mArray.copy] autorelease];
-    CLLocation *location = [LibLocation location];
-    
-    NSLog(@"INIZIO");
-    while (tempArray.count != 0) {
-        int index = [self minInArray:tempArray withI:0 withZ:tempArray.count - 1 withCurrentPosition:location];
-        [returnArray addObject:[tempArray objectAtIndex:index]];
-        [tempArray removeObjectAtIndex:index];
-    }
-    NSLog(@"FINE");
-    
     return returnArray;
 }
 
-- (NSMutableArray *)sortWithArray1:(NSMutableArray *)mArray {
++ (NSMutableArray *)sortWithArray:(NSMutableArray *)mArray {
     
     NSMutableArray *returnArray = [[NSMutableArray alloc] init];
     NSMutableArray *tempArray = [[NSMutableArray alloc] initWithArray:mArray];
     CLLocation *location = [LibLocation location];
     
-    NSLog(@"INIZIO");
+    NSLog(@"INIZIO + sortWithArray1");
     for (int i=0; tempArray.count != 0; i++){
         int index = [self minInArray:tempArray withI:0 withZ:tempArray.count - 1 withCurrentPosition:location];
         [returnArray addObject:[tempArray objectAtIndex:index]];
@@ -529,24 +512,7 @@ static NSString * const TABLE_NAME_DEFIBRILLATORE = @"Defibrillatore";
     
     return returnArray;
 }
-
-- (NSMutableArray *)sortWithArray2:(NSMutableArray *)mArray {
-    
-    NSMutableArray *returnArray = [[[NSMutableArray alloc] init] autorelease];
-    NSMutableArray *tempArray = [[[NSMutableArray alloc] initWithArray:mArray.copy] autorelease];
-    CLLocation *location = [LibLocation location];
-    
-    NSLog(@"INIZIO");
-    for (int i=0; i<tempArray.count; i++){
-        int index = [self minInArray:tempArray withI:0 withZ:tempArray.count - 1 withCurrentPosition:location];
-        [returnArray addObject:[tempArray objectAtIndex:index]];
-    }
-    NSLog(@"FINE");
-    
-    return returnArray;
-}
-
-- (int)minInArray:(NSArray *)array withI:(int)i withZ:(int)z withCurrentPosition:(CLLocation *)currentPosition{
++ (int)minInArray:(NSArray *)array withI:(int)i withZ:(int)z withCurrentPosition:(CLLocation *)currentPosition{
     
     if (i==z) {
         return i;

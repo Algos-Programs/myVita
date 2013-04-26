@@ -68,7 +68,7 @@
     NSMutableArray *returnArray = [[[NSMutableArray alloc] init] autorelease];
     NSMutableArray *tempArray = [[[NSMutableArray alloc] initWithArray:mArray.copy] autorelease];
     
-    NSLog(@"INIZIO");
+    NSLog(@"INIZIO + sortWithArray Test");
     while (tempArray.count != 0) {
         int index = [self minInArray:tempArray withI:0 withZ:tempArray.count - 1];
         [returnArray addObject:[tempArray objectAtIndex:index]];

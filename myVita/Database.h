@@ -56,6 +56,7 @@ static NSString * const KEY_LAST_UPDATE = @"lastUpdated";
 //- (void)insertRecordWithDefibrillatore:(NSDictionary *)dicDefibrillatori;
 - (BOOL)insertRecordWithDefibrillatore:(NSDictionary *)dicDefibrillatori;
 - (BOOL)popolaTabellaWithArray:(NSArray *)arrDef;
++ (NSMutableArray *)sortWithArray:(NSMutableArray *)mArray;
 
 
 

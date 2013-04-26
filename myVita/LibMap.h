@@ -26,4 +26,9 @@
  */
 + (void)zoomMap:(MKMapView *)mapView withLocation:(CLLocation *)location withLatitudinalMeters:(double)latitudinalMeters andLongitudinalMeters:(double)longitudinalMeters;
 
+/**
+ Fa uno zoom PERONALIZZATO e permette di vedere sulla mappa i due punti passati.
+ */
++ (void)zoomMapMiddlePoint:(MKMapView *)mapView witLocationA:(CLLocation *)locationA withLocationB:(CLLocation *)locationB;
+
 @end

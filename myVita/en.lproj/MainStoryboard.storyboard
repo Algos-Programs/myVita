@@ -12,17 +12,11 @@
                         <rect key="frame" x="0.0" y="20" width="320" height="499"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="NdA-rC-GiR"/>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="9k7-D6-cxM">
-                                <color key="color" red="0.19215688110000001" green="0.5176470876" blue="0.95686280729999995" alpha="0.67000000000000004" colorSpace="deviceRGB"/>
-                            </activityIndicatorView>
-                            <progressView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LpG-gC-u9X">
-                                <color key="backgroundColor" red="0.48946945460000002" green="0.054532384150000002" blue="0.85386221289999997" alpha="1" colorSpace="calibratedRGB"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="NdA-rC-GiR">
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="280" id="trc-FC-phd"/>
+                                    <constraint firstAttribute="width" constant="332" id="5B3-lW-6Jf"/>
                                 </constraints>
-                                <color key="progressTintColor" red="0.98431378599999997" green="0.92549026010000002" blue="0.023529414089999999" alpha="1" colorSpace="deviceRGB"/>
-                            </progressView>
+                            </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7l1-ft-0fK">
                                 <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
                                 <state key="normal">
@@ -43,37 +37,66 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <navigationBar contentMode="scaleToFill" barStyle="blackOpaque" translatesAutoresizingMaskIntoConstraints="NO" id="PBa-Kb-50U">
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="yVk-dz-mrc"/>
-                                </constraints>
                                 <color key="tintColor" red="0.0" green="0.47390396659707723" blue="9.8240520880495618e-05" alpha="1" colorSpace="calibratedRGB"/>
                                 <items>
                                     <navigationItem title="myVita" id="2Hv-xG-oZh"/>
                                 </items>
                             </navigationBar>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="loadingView.png" translatesAutoresizingMaskIntoConstraints="NO" id="Ywf-s1-q1l"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Senza titolo-1.png" translatesAutoresizingMaskIntoConstraints="NO" id="Ywf-s1-q1l">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="419" id="JIH-Db-djW"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oY2-ap-K0d">
+                                <fontDescription key="fontDescription" type="boldSystem" size="button"/>
+                                <state key="normal">
+                                    <color key="titleColor" red="0.19607843137254902" green="0.30980392156862746" blue="0.52156862745098043" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="pressButtonZoomDAE:" destination="2" eventType="touchUpInside" id="xZF-s4-Qgz"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9I0-4u-nMg">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="149" id="C9q-kf-WFm"/>
+                                    <constraint firstAttribute="height" constant="16" id="Gf0-BY-2CM"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="pressButtonSeeDaeAndActualPosition:" destination="2" eventType="touchUpInside" id="jHw-CI-mQV"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="etB-Ze-Neq" firstAttribute="top" secondItem="16" secondAttribute="top" constant="56" id="4if-r3-ZYi"/>
-                            <constraint firstItem="LpG-gC-u9X" firstAttribute="top" secondItem="7l1-ft-0fK" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="69H-zj-Dom"/>
+                            <constraint firstItem="Ywf-s1-q1l" firstAttribute="trailing" secondItem="16" secondAttribute="trailing" type="default" id="8co-C8-Cva"/>
+                            <constraint firstItem="oY2-ap-K0d" firstAttribute="leading" secondItem="16" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="8xE-d8-sAh"/>
+                            <constraint firstAttribute="bottom" secondItem="9I0-4u-nMg" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="9jy-Z1-6ji"/>
                             <constraint firstItem="PBa-Kb-50U" firstAttribute="leading" secondItem="16" secondAttribute="leading" type="default" id="Dfg-QX-aI1"/>
-                            <constraint firstAttribute="trailing" secondItem="9k7-D6-cxM" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="F7c-Mz-v0E"/>
-                            <constraint firstItem="Ywf-s1-q1l" firstAttribute="top" secondItem="PBa-Kb-50U" secondAttribute="bottom" type="default" id="JIh-4C-YZs"/>
-                            <constraint firstItem="7l1-ft-0fK" firstAttribute="centerX" secondItem="9k7-D6-cxM" secondAttribute="centerX" type="default" id="LdJ-Bs-acM"/>
-                            <constraint firstItem="7l1-ft-0fK" firstAttribute="centerY" secondItem="9k7-D6-cxM" secondAttribute="centerY" type="default" id="MSZ-oi-YyF"/>
                             <constraint firstItem="NdA-rC-GiR" firstAttribute="trailing" secondItem="16" secondAttribute="trailing" type="default" id="Mg9-Eg-RCY"/>
-                            <constraint firstItem="Ywf-s1-q1l" firstAttribute="leading" secondItem="16" secondAttribute="leading" type="default" id="Mzu-89-dY4"/>
+                            <constraint firstItem="Ywf-s1-q1l" firstAttribute="centerY" secondItem="16" secondAttribute="centerY" type="default" id="Wah-GJ-jWS"/>
+                            <constraint firstItem="Ywf-s1-q1l" firstAttribute="leading" secondItem="16" secondAttribute="leading" type="default" id="WiM-cV-9lH"/>
                             <constraint firstItem="PBa-Kb-50U" firstAttribute="top" secondItem="16" secondAttribute="top" type="default" id="Xz8-xm-Fte"/>
-                            <constraint firstItem="NdA-rC-GiR" firstAttribute="top" secondItem="16" secondAttribute="top" type="default" id="kdA-MG-AEz"/>
-                            <constraint firstItem="Ywf-s1-q1l" firstAttribute="bottom" secondItem="16" secondAttribute="bottom" type="default" id="mwU-k5-2Ia"/>
-                            <constraint firstItem="etB-Ze-Neq" firstAttribute="centerX" secondItem="LpG-gC-u9X" secondAttribute="centerX" type="default" id="o2n-Me-SKT"/>
-                            <constraint firstAttribute="bottom" secondItem="9k7-D6-cxM" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="o6g-AQ-B4y"/>
-                            <constraint firstItem="LpG-gC-u9X" firstAttribute="leading" secondItem="16" secondAttribute="leading" constant="17" id="ohB-uV-OKW"/>
+                            <constraint firstAttribute="trailing" secondItem="7l1-ft-0fK" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="bRr-t4-6cD"/>
+                            <constraint firstItem="etB-Ze-Neq" firstAttribute="leading" secondItem="16" secondAttribute="leading" constant="21" id="csG-d8-Tbb"/>
+                            <constraint firstItem="NdA-rC-GiR" firstAttribute="top" secondItem="PBa-Kb-50U" secondAttribute="bottom" type="default" id="f4S-ay-Iie"/>
+                            <constraint firstAttribute="bottom" secondItem="7l1-ft-0fK" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="hey-35-w8Q"/>
+                            <constraint firstItem="9I0-4u-nMg" firstAttribute="centerX" secondItem="etB-Ze-Neq" secondAttribute="centerX" type="default" id="mQa-63-zVh"/>
+                            <constraint firstAttribute="bottom" secondItem="oY2-ap-K0d" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="qyy-Qs-O3U"/>
                             <constraint firstItem="PBa-Kb-50U" firstAttribute="trailing" secondItem="16" secondAttribute="trailing" type="default" id="u77-gL-uJm"/>
                             <constraint firstItem="NdA-rC-GiR" firstAttribute="bottom" secondItem="16" secondAttribute="bottom" type="default" id="uPC-9c-d82"/>
-                            <constraint firstItem="NdA-rC-GiR" firstAttribute="leading" secondItem="16" secondAttribute="leading" type="default" id="vJS-83-Xk6"/>
-                            <constraint firstItem="Ywf-s1-q1l" firstAttribute="trailing" secondItem="16" secondAttribute="trailing" type="default" id="w8b-Qt-GbE"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="First" image="first" id="7"/>
@@ -81,13 +104,25 @@
                         <outlet property="distanceLabel" destination="etB-Ze-Neq" id="MAs-hO-Q0G"/>
                         <outlet property="loadImage" destination="Ywf-s1-q1l" id="B8B-q3-LzW"/>
                         <outlet property="mapView" destination="NdA-rC-GiR" id="FFf-f8-vRw"/>
-                        <outlet property="progressBar" destination="LpG-gC-u9X" id="WNr-ZC-k5X"/>
-                        <outlet property="progressIndicatorView" destination="9k7-D6-cxM" id="iyu-i8-NbS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="10" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="721" y="166"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="QO3-iC-dNv">
+            <objects>
+                <viewController id="PAv-Nz-GNm" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="GIe-85-pVg">
+                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5BW-3t-ZYU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1101" y="231"/>
         </scene>
         <!--Info View Controller - Root View Controller-->
         <scene sceneID="XkK-NK-ljL">
@@ -147,8 +182,14 @@
                         </prototypes>
                     </tableView>
                     <navigationItem key="navigationItem" title="Root View Controller" id="Ak9-FE-9aR">
+                        <barButtonItem key="leftBarButtonItem" systemItem="refresh" id="LbZ-q2-Tsa">
+                            <color key="tintColor" red="0.20428236065743224" green="0.61377870563674319" blue="0.07050896838104892" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="pressButtonRefresh:" destination="nMg-eQ-byl" id="4sf-hn-rSY"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="&lt; 1 km " id="8Vs-nq-FGx">
-                            <color key="tintColor" red="0.39642889095644457" green="0.47390396659707723" blue="0.32258497255770607" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="tintColor" red="0.2042823607" green="0.61377870560000003" blue="0.070508968379999995" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="pressButtonSelect:" destination="nMg-eQ-byl" id="z5h-Cf-ZBG"/>
                             </connections>
@@ -268,41 +309,9 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Senza titolo-1.png" width="649" height="960"/>
         <image name="first" width="16" height="16"/>
-        <image name="loadingView.png" width="640" height="960"/>
     </resources>
-    <classes>
-        <class className="DetailViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/DetailViewController.h"/>
-        </class>
-        <class className="FirstViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/FirstViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="pressButtonZoom:"/>
-                <relationship kind="outlet" name="distanceLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="loadImage" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
-                <relationship kind="outlet" name="progressBar" candidateClass="UIProgressView"/>
-                <relationship kind="outlet" name="progressIndicatorView" candidateClass="UIActivityIndicatorView"/>
-            </relationships>
-        </class>
-        <class className="InfoViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/InfoViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="pressButtonSelect:"/>
-                <relationship kind="outlet" name="buttonSelect" candidateClass="UIBarButtonItem"/>
-            </relationships>
-        </class>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-        <class className="ProvaViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ProvaViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="o" candidateClass="UIActivityIndicatorView"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

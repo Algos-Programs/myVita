@@ -26,6 +26,8 @@
     NSString *ZIPCode;
     NSString *country;
     
+    CLLocation *daePiuVicino;
+    
 }
 
 @property (retain, nonatomic) IBOutlet MKMapView *mapView;
@@ -51,4 +53,6 @@
 @property (retain, nonatomic) IBOutlet UIImageView *loadImage;
 
 - (IBAction)pressButtonZoom:(id)sender;
+- (IBAction)pressButtonZoomDAE:(id)sender;
+- (IBAction)pressButtonSeeDaeAndActualPosition:(id)sender;
 @end

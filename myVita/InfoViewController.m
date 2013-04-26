@@ -291,6 +291,10 @@ BOOL viewAll = YES;
     return f;
 }
 
+//**********************************************
+#pragma mark - Action Methods
+//**********************************************
+
 - (IBAction)pressButtonSelect:(id)sender {
     if ([self.buttonSelect.title isEqual: @"Tutti"]) {
         self.buttonSelect.title = @"< 1 km";
@@ -301,5 +305,10 @@ BOOL viewAll = YES;
         viewAll = YES;
     }
     [self.tableView reloadData];
+}
+
+- (IBAction)pressButtonRefresh:(id)sender {
+    
+    
 }
 @end

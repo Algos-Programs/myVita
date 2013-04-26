@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A9157E161725A20C0001DACE /* loadingImage.png in Resources */ = {isa = PBXBuildFile; fileRef = A9157E151725A20C0001DACE /* loadingImage.png */; };
+		A9157E181725A3180001DACE /* Senza titolo-1.png in Resources */ = {isa = PBXBuildFile; fileRef = A9157E171725A3180001DACE /* Senza titolo-1.png */; };
+		A91D03B017241D7900428605 /* LibFetchData.m in Sources */ = {isa = PBXBuildFile; fileRef = A91D03AF17241D7900428605 /* LibFetchData.m */; };
+		A91D03B317241F7B00428605 /* TestLibFetchData.m in Sources */ = {isa = PBXBuildFile; fileRef = A91D03B217241F7B00428605 /* TestLibFetchData.m */; };
 		A95089041703474B006AC00F /* Annotation.m in Sources */ = {isa = PBXBuildFile; fileRef = A95089031703474B006AC00F /* Annotation.m */; };
 		A950890A17034EF9006AC00F /* InfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A950890917034EF9006AC00F /* InfoViewController.m */; };
 		A950890E17035A9F006AC00F /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A950890D17035A9F006AC00F /* DetailViewController.m */; };
@@ -87,6 +91,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A9157E151725A20C0001DACE /* loadingImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loadingImage.png; sourceTree = "<group>"; };
+		A9157E171725A3180001DACE /* Senza titolo-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Senza titolo-1.png"; sourceTree = "<group>"; };
+		A91D03AE17241D7900428605 /* LibFetchData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LibFetchData.h; sourceTree = "<group>"; };
+		A91D03AF17241D7900428605 /* LibFetchData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LibFetchData.m; sourceTree = "<group>"; };
+		A91D03B117241F7B00428605 /* TestLibFetchData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestLibFetchData.h; sourceTree = "<group>"; };
+		A91D03B217241F7B00428605 /* TestLibFetchData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestLibFetchData.m; sourceTree = "<group>"; };
 		A95089021703474B006AC00F /* Annotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Annotation.h; sourceTree = "<group>"; };
 		A95089031703474B006AC00F /* Annotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Annotation.m; sourceTree = "<group>"; };
 		A950890817034EF9006AC00F /* InfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoViewController.h; sourceTree = "<group>"; };
@@ -183,6 +193,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A91D03B417241F8000428605 /* Test */ = {
+			isa = PBXGroup;
+			children = (
+				A91D03B117241F7B00428605 /* TestLibFetchData.h */,
+				A91D03B217241F7B00428605 /* TestLibFetchData.m */,
+			);
+			name = Test;
+			sourceTree = "<group>";
+		};
 		A950890517034757006AC00F /* Location */ = {
 			isa = PBXGroup;
 			children = (
@@ -232,6 +251,8 @@
 				A99811A5171C044200DA20AC /* loadingView.png */,
 				A9C580B9171C663300F60071 /* greenColor.png */,
 				A9C580C4171C67C500F60071 /* greenColor1.png */,
+				A9157E151725A20C0001DACE /* loadingImage.png */,
+				A9157E171725A3180001DACE /* Senza titolo-1.png */,
 				A98DE3801702430D00604EEF /* libsqlite3.0.dylib */,
 				A9A3145017023A7C0081BC88 /* myVita */,
 				A9A3147F17023A7C0081BC88 /* myVitaTests */,
@@ -326,6 +347,9 @@
 				A9A3149517023D130081BC88 /* LibLocation.m */,
 				A9A314C817023E810081BC88 /* LibMap.h */,
 				A9A314C917023E810081BC88 /* LibMap.m */,
+				A91D03AE17241D7900428605 /* LibFetchData.h */,
+				A91D03AF17241D7900428605 /* LibFetchData.m */,
+				A91D03B417241F8000428605 /* Test */,
 			);
 			name = Lib;
 			sourceTree = "<group>";
@@ -453,6 +477,8 @@
 				A99811A6171C044200DA20AC /* loadingView.png in Resources */,
 				A9C580BA171C663300F60071 /* greenColor.png in Resources */,
 				A9C580C5171C67C500F60071 /* greenColor1.png in Resources */,
+				A9157E161725A20C0001DACE /* loadingImage.png in Resources */,
+				A9157E181725A3180001DACE /* Senza titolo-1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -516,6 +542,7 @@
 				A950890A17034EF9006AC00F /* InfoViewController.m in Sources */,
 				A950890E17035A9F006AC00F /* DetailViewController.m in Sources */,
 				A97E39C9170D82F90089F4A7 /* ProvaViewController.m in Sources */,
+				A91D03B017241D7900428605 /* LibFetchData.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -524,6 +551,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A9A3148717023A7C0081BC88 /* myVitaTests.m in Sources */,
+				A91D03B317241F7B00428605 /* TestLibFetchData.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

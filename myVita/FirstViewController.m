@@ -34,8 +34,7 @@
 static BOOL WITH_REFRESH = NO;
 
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     
     self.mapView.mapType = MKMapTypeStandard;
@@ -55,9 +54,12 @@ static BOOL WITH_REFRESH = NO;
         newAnnotation.title = @"CIAO";
         newAnnotation.coordinate = location.coordinate;
         
+        
         int distance = [location distanceFromLocation:[LibLocation location]];
         if (distance < distanceMin) {
+            CLLocationCoordinate2D coordinate = location.coordinate;
             distanceMin = distance;
+            daePiuVicino = location;
         }
         [self.mapView addAnnotation:newAnnotation];
     }
@@ -80,79 +82,6 @@ static BOOL WITH_REFRESH = NO;
         [self.loadImage setHidden:YES];
 }
 
-- (void)fetchedData:(NSData *)responseData {
-
-    if (responseData) {
-        //parse out the json data
-        NSError* error;
-        //Array di Dictionary.
-        NSArray* json = [NSJSONSerialization
-                         JSONObjectWithData:responseData //1
-                         options:kNilOptions
-                         error:&error];
-        
-        NSLog(@"DESCR_JSON: %@", [json description]); //3
-        NSLog(@"COUNT_JSON: %lu", (unsigned long)[json count]); //3
-        NSLog(@"COUNT_KEY_JSON: %i", [[[json objectAtIndex:0] allKeys] count]);
-        
-        Database *db = [[Database alloc] init];
-        [db openDB];
-        [db DeleteTable:@"Defibrillatore"];
-        [db createTableDefibrillatore];
-                
-        NSLog(@"-.- Inzio Carico Dati -.-");
-        
-        CGFloat progressBarCount = 1.0000 / json.count;
-        
-        int c =0;
-        for (int i=0; i<json.count; i++) {
-            [self.progressBar setProgress:progressBarCount * i];
-
-            if (![db insertRecordWithDefibrillatore:[json objectAtIndex:i]]) {
-                NSLog(@"--- i = %i", i);
-                c++;
-            }
-        }
-        
-        
-        //[db popolaTabellaWithArray:json];
-        
-        NSLog(@"-.- Fine Carico Dati -.-");
-        //NSLog(@"c = %i", c);
-
-    }
-    
-    [self.progressIndicatorView stopAnimating];
-    [self.progressIndicatorView setHidesWhenStopped:YES];
-    self.loadImage.hidden = YES;
-}
-
-
-- (int)maxInArray:(NSArray *)array withI:(int)i withZ:(int)z {
-    
-    if (i==z) {
-        return i;
-    }
-    if (z == i+1) {
-        if ([array objectAtIndex:i] > [array objectAtIndex:i+1])
-            return i;
-        else
-            return i+1;
-    }
-    else {
-        int m = (i + z) / 2;
-        int sx = [self maxInArray:array withI:i withZ:m];
-        int dx = [self maxInArray:array withI:m+1 withZ:z];
-        
-        if (dx > sx)
-            return dx;
-        
-        else
-            return sx;
-    }
-}
-
-
 - (void)viewWillAppear:(BOOL)animated {
     [self.progressIndicatorView startAnimating];
 
@@ -162,14 +91,15 @@ static BOOL WITH_REFRESH = NO;
     [self localizedMe]; //init manager.
 
 }
+
 - (void)viewDidAppear:(BOOL)animated {
     
     [self zoom];
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+    NSLog(@"****ERROR: MEMORY WARING");
     // Dispose of any resources that can be recreated.
 }
 
@@ -188,6 +118,55 @@ static BOOL WITH_REFRESH = NO;
     [super dealloc];
 }
 
+//************************************
+#pragma mark - Fetch Data Methods
+//************************************
+
+- (void)fetchedData:(NSData *)responseData {
+    
+    if (responseData) {
+        //parse out the json data
+        NSError* error;
+        
+        //Array di Dictionary.
+        NSArray* json = [NSJSONSerialization
+                         JSONObjectWithData:responseData //1
+                         options:kNilOptions
+                         error:&error];
+        
+        NSLog(@"DESCR_JSON: %@", [json description]); //3
+        NSLog(@"COUNT_JSON: %lu", (unsigned long)[json count]); //3
+        NSLog(@"COUNT_KEY_JSON: %i", [[[json objectAtIndex:0] allKeys] count]);
+        
+        Database *db = [[Database alloc] init];
+        [db openDB];
+        [db DeleteTable:@"Defibrillatore"];
+        [db createTableDefibrillatore];
+        
+        NSLog(@"-.- Inzio Carico Dati -.-");
+        
+        CGFloat progressBarCount = 1.0000 / json.count;
+        
+        int c =0;
+        for (int i=0; i<json.count; i++) {
+            [self.progressBar setProgress:progressBarCount * i];
+            
+            if (![db insertRecordWithDefibrillatore:[json objectAtIndex:i]]) {
+                NSLog(@"--- i = %i", i);
+                c++;
+            }
+        }
+        //[db popolaTabellaWithArray:json];
+        
+        NSLog(@"-.- Fine Carico Dati -.-");
+        //NSLog(@"c = %i", c);
+        
+    }
+    
+    [self.progressIndicatorView stopAnimating];
+    [self.progressIndicatorView setHidesWhenStopped:YES];
+    self.loadImage.hidden = YES;
+}
 
 //************************************
 #pragma mark - Localization Methods
@@ -215,8 +194,6 @@ static BOOL WITH_REFRESH = NO;
 #pragma mark - Map Methods
 //************************************
 
-
-
 - (MKAnnotationView *) mapView:(MKMapView *)aMapView viewForAnnotation:(id <MKAnnotation>) annotation{
     MKPinAnnotationView *pinAnnotation = nil;
     if(annotation != mapView.userLocation)
@@ -238,7 +215,6 @@ static BOOL WITH_REFRESH = NO;
     
     return pinAnnotation;
 }
-
 
 - (MKOverlayView *)mapView:(MKMapView *)mapView viewForOverlay:(id<MKOverlay>)overlay {
     //-- Posizione Attuale.
@@ -299,7 +275,27 @@ static BOOL WITH_REFRESH = NO;
 
 }
 
+//************************************
+#pragma mark - Action Methods
+//************************************
+
 - (IBAction)pressButtonZoom:(id)sender {
     [self zoom];
+}
+
+- (IBAction)pressButtonZoomDAE:(id)sender {
+    [LibMap zoomMap:self.mapView withLocation:daePiuVicino withLatitudinalMeters:2000 andLongitudinalMeters:2000];
+}
+
+- (IBAction)pressButtonSeeDaeAndActualPosition:(id)sender {
+    [LibMap zoomMapMiddlePoint:self.mapView witLocationA:daePiuVicino withLocationB:[LibLocation location]];
+    /*
+    CLLocation *actualPosition = [LibLocation location];
+    double distance = [daePiuVicino distanceFromLocation:actualPosition];
+    double latidude = (daePiuVicino.coordinate.latitude +actualPosition.coordinate.latitude) / 2;
+    double longitude = (daePiuVicino.coordinate.longitude + actualPosition.coordinate.longitude) / 2;
+    CLLocation *newLocation = [[CLLocation alloc] initWithLatitude:latidude longitude:longitude];
+    [LibMap zoomMap:self.mapView withLocation:newLocation withLatitudinalMeters:distance andLongitudinalMeters:distance];
+     */
 }
 @end

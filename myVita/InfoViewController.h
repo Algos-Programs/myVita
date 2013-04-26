@@ -17,4 +17,5 @@
 @property (retain, nonatomic) IBOutlet UIBarButtonItem *buttonSelect;
 
 - (IBAction)pressButtonSelect:(id)sender;
+- (IBAction)pressButtonRefresh:(id)sender;
 @end

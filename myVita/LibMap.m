@@ -51,5 +51,12 @@
     [mapView setRegion:adjustingRegion animated:YES];
 }
 
++ (void)zoomMapMiddlePoint:(MKMapView *)mapView witLocationA:(CLLocation *)locationA withLocationB:(CLLocation *)locationB {
+    double distance = [locationA distanceFromLocation:locationB];
+    double latidude = (locationA.coordinate.latitude + locationB.coordinate.latitude) / 2;
+    double longitude = (locationA.coordinate.longitude + locationB.coordinate.longitude) / 2;
+    CLLocation *newLocation = [[CLLocation alloc] initWithLatitude:latidude longitude:longitude];
+    [LibMap zoomMap:mapView withLocation:newLocation withLatitudinalMeters:distance andLongitudinalMeters:distance];
+}
 
 @end

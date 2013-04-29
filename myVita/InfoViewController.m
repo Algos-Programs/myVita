@@ -167,8 +167,8 @@ BOOL viewAll = YES;
         CellIdentifier = @"Cell_Legend";
         cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
 
-        text = @"DISTANZA";
-        detail = @"NOME POSTO";
+        text = @"Nome Posto";
+        detail = @"Distanza";
         
         cell.textLabel.font = [UIFont fontWithName:@"Trebuchet MS" size:25.0];
         cell.textLabel.textColor = [UIColor redColor];
@@ -202,7 +202,7 @@ BOOL viewAll = YES;
             NSNumber *distance = [[[NSNumber alloc] initWithFloat:[[LibLocation location] distanceFromLocation:tempLocation]] autorelease];
             
             cell.textLabel.text = [NSString stringWithFormat:@"%i m",[distance intValue]];
-            cell.detailTextLabel.text = [tempArray objectAtIndex:1];
+            cell.detailTextLabel.text = [tempArray objectAtIndex:5];
         }
         
         
@@ -267,15 +267,17 @@ BOOL viewAll = YES;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (indexPath.row != 0) {
+        DetailViewController *detailViewController = [[DetailViewController alloc] init];
+        detailViewController.arrayInfo = [arrayDefibrillatori objectAtIndex:indexPath.row-1];
+        [self.navigationController pushViewController:detailViewController animated:YES];
+        [detailViewController release];
+    }
     // Navigation logic may go here. Create and push another view controller.
     
      // ...
      // Pass the selected object to the new view controller.
     
-    DetailViewController *detailViewController = [[DetailViewController alloc] init];
-    detailViewController.arrayInfo = [arrayDefibrillatori objectAtIndex:indexPath.row-1];
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     [detailViewController release];
      
 }
 
@@ -308,7 +310,8 @@ BOOL viewAll = YES;
 }
 
 - (IBAction)pressButtonRefresh:(id)sender {
-    
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Aggiornamento" message:@"La lista è gia aggiornata" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    [alertView show];
     
 }
 @end

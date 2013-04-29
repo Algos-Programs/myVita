@@ -11,6 +11,10 @@
 		A9157E181725A3180001DACE /* Senza titolo-1.png in Resources */ = {isa = PBXBuildFile; fileRef = A9157E171725A3180001DACE /* Senza titolo-1.png */; };
 		A91D03B017241D7900428605 /* LibFetchData.m in Sources */ = {isa = PBXBuildFile; fileRef = A91D03AF17241D7900428605 /* LibFetchData.m */; };
 		A91D03B317241F7B00428605 /* TestLibFetchData.m in Sources */ = {isa = PBXBuildFile; fileRef = A91D03B217241F7B00428605 /* TestLibFetchData.m */; };
+		A926C757172F0B2600244B77 /* 07-map-marker.png in Resources */ = {isa = PBXBuildFile; fileRef = A926C756172F0B2600244B77 /* 07-map-marker.png */; };
+		A926C759172F0B5800244B77 /* globe.png in Resources */ = {isa = PBXBuildFile; fileRef = A926C758172F0B5800244B77 /* globe.png */; };
+		A926C75B172F0B6500244B77 /* 33-cabinet.png in Resources */ = {isa = PBXBuildFile; fileRef = A926C75A172F0B6500244B77 /* 33-cabinet.png */; };
+		A926C760172F0BD800244B77 /* globe@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A926C75F172F0BD800244B77 /* globe@2x.png */; };
 		A95089041703474B006AC00F /* Annotation.m in Sources */ = {isa = PBXBuildFile; fileRef = A95089031703474B006AC00F /* Annotation.m */; };
 		A950890A17034EF9006AC00F /* InfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A950890917034EF9006AC00F /* InfoViewController.m */; };
 		A950890E17035A9F006AC00F /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A950890D17035A9F006AC00F /* DetailViewController.m */; };
@@ -18,6 +22,8 @@
 		A98B3D4E172B277C001EAC04 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A98B3D4B172B277C001EAC04 /* Default-568h@2x.png */; };
 		A98B3D4F172B277C001EAC04 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = A98B3D4C172B277C001EAC04 /* Default.png */; };
 		A98B3D50172B277C001EAC04 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A98B3D4D172B277C001EAC04 /* Default@2x.png */; };
+		A98B3D52172B2C15001EAC04 /* dae.png in Resources */ = {isa = PBXBuildFile; fileRef = A98B3D51172B2C14001EAC04 /* dae.png */; };
+		A98B3D54172B2DFD001EAC04 /* dae2.png in Resources */ = {isa = PBXBuildFile; fileRef = A98B3D53172B2DFD001EAC04 /* dae2.png */; };
 		A98DE3811702430D00604EEF /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A98DE3801702430D00604EEF /* libsqlite3.0.dylib */; };
 		A98DE3841702431D00604EEF /* Database.m in Sources */ = {isa = PBXBuildFile; fileRef = A98DE3831702431D00604EEF /* Database.m */; };
 		A998117C171AF42F00DA20AC /* dae114x114.png in Resources */ = {isa = PBXBuildFile; fileRef = A998117B171AF42F00DA20AC /* dae114x114.png */; };
@@ -100,6 +106,10 @@
 		A91D03AF17241D7900428605 /* LibFetchData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LibFetchData.m; sourceTree = "<group>"; };
 		A91D03B117241F7B00428605 /* TestLibFetchData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestLibFetchData.h; sourceTree = "<group>"; };
 		A91D03B217241F7B00428605 /* TestLibFetchData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestLibFetchData.m; sourceTree = "<group>"; };
+		A926C756172F0B2600244B77 /* 07-map-marker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "07-map-marker.png"; sourceTree = "<group>"; };
+		A926C758172F0B5800244B77 /* globe.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = globe.png; sourceTree = "<group>"; };
+		A926C75A172F0B6500244B77 /* 33-cabinet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "33-cabinet.png"; sourceTree = "<group>"; };
+		A926C75F172F0BD800244B77 /* globe@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "globe@2x.png"; sourceTree = "<group>"; };
 		A95089021703474B006AC00F /* Annotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Annotation.h; sourceTree = "<group>"; };
 		A95089031703474B006AC00F /* Annotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Annotation.m; sourceTree = "<group>"; };
 		A950890817034EF9006AC00F /* InfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoViewController.h; sourceTree = "<group>"; };
@@ -111,6 +121,8 @@
 		A98B3D4B172B277C001EAC04 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		A98B3D4C172B277C001EAC04 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		A98B3D4D172B277C001EAC04 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		A98B3D51172B2C14001EAC04 /* dae.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dae.png; sourceTree = "<group>"; };
+		A98B3D53172B2DFD001EAC04 /* dae2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dae2.png; sourceTree = "<group>"; };
 		A98DE3801702430D00604EEF /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		A98DE3821702431D00604EEF /* Database.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Database.h; sourceTree = "<group>"; };
 		A98DE3831702431D00604EEF /* Database.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Database.m; sourceTree = "<group>"; };
@@ -262,7 +274,13 @@
 				A9C580C4171C67C500F60071 /* greenColor1.png */,
 				A9157E151725A20C0001DACE /* loadingImage.png */,
 				A9157E171725A3180001DACE /* Senza titolo-1.png */,
+				A98B3D51172B2C14001EAC04 /* dae.png */,
+				A98B3D53172B2DFD001EAC04 /* dae2.png */,
+				A926C756172F0B2600244B77 /* 07-map-marker.png */,
+				A926C75A172F0B6500244B77 /* 33-cabinet.png */,
+				A926C75F172F0BD800244B77 /* globe@2x.png */,
 				A98DE3801702430D00604EEF /* libsqlite3.0.dylib */,
+				A926C758172F0B5800244B77 /* globe.png */,
 				A9A3145017023A7C0081BC88 /* myVita */,
 				A9A3147F17023A7C0081BC88 /* myVitaTests */,
 				A9A3144917023A7C0081BC88 /* Frameworks */,
@@ -491,6 +509,12 @@
 				A98B3D4E172B277C001EAC04 /* Default-568h@2x.png in Resources */,
 				A98B3D4F172B277C001EAC04 /* Default.png in Resources */,
 				A98B3D50172B277C001EAC04 /* Default@2x.png in Resources */,
+				A98B3D52172B2C15001EAC04 /* dae.png in Resources */,
+				A98B3D54172B2DFD001EAC04 /* dae2.png in Resources */,
+				A926C757172F0B2600244B77 /* 07-map-marker.png in Resources */,
+				A926C759172F0B5800244B77 /* globe.png in Resources */,
+				A926C75B172F0B6500244B77 /* 33-cabinet.png in Resources */,
+				A926C760172F0BD800244B77 /* globe@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

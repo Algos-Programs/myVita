@@ -39,7 +39,7 @@ static BOOL WITH_REFRESH = YES;
     
     self.mapView.mapType = MKMapTypeStandard;
     //[self.progressIndicatorView setHidesWhenStopped:YES];
-
+    
     Database *db = [[Database alloc] init];
     if ([db allObjects].count == 0) {
         WITH_REFRESH = YES;

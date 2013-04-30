@@ -51,12 +51,23 @@
     [mapView setRegion:adjustingRegion animated:YES];
 }
 
+/**
+ Mostra nella mappa i due punti A e B a qualunque distanza si trovino.
+ */
 + (void)zoomMapMiddlePoint:(MKMapView *)mapView witLocationA:(CLLocation *)locationA withLocationB:(CLLocation *)locationB {
     double distance = [locationA distanceFromLocation:locationB];
     double latidude = (locationA.coordinate.latitude + locationB.coordinate.latitude) / 2;
     double longitude = (locationA.coordinate.longitude + locationB.coordinate.longitude) / 2;
     CLLocation *newLocation = [[CLLocation alloc] initWithLatitude:latidude longitude:longitude];
     [LibMap zoomMap:mapView withLocation:newLocation withLatitudinalMeters:distance andLongitudinalMeters:distance];
+}
+
+/**
+ Mostra la mappa centrata sulla posione A
+ */
++ (void)zoomMap:(MKMapView *)mapView centerIn:(CLLocation *)locationA andLocationB:(CLLocation *)locationB{
+    double distance = [locationA distanceFromLocation:locationB];
+    [LibMap zoomMap:mapView withLocation:locationA withLatitudinalMeters:distance andLongitudinalMeters:distance * 3];
 }
 
 @end

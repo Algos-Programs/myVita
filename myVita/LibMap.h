@@ -28,7 +28,12 @@
 
 /**
  Fa uno zoom PERONALIZZATO e permette di vedere sulla mappa i due punti passati.
+ Mostra nella mappa i due punti A e B a qualunque distanza si trovino.
  */
 + (void)zoomMapMiddlePoint:(MKMapView *)mapView witLocationA:(CLLocation *)locationA withLocationB:(CLLocation *)locationB;
 
+/**
+ Mostra la mappa centrata sulla posione A
+ */
++ (void)zoomMap:(MKMapView *)mapView centerIn:(CLLocation *)locationA andLocationB:(CLLocation *)locationB;
 @end

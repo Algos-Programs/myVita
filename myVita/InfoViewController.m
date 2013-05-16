@@ -39,30 +39,30 @@ BOOL viewAll = YES;
 
     arrayDefibrillatori = [[[NSMutableArray alloc] init] autorelease];
     arraySort = [[[NSMutableArray alloc] init] autorelease];
+    arrayDefibrillatoriToView = [[NSMutableArray alloc] init];
     FirstViewController *fvc = [self.tabBarController.viewControllers objectAtIndex:0];
     arrayDefibrillatori = [fvc.posizionrDef copy];
     
     Database *db = [[Database alloc] init];
     [db openDB];
     
-    [db createTableDefibrillatore];
-    arrayDefibrillatori = (NSMutableArray *)[db allObjects];
+    [db createTableDefibrillatoi];
+    arrayDefibrillatori = (NSMutableArray *)[db objectsV2];
     self.navigationItem.title = [NSString stringWithFormat:@"%i su 356", arrayDefibrillatori.count];
     
-    arrayDefibrillatoriToView = [[NSMutableArray alloc] init];
     
     for (int i=0; i<arrayDefibrillatori.count; i++) {
-        NSArray *tempArray = [[NSArray alloc] initWithArray:[arrayDefibrillatori objectAtIndex:i]];
+        NSDictionary *tempDic = [[NSDictionary alloc] initWithDictionary:[arrayDefibrillatori objectAtIndex:i]];
         CLLocationCoordinate2D coordinate;
-        coordinate.latitude = [[tempArray objectAtIndex:8] doubleValue];
-        coordinate.longitude = [[tempArray objectAtIndex:10] doubleValue];
+        coordinate.latitude = [[tempDic valueForKey:KEY_LATITUDINE] doubleValue];
+        coordinate.longitude = [[tempDic valueForKey:KEY_LONGITUDINE] doubleValue];
         
         if ((coordinate.longitude || coordinate.longitude) != 0) {
             CLLocation *tempLocation = [[CLLocation alloc] initWithLatitude:
                                         coordinate.latitude longitude:coordinate.longitude];
             if (viewAll) {
                 if ([[LibLocation location] distanceFromLocation:tempLocation] < 100000) {
-                    [arrayDefibrillatoriToView addObject:tempArray];
+                    [arrayDefibrillatoriToView addObject:tempDic];
                 }
             }
         }
@@ -75,7 +75,7 @@ BOOL viewAll = YES;
 
 - (void)viewWillAppear:(BOOL)animated {
     
-    arraySort = [Database sortWithArray:arrayDefibrillatoriToView];
+    arraySort = [Database sortWithArray2:arrayDefibrillatoriToView];
 }
 
 
@@ -187,11 +187,15 @@ BOOL viewAll = YES;
         
         CellIdentifier = @"Cell";
         cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath]; //arrayDefibrillatoriToView
-        NSArray *tempArray = [arraySort objectAtIndex:indexPath.row - 1];
+        //NSArray *tempArray = [arraySort objectAtIndex:indexPath.row - 1];
+        NSDictionary *tempDictionary = [arraySort objectAtIndex:indexPath.row - 1];
         
         CLLocationCoordinate2D coordinate;
-        coordinate.latitude = [[tempArray objectAtIndex:8] doubleValue];
-        coordinate.longitude = [[tempArray objectAtIndex:10] doubleValue];
+        coordinate.latitude = [[tempDictionary valueForKey:KEY_LATITUDINE] doubleValue];
+        coordinate.longitude = [[tempDictionary valueForKey:KEY_LONGITUDINE] doubleValue];
+        
+//        coordinate.latitude = [[tempArray objectAtIndex:8] doubleValue];
+//        coordinate.longitude = [[tempArray objectAtIndex:10] doubleValue];
         
         if ((coordinate.longitude || coordinate.longitude) == 0) {
             cell.textLabel.text = @"N.D.";
@@ -202,7 +206,7 @@ BOOL viewAll = YES;
             NSNumber *distance = [[[NSNumber alloc] initWithFloat:[[LibLocation location] distanceFromLocation:tempLocation]] autorelease];
             
             cell.textLabel.text = [NSString stringWithFormat:@"%i m",[distance intValue]];
-            cell.detailTextLabel.text = [tempArray objectAtIndex:5];
+            cell.detailTextLabel.text = [tempDictionary valueForKey:KEY_DISPONIBILITA];
         }
         
         

@@ -8,11 +8,9 @@
 
 #import "AppDelegate.h"
 #import "Database.h"
+#import "LibLocation.h"
 
 @implementation AppDelegate
-
-#define kBgQueue dispatch_get_global_queue (DISPATCH_QUEUE_PRIORITY_DEFAULT, 0) //1
-#define kLatestKivaLoansURL [NSURL URLWithString:@"http://77.43.32.198:8080/myvitaback/mappa"] //2
 
 - (void)dealloc
 {
@@ -22,6 +20,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+
     return YES;
 }
 
@@ -51,5 +50,6 @@
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+
 
 @end

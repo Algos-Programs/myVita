@@ -14,8 +14,6 @@
 /**
  Restituisce la localizzazione attuale.
  */
-+ (CLLocation*)findCurrentLocation;
-
 + (CLLocation*)location;
 
 /**

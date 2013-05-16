@@ -14,14 +14,16 @@
 @implementation Database
 
 static NSString * const TABLE_NAME_DEFIBRILLATORI = @"Defibrillatori";
-static NSString * const TABLE_NAME_DEFIBRILLATORE = @"Defibrillatore";
+static NSString * const TABLE_NAME_DEFIBRILLATORE = @"Defibrillatore"; __attribute__ ((deprecated))
+
+static NSString * const DATABASE_NAME = @"database.sql";
 
 - (NSString *) filePath {
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDir = [paths objectAtIndex:0];
     
-    return [documentsDir stringByAppendingPathComponent:@"database.sql"];
+    return [documentsDir stringByAppendingPathComponent:@"DatabaseTest.sql"];
 }
 
 - (void) openDB {
@@ -38,6 +40,9 @@ static NSString * const TABLE_NAME_DEFIBRILLATORE = @"Defibrillatore";
 #pragma mark - Creazione Tabelle
 //************************************
 
+/**
+ @deprecated Obsoleto utilizzare createTableDefibrillatoi:
+ */
 - (void)createTableDefibrillatore {
     
     char *err;
@@ -83,12 +88,46 @@ static NSString * const TABLE_NAME_DEFIBRILLATORE = @"Defibrillatore";
     }
 }
 
-
+- (BOOL)createTableDefibrillatoi {
+    char *err;
+    NSString *query = [[[NSString alloc] initWithFormat:@"CREATE TABLE IF NOT EXISTS '%@' ('%@' "
+                        "INTEGER PRIMARY KEY, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' REAL, '%@' TEXT, '%@' REAL, '%@' TEXT, '%@' TEXT, '%@' INTEGER, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT);",
+                        TABLE_NAME_DEFIBRILLATORI,
+                        @"id",
+                        KEY_CATEGORIA, //1...
+                        KEY_CODICE,
+                        KEY_COMUNE,
+                        KEY_DISPONIBILITA,
+                        KEY_IMMAGINE,
+                        KEY_INDIRIZZO,
+                        KEY_LATITUDINE, //..7..
+                        KEY_LOCALITA,
+                        KEY_LONGITUDINE, //..9..
+                        KEY_MAIL,
+                        KEY_NOME,
+                        KEY_OK, //..12..
+                        KEY_SCAD_BATT,
+                        KEY_SCAD_ELET,
+                        KEY_STATO,
+                        KEY_TELEFONO,
+                        KEY_TEL_PUNTO_BLU,
+                        KEY_LAST_UPDATE] autorelease]; //18.
+    [self openDB];
+    if (sqlite3_exec(db, [query UTF8String], NULL, NULL, &err) != SQLITE_OK) {
+        sqlite3_close(db);
+        NSLog(@"*****ERRORE:Table %@ falied create. - %s", TABLE_NAME_DEFIBRILLATORI, err);
+        return false;
+    }
+    return true;
+}
 
 //************************************
 #pragma mark - Inseriemento Oggetti
 //************************************
 
+/**
+ @deprecated Obsoleto utilizzare insertRecord:
+ */
 - (BOOL)insertRecordWithDefibrillatore:(NSDictionary *)dicDefibrillatori {
     
     int countOfDb = 0;
@@ -105,7 +144,6 @@ static NSString * const TABLE_NAME_DEFIBRILLATORE = @"Defibrillatore";
     NSString *str = [dicDefibrillatori objectForKey:KEY_STATO];
     str = [str stringByReplacingOccurrencesOfString:@"'" withString:@""];
     
-    int k =0;
     //-- Controllo
     
     NSString *sql = [NSString stringWithFormat:@"INSERT OR REPLACE INTO '%@' ('%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@')"
@@ -183,118 +221,110 @@ static NSString * const TABLE_NAME_DEFIBRILLATORE = @"Defibrillatore";
     return YES;
 }
 
-
-- (BOOL)popolaTabellaWithArray:(NSArray *)arrDef {
+- (BOOL)insertRecord:(NSDictionary *)dicDefibrillatori {
+    //I record del DB parono da 1.
+    
+    int countDB = [self countOfDbFromTableNamed:TABLE_NAME_DEFIBRILLATORI] + 1;
     int ultimaModifica = 0;
-    int index = 0;
-    for (index=0; index<arrDef.count; index ++) {
-        if (index == 29) {
-            int k=0;
-        }
-        NSDictionary *dicDefibrillatori = [[NSDictionary alloc] initWithDictionary:[arrDef objectAtIndex:index]];
-        
-        //-- Controllo
-        if ([dicDefibrillatori objectForKey:KEY_ULTIMA_MODIFICA] == NULL) {
-            ultimaModifica = 0;
-        }
-        else
-            ultimaModifica = (int)[dicDefibrillatori objectForKey:KEY_ULTIMA_MODIFICA];
-        
-        NSString *strStato = [dicDefibrillatori objectForKey:KEY_STATO];
-        if (strStato != NULL) {
-            strStato = [strStato stringByReplacingOccurrencesOfString:@"'" withString:@""];
-        }
-        
-        
-        //-- Controllo
-        
-        NSString *sql = [NSString stringWithFormat:@"INSERT OR REPLACE INTO '%@' ('%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@')"
-                         "VALUES ('%d','%@','%@','%d','%@','%@','%@','%@','%@','%f','%@','%f','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%d','%f','%@','%@')",
-                         TABLE_NAME_DEFIBRILLATORE,
-                         @"id", //1
-                         KEY_CARTELLI,//2
-                         KEY_CATEGORIA,//3
-                         KEY_CODICE,//4
-                         KEY_COLLOCAZIONE,//5
-                         KEY_COMUNE,//6
-                         KEY_DISPONIBILITA, //7
-                         KEY_IMMAGINE,//8
-                         KEY_INDIRIZZO,//9
-                         KEY_LATITUDINE,//10
-                         KEY_LOCALITA,//11
-                         KEY_LONGITUDINE,//12
-                         KEY_MAIL,//13
-                         KEY_MODELLO,//14
-                         KEY_NOME,//15
-                         KEY_NOTE,//16
-                         KEY_OK,//17
-                         KEY_PROVINCIA, //18
-                         KEY_RIFERIMENTO, //19
-                         KEY_SCAD_BATT, //20
-                         KEY_SCAD_ELET, //21
-                         KEY_SERIE, //22
-                         KEY_STATO, //23
-                         KEY_TECA, //24
-                         KEY_TEL_PUNTO_BLU, //25
-                         KEY_TELEFONO, //26
-                         KEY_ULTIMA_MODIFICA, //27
-                         KEY_ULTIMA_VERIFICA, //28
-                         KEY_ULTIMO_CORSO, // 29
-                         KEY_LAST_UPDATE,
-                         
-                         
-                         index, //0-id
-                         [dicDefibrillatori objectForKey:KEY_CARTELLI], //1
-                         [dicDefibrillatori objectForKey:KEY_CATEGORIA], //2
-                         [[dicDefibrillatori objectForKey:KEY_CODICE] integerValue], //3
-                         [dicDefibrillatori objectForKey:KEY_COLLOCAZIONE], //4
-                         [dicDefibrillatori objectForKey:KEY_COMUNE], //5
-                         [dicDefibrillatori objectForKey:KEY_DISPONIBILITA], //6
-                         [dicDefibrillatori objectForKey:KEY_IMMAGINE], //7
-                         [dicDefibrillatori objectForKey:KEY_INDIRIZZO], //8
-                         [[dicDefibrillatori objectForKey:KEY_LATITUDINE] floatValue], //9
-                         [dicDefibrillatori objectForKey:KEY_LOCALITA], //10
-                         [[dicDefibrillatori objectForKey:KEY_LONGITUDINE] floatValue],//11
-                         [dicDefibrillatori objectForKey:KEY_MAIL],//12
-                         [dicDefibrillatori objectForKey:KEY_MODELLO],//13
-                         [dicDefibrillatori objectForKey:KEY_NOME],//14
-                         [dicDefibrillatori objectForKey:KEY_NOTE],//15
-                         [dicDefibrillatori objectForKey:KEY_OK],//16
-                         [dicDefibrillatori objectForKey:KEY_PROVINCIA],//17
-                         [dicDefibrillatori objectForKey:KEY_RIFERIMENTO],//18
-                         [dicDefibrillatori objectForKey:KEY_SCAD_BATT],//19
-                         [dicDefibrillatori objectForKey:KEY_SCAD_ELET],//20
-                         [dicDefibrillatori objectForKey:KEY_SERIE],//21
-                         strStato, //22
-                         [dicDefibrillatori objectForKey:KEY_TECA], //23
-                         [dicDefibrillatori objectForKey:KEY_TEL_PUNTO_BLU], //24
-                         [dicDefibrillatori objectForKey:KEY_TELEFONO], //25
-                         ultimaModifica,
-                         0.0, //(long)[[dicDefibrillatori objectForKey:KEY_ULTIMA_VERIFICA] integerValue]
-                         [dicDefibrillatori objectForKey:KEY_ULTIMO_CORSO],
-                         [dicDefibrillatori objectForKey:KEY_LAST_UPDATE]];
-        
-        char *err;
-        if (sqlite3_exec(db, [sql UTF8String], NULL, NULL, &err) != SQLITE_OK) {
-            
-            sqlite3_close(db);
-            NSLog(@"\n****** Not Posssible Insert New Record In %@, with error: '%s'", TABLE_NAME_DEFIBRILLATORE, err);
-            return NO;
-        }
+    
+    //-- Controllo
+    if ([dicDefibrillatori objectForKey:KEY_ULTIMA_MODIFICA] == NULL) {
+        ultimaModifica = 0;
     }
-    NSLog(@"%i", index);
+    else
+        ultimaModifica = (int)[dicDefibrillatori objectForKey:KEY_ULTIMA_MODIFICA];
+    
+    NSString *str = [dicDefibrillatori objectForKey:KEY_STATO];
+    str = [str stringByReplacingOccurrencesOfString:@"'" withString:@""];
+    
+    //19
+    NSString *query = [[NSString alloc] initWithFormat:@"INSERT OR REPLACE INTO '%@' ('%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@')"
+                       "VALUES ('%d','%@','%@','%@','%@','%@','%@','%f','%@','%f','%@','%@','%@','%@','%@','%@','%@','%@','%@')",
+                        TABLE_NAME_DEFIBRILLATORI,
+                        @"id",
+                        KEY_CATEGORIA,
+                        KEY_CODICE,
+                        KEY_COMUNE,
+                        KEY_DISPONIBILITA,
+                        KEY_IMMAGINE,
+                        KEY_INDIRIZZO,
+                        KEY_LATITUDINE,
+                        KEY_LOCALITA,
+                        KEY_LONGITUDINE,
+                        KEY_MAIL,
+                        KEY_NOME,
+                        KEY_OK,
+                        KEY_SCAD_BATT,
+                        KEY_SCAD_ELET,
+                        KEY_STATO,
+                        KEY_TELEFONO,
+                        KEY_TEL_PUNTO_BLU,
+                        KEY_LAST_UPDATE,
+                        
+                        countDB,
+                       [dicDefibrillatori objectForKey:KEY_CATEGORIA],
+                       [dicDefibrillatori objectForKey:KEY_CODICE],
+                       [dicDefibrillatori objectForKey:KEY_COMUNE],
+                       [dicDefibrillatori objectForKey:KEY_DISPONIBILITA],
+                       [dicDefibrillatori objectForKey:KEY_IMMAGINE],
+                       [dicDefibrillatori objectForKey:KEY_INDIRIZZO],
+                       [[dicDefibrillatori objectForKey:KEY_LATITUDINE] doubleValue],
+                       [dicDefibrillatori objectForKey:KEY_LOCALITA],
+                       [[dicDefibrillatori objectForKey:KEY_LONGITUDINE] doubleValue],
+                       [dicDefibrillatori objectForKey:KEY_MAIL],
+                       [dicDefibrillatori objectForKey:KEY_NOME],
+                       [dicDefibrillatori objectForKey:KEY_OK],
+                       [dicDefibrillatori objectForKey:KEY_SCAD_BATT],
+                       [dicDefibrillatori objectForKey:KEY_SCAD_ELET],
+                       [dicDefibrillatori objectForKey:KEY_STATO],
+                       [dicDefibrillatori objectForKey:KEY_TELEFONO],
+                       [dicDefibrillatori objectForKey:KEY_TEL_PUNTO_BLU],
+                       [dicDefibrillatori objectForKey:KEY_LAST_UPDATE]];
+//    [[dicDefibrillatori objectForKey:KEY_CATEGORIA] stringValue],
+//    [[dicDefibrillatori objectForKey:KEY_CODICE] intValue],
+//    [[dicDefibrillatori objectForKey:KEY_COMUNE] stringValue],
+//    [[dicDefibrillatori objectForKey:KEY_DISPONIBILITA] stringValue],
+//    [[dicDefibrillatori objectForKey:KEY_IMMAGINE] stringValue],
+//    [[dicDefibrillatori objectForKey:KEY_INDIRIZZO] stringValue],
+//    [[dicDefibrillatori objectForKey:KEY_LATITUDINE] doubleValue],
+//    [[dicDefibrillatori objectForKey:KEY_LOCALITA] stringValue],
+//    [[dicDefibrillatori objectForKey:KEY_LONGITUDINE] doubleValue],
+//    [[dicDefibrillatori objectForKey:KEY_MAIL] stringValue],
+//    [[dicDefibrillatori objectForKey:KEY_NOME] stringValue],
+//    [[dicDefibrillatori objectForKey:KEY_OK] intValue],
+//    [[dicDefibrillatori objectForKey:KEY_SCAD_BATT] stringValue],
+//    [[dicDefibrillatori objectForKey:KEY_SCAD_ELET] stringValue],
+//    [[dicDefibrillatori objectForKey:KEY_STATO] stringValue],
+//    [[dicDefibrillatori objectForKey:KEY_TELEFONO] stringValue],
+//    [[dicDefibrillatori objectForKey:KEY_TEL_PUNTO_BLU] stringValue],
+//    [[dicDefibrillatori objectForKey:KEY_LAST_UPDATE] doubleValue]];
+    
+    char *err;
+    [self openDB];
+    if (sqlite3_exec(db, [query UTF8String], NULL, NULL, &err) != SQLITE_OK) {
+        
+        //sqlite3_close(db);
+        NSLog(@"\n****** Not Posssible Insert New Record In %@, with error: '%s'", TABLE_NAME_DEFIBRILLATORI, err);
+        return NO;
+    }
     return YES;
-}
 
+}
 
 //************************************
 #pragma mark - Count DB
 //************************************
 
-
+/**
+ @deprecated Obsoleto utilizzare countOfDbFromDefibrillatori.
+ */
 - (int)countOfDb {
     
     return [self countOfDbFromTableNamed:TABLE_NAME_DEFIBRILLATORE];
+}
+
+- (int)countOfDbFromDefibrillatori {
+    return [self countOfDbFromTableNamed:TABLE_NAME_DEFIBRILLATORI];
 }
 
 - (int)countOfDbFromTableNamed:(NSString *)tableName {
@@ -321,7 +351,9 @@ static NSString * const TABLE_NAME_DEFIBRILLATORE = @"Defibrillatore";
 #pragma mark - Get Oggetti
 //************************************
 
-
+/**
+ @deprecated Metodo da cancellare.
+ */
 - (NSArray *)allObjects{
     [self openDB];
     NSString * qsql = [NSString stringWithFormat:@"SELECT * FROM '%@'", TABLE_NAME_DEFIBRILLATORE];
@@ -496,8 +528,139 @@ static NSString * const TABLE_NAME_DEFIBRILLATORE = @"Defibrillatore";
     return returnArray;
 }
 
-+ (NSMutableArray *)sortWithArray:(NSMutableArray *)mArray {
+/**
+ @description Prende le info da far vedere nella schermata di dettaglio.
+ */
+/// @avaible 
+- (NSArray *)objects {
+    [self openDB];
+    NSMutableArray *returnArray = [[NSMutableArray alloc] init];
+    NSString * qsql = [NSString stringWithFormat:@"SELECT %@,%@,%@,%@,%@,%@ FROM %@",
+                       KEY_DISPONIBILITA, KEY_LOCALITA, KEY_INDIRIZZO ,KEY_NOME, KEY_TELEFONO, KEY_TEL_PUNTO_BLU, TABLE_NAME_DEFIBRILLATORI];
+    sqlite3_stmt *statment;    
+    if (sqlite3_prepare_v2(db, [qsql UTF8String], -1, &statment, nil) == SQLITE_OK) {
+        
+        while (sqlite3_step(statment) == SQLITE_ROW) {
+            NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+            NSString *strValue = [[[NSString alloc] init] autorelease];
+            char *charValue;
+            
+            //-- Disponibilità
+            charValue = (char *) sqlite3_column_text(statment, 0);
+            strValue = [strValue initWithUTF8String:charValue];
+            [dic setValue:strValue forKey:KEY_DISPONIBILITA];
+            
+            //-- Posizione/Località
+            charValue = (char *) sqlite3_column_text(statment, 1);
+            strValue = [strValue initWithUTF8String:charValue];
+            [dic setValue:strValue forKey:KEY_LOCALITA];
+            
+            //-- Indirizzo
+            charValue = (char *) sqlite3_column_text(statment, 2);
+            strValue = [strValue initWithUTF8String:charValue];
+            [dic setValue:strValue forKey:KEY_INDIRIZZO];
+            
+            //-- Nome Referente
+            charValue = (char *) sqlite3_column_text(statment, 3);
+            strValue = [strValue initWithUTF8String:charValue];
+            [dic setValue:strValue forKey:KEY_NOME];
+            
+            //-- Telefono
+            charValue = (char *) sqlite3_column_text(statment, 4);
+            strValue = [strValue initWithUTF8String:charValue];
+            [dic setValue:strValue forKey:KEY_TELEFONO];
+            
+            //-- Telefono Punto Blu
+            charValue = (char *) sqlite3_column_text(statment, 5);
+            strValue = [strValue initWithUTF8String:charValue];
+            [dic setValue:strValue forKey:KEY_TEL_PUNTO_BLU];
+            
+            [returnArray addObject:dic];
+        }//end while
+        sqlite3_finalize(statment);
+    }//end if
+    else
+        NSLog(@"***** Error do not possible get all objs");
     
+    if ([returnArray count] == 0) {
+        
+        NSLog(@"Non ci sono elementi nella tabella %@", TABLE_NAME_DEFIBRILLATORI);
+    }
+    return returnArray;
+}
+
+/**
+ @description Prende tutte le info da far vedere nella schermata di dettaglio + LE COORDINATE.
+ */
+- (NSArray *)objectsV2 {
+    [self openDB];
+    NSMutableArray *returnArray = [[NSMutableArray alloc] init];
+    NSString * qsql = [NSString stringWithFormat:@"SELECT %@,%@,%@,%@,%@,%@,%@,%@ FROM %@",
+                       KEY_DISPONIBILITA, KEY_LOCALITA, KEY_INDIRIZZO ,KEY_NOME, KEY_TELEFONO, KEY_TEL_PUNTO_BLU, KEY_LATITUDINE, KEY_LONGITUDINE, TABLE_NAME_DEFIBRILLATORI];
+    sqlite3_stmt *statment;
+    if (sqlite3_prepare_v2(db, [qsql UTF8String], -1, &statment, nil) == SQLITE_OK) {
+        
+        while (sqlite3_step(statment) == SQLITE_ROW) {
+            NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+            NSString *strValue = [[[NSString alloc] init] autorelease];
+            char *charValue;
+
+            //-- Disponibilità
+            charValue = (char *) sqlite3_column_text(statment, 0);
+            strValue = [strValue initWithUTF8String:charValue];
+            [dic setValue:strValue forKey:KEY_DISPONIBILITA];
+            
+            //-- Posizione/Località
+            charValue = (char *) sqlite3_column_text(statment, 1);
+            strValue = [strValue initWithUTF8String:charValue];
+            [dic setValue:strValue forKey:KEY_LOCALITA];
+            
+            //-- Indirizzo
+            charValue = (char *) sqlite3_column_text(statment, 2);
+            strValue = [strValue initWithUTF8String:charValue];
+            [dic setValue:strValue forKey:KEY_INDIRIZZO];
+            
+            //-- Nome Referente
+            charValue = (char *) sqlite3_column_text(statment, 3);
+            strValue = [strValue initWithUTF8String:charValue];
+            [dic setValue:strValue forKey:KEY_NOME];
+            
+            //-- Telefono
+            charValue = (char *) sqlite3_column_text(statment, 4);
+            strValue = [strValue initWithUTF8String:charValue];
+            [dic setValue:strValue forKey:KEY_TELEFONO];
+            
+            //-- Telefono Punto Blu
+            charValue = (char *) sqlite3_column_text(statment, 5);
+            strValue = [strValue initWithUTF8String:charValue];
+            [dic setValue:strValue forKey:KEY_TEL_PUNTO_BLU];
+            
+            //-- Latutudine
+            charValue = (char *) sqlite3_column_text(statment, 6);
+            strValue = [strValue initWithUTF8String:charValue];
+            [dic setValue:strValue forKey:KEY_LATITUDINE];
+
+            //-- Longitudie
+            charValue = (char *) sqlite3_column_text(statment, 7);
+            strValue = [strValue initWithUTF8String:charValue];
+            [dic setValue:strValue forKey:KEY_LONGITUDINE];
+            
+            
+            [returnArray addObject:dic];
+        }//end while
+        sqlite3_finalize(statment);
+    }//end if
+    else
+        NSLog(@"***** Error do not possible get all objs");
+    
+    if ([returnArray count] == 0) {
+        
+        NSLog(@"Non ci sono elementi nella tabella %@", TABLE_NAME_DEFIBRILLATORI);
+    }
+    return returnArray;
+}
+
++ (NSMutableArray *)sortWithArray:(NSMutableArray *)mArray {
     NSMutableArray *returnArray = [[NSMutableArray alloc] init];
     NSMutableArray *tempArray = [[NSMutableArray alloc] initWithArray:mArray];
     CLLocation *location = [LibLocation location];
@@ -512,6 +675,57 @@ static NSString * const TABLE_NAME_DEFIBRILLATORE = @"Defibrillatore";
     
     return returnArray;
 }
+
+//TODO: Sto lavorando qui
++ (NSMutableArray *)sortWithArray2:(NSMutableArray *)mArray {
+    
+    NSMutableArray *returnArray = [[NSMutableArray alloc] init];
+    NSMutableArray *tempArray = [[NSMutableArray alloc] initWithArray:mArray];
+    CLLocation *location = [LibLocation location];
+    
+    NSLog(@"INIZIO + sortWithArray1");
+    for (int i=0; tempArray.count != 0; i++){ //TODO: Cambiare tipo di for.
+        int index = [self minInArray2:tempArray withI:0 withZ:tempArray.count - 1 withCurrentPosition:location];
+        [returnArray addObject:[tempArray objectAtIndex:index]];
+        [tempArray removeObjectAtIndex:index];
+    }
+    NSLog(@"FINE");
+    
+    return returnArray;
+}
+
++ (int)minInArray2:(NSArray *)array withI:(int)i withZ:(int)z withCurrentPosition:(CLLocation *)currentPosition{
+    
+    if (i==z) {
+        return i;
+    }
+    if (z == i+1) {
+        CLLocation *location1 = [[CLLocation alloc] initWithLatitude:[[[array objectAtIndex:i] valueForKey:KEY_LATITUDINE] doubleValue] longitude:[[[array objectAtIndex:i] valueForKey:KEY_LONGITUDINE] doubleValue]];
+        CLLocation *location2 = [[CLLocation alloc] initWithLatitude:[[[array objectAtIndex:i+1] valueForKey:KEY_LATITUDINE] doubleValue] longitude:[[[array objectAtIndex:i+1] valueForKey:KEY_LONGITUDINE] doubleValue]];
+        
+        if ([currentPosition distanceFromLocation:location1] < [currentPosition distanceFromLocation:location2]){
+            return i;
+        }
+        else {
+            return i+1;
+        }
+    }
+    else {
+        int m = (i + z) / 2;
+        int sx = [self minInArray2:array withI:i withZ:m withCurrentPosition:currentPosition];
+        int dx = [self minInArray2:array withI:m+1 withZ:z withCurrentPosition:currentPosition];
+        
+        CLLocation *locationDX = [[CLLocation alloc] initWithLatitude:[[[array objectAtIndex:dx] valueForKey:KEY_LATITUDINE] doubleValue] longitude:[[[array objectAtIndex:dx] valueForKey:KEY_LONGITUDINE] doubleValue]];
+        CLLocation *locationSX = [[CLLocation alloc] initWithLatitude:[[[array objectAtIndex:sx] valueForKey:KEY_LATITUDINE] doubleValue] longitude:[[[array objectAtIndex:sx] valueForKey:KEY_LONGITUDINE] doubleValue]];
+        
+        if ([currentPosition distanceFromLocation:locationDX] < [currentPosition distanceFromLocation:locationSX])
+            return dx;
+        else
+            return sx;
+    }
+}
+
+
 + (int)minInArray:(NSArray *)array withI:(int)i withZ:(int)z withCurrentPosition:(CLLocation *)currentPosition{
     
     if (i==z) {
@@ -543,14 +757,13 @@ static NSString * const TABLE_NAME_DEFIBRILLATORE = @"Defibrillatore";
     }
 }
 
-
 /**
     Ritorna un array di CLLoation con tutte le coordinate inserite (!= 0)
  */
 - (NSArray *)allLocation{
     [self openDB];
     
-    NSString * qsql = [NSString stringWithFormat:@"SELECT %@,%@ FROM '%@'", KEY_LATITUDINE, KEY_LONGITUDINE, TABLE_NAME_DEFIBRILLATORE];
+    NSString * qsql = [NSString stringWithFormat:@"SELECT %@,%@ FROM '%@'", KEY_LATITUDINE, KEY_LONGITUDINE, TABLE_NAME_DEFIBRILLATORI];
     sqlite3_stmt *statment;
     NSMutableArray *returnArray = [[NSMutableArray alloc] init];
     

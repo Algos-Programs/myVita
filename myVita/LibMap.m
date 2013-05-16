@@ -16,7 +16,7 @@
  */
 + (MKMapView *)zoomMap:(MKMapView *)mapView {
     
-    CLLocation *location = [LibLocation findCurrentLocation];
+    CLLocation *location = [LibLocation location];
     CLLocationCoordinate2D coordinate2D = [location coordinate];
     
     MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(coordinate2D, 2000, 2000);
@@ -31,7 +31,7 @@
  */
 + (void)zoomMap:(MKMapView *)mapView withLatitudinalMeters:(double)latitudinalMeters andLongitudinalMeters:(double)longitudinalMeters {
     
-    CLLocation *location = [LibLocation findCurrentLocation];
+    CLLocation *location = [LibLocation location];
     CLLocationCoordinate2D coordinate2D = [location coordinate];
     
     MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(coordinate2D, latitudinalMeters, longitudinalMeters);

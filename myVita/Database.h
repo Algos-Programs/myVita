@@ -45,18 +45,25 @@ static NSString * const KEY_LAST_UPDATE = @"lastUpdated";
 }
 
 - (void) openDB;
-- (void)createTableNamedDefibrillatori;
-- (void)createTableDefibrillatore;
+- (void)createTableNamedDefibrillatori __attribute__ ((deprecated));
+- (void)createTableDefibrillatore __attribute__ ((deprecated));
+- (BOOL)createTableDefibrillatoi;
 - (void)riempiTabella:(NSArray *)array;
-- (NSArray *)allObjects;
+- (NSArray *)allObjects __attribute__((deprecated));
+- (NSArray *)objects;
+ ///@description Prende tutte le info da far vedere nella schermata di dettaglio + LE COORDINATE.
+- (NSArray *)objectsV2;
 - (NSArray *)allLocation;
-- (NSArray *)allObjectsInDictionary;
+- (NSArray *)allObjectsInDictionary __attribute__((deprecated));
 - (char *)DeleteTable:(NSString *)table;
+- (int)countOfDb __attribute__((deprecated));
+- (int)countOfDbFromDefibrillatori;
 - (int)countOfDbFromTableNamed:(NSString *)tableName;
-//- (void)insertRecordWithDefibrillatore:(NSDictionary *)dicDefibrillatori;
-- (BOOL)insertRecordWithDefibrillatore:(NSDictionary *)dicDefibrillatori;
+- (BOOL)insertRecordWithDefibrillatore:(NSDictionary *)dicDefibrillatori __attribute__ ((deprecated));
+- (BOOL)insertRecord:(NSDictionary *)dicDefibrillatori;
 - (BOOL)popolaTabellaWithArray:(NSArray *)arrDef;
-+ (NSMutableArray *)sortWithArray:(NSMutableArray *)mArray;
++ (NSMutableArray *)sortWithArray:(NSMutableArray *)mArray __attribute__((deprecated));
++ (NSMutableArray *)sortWithArray2:(NSMutableArray *)mArray;
 
 
 

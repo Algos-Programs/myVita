@@ -10,6 +10,6 @@
 
 @interface LibFetchData : NSObject
 
-+ (void)fetchData;
++ (NSArray *)fetchData;
 
 @end

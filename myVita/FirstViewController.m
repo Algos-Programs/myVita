@@ -18,6 +18,8 @@
 
 @end
 
+
+
 #define kBgQueue dispatch_get_global_queue (DISPATCH_QUEUE_PRIORITY_DEFAULT, 0) //1
 //#define kLatestKivaLoansURL [NSURL URLWithString:@"http://api.kivaws.org/v1/loans/search.json?status=fundraising"] //2
 #define kLatestKivaLoansURL [NSURL URLWithString:@"http://77.43.32.198:8080/myvitaback/mappa"] //2
@@ -34,56 +36,70 @@
 static BOOL WITH_REFRESH = YES;
 
 
+
+- (void)getData {
+    dispatch_sync(kBgQueue, ^{
+        
+        NSData* data = [NSData dataWithContentsOfURL:
+                        kLatestKivaLoansURL];
+        [self performSelectorOnMainThread:@selector(fetchedData:)
+                               withObject:data waitUntilDone:YES];
+    });
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [self.mapView setDelegate:self];
     self.mapView.mapType = MKMapTypeStandard;
-    //[self.progressIndicatorView setHidesWhenStopped:YES];
+    
     
     Database *db = [[Database alloc] init];
-    if ([db allObjects].count == 0) {
+    NSArray *daeArray = [db objects];
+    if (daeArray.count == 0) {
         WITH_REFRESH = YES;
+        [self getData];
     }
     else {
         WITH_REFRESH = NO;
+        [self loadDae:db daeArray:daeArray];
+        [self.loadImage setHidden:YES];
     }
-    NSArray *locationArray = [db allLocation];
-    NSArray *daeArray = [db allObjects];
-   
-#warning dont works NSArray *array2 = [db allObjectsInDictionary];
-    NSArray *array2 = [db allObjectsInDictionary];
-    [self.mapView setDelegate:self];
-    int distanceMin = MAXFLOAT;
-//    for (CLLocation *location in locationArray) {
-//        Annotation *newAnnotation = [[Annotation alloc] init];
-//        //int distance = [location distanceFromLocation:[LibLocation location]];
-//        NSNumber *distance = [[[NSNumber alloc] initWithFloat:[[LibLocation location] distanceFromLocation:location]] autorelease];
-//
-//        //-- Indirizzo
-//        NSString *str1 = [[daeArray objectAtIndex:8] objectAtIndex:7];
-//        
-//        //-- Disponibilità
-//        NSString *str3 = [daeArray objectAtIndex:6];
-//        
-//        newAnnotation.title = [NSString stringWithFormat:@"%i metri", [distance intValue]];
-//        newAnnotation.subtitle = [NSString stringWithFormat:@"%@ - %@", str1, str3];
-//        newAnnotation.coordinate = location.coordinate;
-//        
-//
-//        if ([distance intValue] < distanceMin) {
-//            distanceMin = [distance intValue];
-//            daePiuVicino = location;
-//        }
-//        [self.mapView addAnnotation:newAnnotation];
+    
+    
+//    if (WITH_REFRESH) {
+//        dispatch_async(kBgQueue, ^{
+//            
+//            NSData* data = [NSData dataWithContentsOfURL:
+//                            kLatestKivaLoansURL];
+//            [self performSelectorOnMainThread:@selector(fetchedData:)
+//                                   withObject:data waitUntilDone:YES];
+//        });
 //    }
+//    else
+//        [self.loadImage setHidden:YES];
+
+    
+
+    // Mostro all'utente la sua posizione sulla mappa.
+    self.mapView.showsUserLocation = YES;
+    
+}
+
+- (void)loadDae { //OK
+    Database *db = [[Database alloc] init];
+    NSArray *daeArray = [db objects];
+    [self loadDae:db daeArray:daeArray];
+}
+- (void)loadDae:(Database *)db daeArray:(NSArray *)daeArray {
+    int distanceMin = MAXFLOAT;
+    NSArray *locationArray = [db allLocation];
     
     for (int i=0; i<locationArray.count; i++) {
-        
         CLLocation *location = [[locationArray objectAtIndex:i] autorelease];
         Annotation *newAnnotation = [[Annotation alloc] init];
         NSNumber *distance = [[[NSNumber alloc] initWithFloat:[[LibLocation location] distanceFromLocation:location]] autorelease];
-        NSString *indirizzo = [[daeArray objectAtIndex:i] objectAtIndex:7];
-        NSString *disponibilita = [[daeArray objectAtIndex:i] objectAtIndex:5];
+        NSString *indirizzo = [[daeArray objectAtIndex:i] valueForKey:KEY_INDIRIZZO];
+        NSString *disponibilita = [[daeArray objectAtIndex:i] valueForKey:KEY_DISPONIBILITA];
         newAnnotation.title = [NSString stringWithFormat:@"%i metri", [distance intValue]];
         newAnnotation.subtitle = [NSString stringWithFormat:@"%@ - %@", disponibilita, indirizzo];
         newAnnotation.coordinate = location.coordinate;
@@ -92,40 +108,25 @@ static BOOL WITH_REFRESH = YES;
             daePiuVicino = location;
         }
         [self.mapView addAnnotation:newAnnotation];
-
+        
     }
     
     self.distanceLabel.text = [NSString stringWithFormat:@"%i metri", distanceMin];
-
-    // Mostro all'utente la sua posizione sulla mappa.
-    self.mapView.showsUserLocation = YES;
-    
-    if (WITH_REFRESH) {
-        dispatch_async(kBgQueue, ^{
-            
-            NSData* data = [NSData dataWithContentsOfURL:
-                            kLatestKivaLoansURL];
-            [self performSelectorOnMainThread:@selector(fetchedData:)
-                                   withObject:data waitUntilDone:YES];
-        });
-    }
-    else
-        [self.loadImage setHidden:YES];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [self.progressIndicatorView startAnimating];
 
+- (void)viewWillAppear:(BOOL)animated {
+    [self loadDae];
     // Init Geocoder.
     gecoder = [[CLGeocoder alloc] init];
     
     [self localizedMe]; //init manager.
-
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     
-    [self zoom];
+    [self pressButtonSeeDaeAndActualPosition:nil];
+    //[LibMap zoomMap:self.mapView withLatitudinalMeters:300 andLongitudinalMeters:300];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -171,8 +172,12 @@ static BOOL WITH_REFRESH = YES;
         
         Database *db = [[Database alloc] init];
         [db openDB];
-        [db DeleteTable:@"Defibrillatore"];
-        [db createTableDefibrillatore];
+        
+#warning QUESTE 2 RIGHE
+        //[db DeleteTable:@"Defibrillatore"];
+        //[db createTableDefibrillatore];
+        [db DeleteTable:@"Defibrillatori"];
+        [db createTableDefibrillatoi];
         
         NSLog(@"-.- Inzio Carico Dati -.-");
         
@@ -181,13 +186,13 @@ static BOOL WITH_REFRESH = YES;
         int c =0;
         for (int i=0; i<json.count; i++) {
             [self.progressBar setProgress:progressBarCount * i];
-            
-            if (![db insertRecordWithDefibrillatore:[json objectAtIndex:i]]) {
+
+            if (![db insertRecord:[json objectAtIndex:i]]) {
                 NSLog(@"--- i = %i", i);
                 c++;
             }
+
         }
-        //[db popolaTabellaWithArray:json];
         
         NSLog(@"-.- Fine Carico Dati -.-");
         //NSLog(@"c = %i", c);
@@ -197,6 +202,8 @@ static BOOL WITH_REFRESH = YES;
     [self.progressIndicatorView stopAnimating];
     [self.progressIndicatorView setHidesWhenStopped:YES];
     self.loadImage.hidden = YES;
+    [self.view reloadInputViews];
+    [self pressButtonSeeDaeAndActualPosition:nil];
 }
 
 //************************************
@@ -318,7 +325,21 @@ static BOOL WITH_REFRESH = YES;
     [LibMap zoomMap:self.mapView withLocation:daePiuVicino withLatitudinalMeters:2000 andLongitudinalMeters:2000];
 }
 
+/**
+ Effettua
+ */
 - (IBAction)pressButtonSeeDaeAndActualPosition:(id)sender {
-    [LibMap zoomMapMiddlePoint:self.mapView witLocationA:daePiuVicino withLocationB:[LibLocation location]];
+    //[LibMap zoomMapMiddlePoint:self.mapView witLocationA:daePiuVicino withLocationB:[LibLocation location]];
+    if (daePiuVicino != nil)
+        [LibMap zoomMap:self.mapView centerIn:[LibLocation location] andLocationB:daePiuVicino];
+    else {
+        [self loadDae];
+        [self.view reloadInputViews];
+    }
+}
+
+- (IBAction)pressButtonsItemBar:(id)sender {
+    UIBarButtonItem *barButtonItem = (UIBarButtonItem *)sender;
+    [LibMap zoomMap:self.mapView withLatitudinalMeters:barButtonItem.tag + 100 andLongitudinalMeters:barButtonItem.tag + 100];
 }
 @end

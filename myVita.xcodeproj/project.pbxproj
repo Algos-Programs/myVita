@@ -18,6 +18,8 @@
 		A95089041703474B006AC00F /* Annotation.m in Sources */ = {isa = PBXBuildFile; fileRef = A95089031703474B006AC00F /* Annotation.m */; };
 		A950890A17034EF9006AC00F /* InfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A950890917034EF9006AC00F /* InfoViewController.m */; };
 		A950890E17035A9F006AC00F /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A950890D17035A9F006AC00F /* DetailViewController.m */; };
+		A9656AFD17380BAC0004F1F1 /* TestDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = A9656AFC17380BAC0004F1F1 /* TestDatabase.m */; };
+		A9656B02173824490004F1F1 /* TestFirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9656B01173824490004F1F1 /* TestFirstViewController.m */; };
 		A97E39C9170D82F90089F4A7 /* ProvaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A97E39C8170D82F90089F4A7 /* ProvaViewController.m */; };
 		A98B3D4E172B277C001EAC04 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A98B3D4B172B277C001EAC04 /* Default-568h@2x.png */; };
 		A98B3D4F172B277C001EAC04 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = A98B3D4C172B277C001EAC04 /* Default.png */; };
@@ -116,6 +118,10 @@
 		A950890917034EF9006AC00F /* InfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoViewController.m; sourceTree = "<group>"; };
 		A950890C17035A9F006AC00F /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		A950890D17035A9F006AC00F /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		A9656AFB17380BAB0004F1F1 /* TestDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestDatabase.h; sourceTree = "<group>"; };
+		A9656AFC17380BAC0004F1F1 /* TestDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestDatabase.m; sourceTree = "<group>"; };
+		A9656B00173824490004F1F1 /* TestFirstViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFirstViewController.h; sourceTree = "<group>"; };
+		A9656B01173824490004F1F1 /* TestFirstViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestFirstViewController.m; sourceTree = "<group>"; };
 		A97E39C7170D82F90089F4A7 /* ProvaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProvaViewController.h; sourceTree = "<group>"; };
 		A97E39C8170D82F90089F4A7 /* ProvaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProvaViewController.m; sourceTree = "<group>"; };
 		A98B3D4B172B277C001EAC04 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -241,8 +247,27 @@
 				A950890D17035A9F006AC00F /* DetailViewController.m */,
 				A97E39C7170D82F90089F4A7 /* ProvaViewController.h */,
 				A97E39C8170D82F90089F4A7 /* ProvaViewController.m */,
+				A9656AFF173824270004F1F1 /* Test */,
 			);
 			name = Controllers;
+			sourceTree = "<group>";
+		};
+		A9656AFE1738241D0004F1F1 /* Test */ = {
+			isa = PBXGroup;
+			children = (
+				A9656AFB17380BAB0004F1F1 /* TestDatabase.h */,
+				A9656AFC17380BAC0004F1F1 /* TestDatabase.m */,
+			);
+			name = Test;
+			sourceTree = "<group>";
+		};
+		A9656AFF173824270004F1F1 /* Test */ = {
+			isa = PBXGroup;
+			children = (
+				A9656B00173824490004F1F1 /* TestFirstViewController.h */,
+				A9656B01173824490004F1F1 /* TestFirstViewController.m */,
+			);
+			name = Test;
 			sourceTree = "<group>";
 		};
 		A98DE3851702432200604EEF /* Database */ = {
@@ -250,6 +275,7 @@
 			children = (
 				A98DE3821702431D00604EEF /* Database.h */,
 				A98DE3831702431D00604EEF /* Database.m */,
+				A9656AFE1738241D0004F1F1 /* Test */,
 			);
 			name = Database;
 			sourceTree = "<group>";
@@ -261,9 +287,10 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
-		A9A3143E17023A7C0081BC88 = {
+		A9999364173031E70070D259 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				A926C758172F0B5800244B77 /* globe.png */,
 				A98B3D4B172B277C001EAC04 /* Default-568h@2x.png */,
 				A98B3D4C172B277C001EAC04 /* Default.png */,
 				A98B3D4D172B277C001EAC04 /* Default@2x.png */,
@@ -279,8 +306,14 @@
 				A926C756172F0B2600244B77 /* 07-map-marker.png */,
 				A926C75A172F0B6500244B77 /* 33-cabinet.png */,
 				A926C75F172F0BD800244B77 /* globe@2x.png */,
-				A98DE3801702430D00604EEF /* libsqlite3.0.dylib */,
-				A926C758172F0B5800244B77 /* globe.png */,
+			);
+			name = Images;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		A9A3143E17023A7C0081BC88 = {
+			isa = PBXGroup;
+			children = (
 				A9A3145017023A7C0081BC88 /* myVita */,
 				A9A3147F17023A7C0081BC88 /* myVitaTests */,
 				A9A3144917023A7C0081BC88 /* Frameworks */,
@@ -302,6 +335,7 @@
 		A9A3144917023A7C0081BC88 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A98DE3801702430D00604EEF /* libsqlite3.0.dylib */,
 				A9A3149217023B900081BC88 /* CoreLocation.framework */,
 				A9A3149017023B240081BC88 /* MapKit.framework */,
 				A9A3144A17023A7C0081BC88 /* UIKit.framework */,
@@ -315,6 +349,7 @@
 		A9A3145017023A7C0081BC88 /* myVita */ = {
 			isa = PBXGroup;
 			children = (
+				A9999364173031E70070D259 /* Images */,
 				A950890717034EDC006AC00F /* Controllers */,
 				A950890517034757006AC00F /* Location */,
 				A98DE3851702432200604EEF /* Database */,
@@ -588,6 +623,8 @@
 			files = (
 				A9A3148717023A7C0081BC88 /* myVitaTests.m in Sources */,
 				A91D03B317241F7B00428605 /* TestLibFetchData.m in Sources */,
+				A9656AFD17380BAC0004F1F1 /* TestDatabase.m in Sources */,
+				A9656B02173824490004F1F1 /* TestFirstViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

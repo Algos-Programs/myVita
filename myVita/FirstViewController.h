@@ -10,6 +10,12 @@
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
 
+@protocol GetData <NSObject>
+
+- (void)getData;
+
+@end
+
 @interface FirstViewController : UIViewController <CLLocationManagerDelegate, MKMapViewDelegate, MKAnnotation> {
     
     //-- Localizzazione
@@ -52,7 +58,11 @@
 @property (retain, nonatomic) IBOutlet UILabel *distanceLabel;
 @property (retain, nonatomic) IBOutlet UIImageView *loadImage;
 
+- (void)getData;
+
 - (IBAction)pressButtonZoom:(id)sender;
 - (IBAction)pressButtonZoomDAE:(id)sender;
 - (IBAction)pressButtonSeeDaeAndActualPosition:(id)sender;
+
+- (IBAction)pressButtonsItemBar:(id)sender;
 @end

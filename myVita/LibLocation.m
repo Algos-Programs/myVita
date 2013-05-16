@@ -13,26 +13,6 @@
 /**
  Restituisce la localizzazione attuale.
  */
-+ (CLLocation*)findCurrentLocation
-{
-    CLLocationManager *locationManager = [[CLLocationManager alloc] init];
-    
-    if ([CLLocationManager locationServicesEnabled]) {
-        
-        //Questo metodo chiede all'utente se l'app può essere localizzata.
-        [locationManager startUpdatingLocation];
-        locationManager.delegate = locationManager.delegate;
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-        locationManager.distanceFilter = kCLDistanceFilterNone;
-    }
-    CLLocation *location = [locationManager location];
-    
-    return location;
-}
-
-/**
- Restituisce la localizzazione attuale.
- */
 + (CLLocation*)location
 {
     CLLocationManager *locationManager = [[CLLocationManager alloc] init];
@@ -55,7 +35,7 @@
  */
 + (float)calcoloDistanza:(CLLocation *)location {
     
-    float f = [[LibLocation findCurrentLocation] distanceFromLocation:location];
+    float f = [[LibLocation location] distanceFromLocation:location];
     return f;
 }
 

@@ -274,6 +274,7 @@ BOOL viewAll = YES;
     if (indexPath.row != 0) {
         DetailViewController *detailViewController = [[DetailViewController alloc] init];
         detailViewController.arrayInfo = [arrayDefibrillatori objectAtIndex:indexPath.row-1];
+        detailViewController.dicInfo = [arrayDefibrillatori objectAtIndex:indexPath.row-1];
         [self.navigationController pushViewController:detailViewController animated:YES];
         [detailViewController release];
     }

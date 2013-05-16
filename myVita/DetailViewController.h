@@ -10,14 +10,15 @@
 
 @interface DetailViewController : UITableViewController {
     
-    NSMutableArray *arrayInfo; //Contiene i valori (es. 20090 ect.)
+    NSMutableArray *arrayInfo __attribute__((deprecated)); //Contiene i valori (es. 20090 ect.)
+    //NSMutableDictionary *dicInfo;
     NSMutableArray *arrayNameInfo; //Contiene i nomi dei valori (es. Cap etc.)
     NSMutableArray *arrayValueTV; //Contiene i due array precedenti.
     
 }
 
-@property (nonatomic, strong)NSMutableArray *arrayInfo; //Contiene i valori (es. 20090 ect.)
-
+@property (nonatomic, strong)NSMutableArray *arrayInfo __attribute__((deprecated)); //Contiene i valori (es. 20090 ect.)
+@property (nonatomic, strong)NSMutableArray *dicInfo;
 
 
 @end

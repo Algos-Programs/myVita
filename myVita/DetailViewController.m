@@ -41,12 +41,22 @@
     [arrayNameInfo addObject:@"Telefono Punto Blu"];
     
     arrayValueTV = [[NSMutableArray alloc] init];
-    [arrayValueTV addObject:[_arrayInfo objectAtIndex:13]];
-    [arrayValueTV addObject:[_arrayInfo objectAtIndex:5]];
-    [arrayValueTV addObject:[_arrayInfo objectAtIndex:3]];
-    [arrayValueTV addObject:[_arrayInfo objectAtIndex:7]];
-    [arrayValueTV addObject:[_arrayInfo objectAtIndex:17]];
-    [arrayValueTV addObject:[_arrayInfo objectAtIndex:23]];
+    [arrayValueTV addObject:[_dicInfo valueForKey:KEY_NOME]];
+    [arrayValueTV addObject:[_dicInfo valueForKey:KEY_DISPONIBILITA]];
+    [arrayValueTV addObject:[_dicInfo valueForKey:KEY_LOCALITA]];
+    [arrayValueTV addObject:[_dicInfo valueForKey:KEY_INDIRIZZO]];
+    if ([_dicInfo valueForKey:KEY_RIFERIMENTO]) {
+        [arrayValueTV addObject:[_dicInfo valueForKey:KEY_RIFERIMENTO]];
+    }
+    
+    [arrayValueTV addObject:[_dicInfo valueForKey:KEY_TEL_PUNTO_BLU]];
+    
+//    [arrayValueTV addObject:[_arrayInfo objectAtIndex:13]];
+//    [arrayValueTV addObject:[_arrayInfo objectAtIndex:5]];
+//    [arrayValueTV addObject:[_arrayInfo objectAtIndex:3]];
+//    [arrayValueTV addObject:[_arrayInfo objectAtIndex:7]];
+//    [arrayValueTV addObject:[_arrayInfo objectAtIndex:17]];
+//    [arrayValueTV addObject:[_arrayInfo objectAtIndex:23]];
 
 
 

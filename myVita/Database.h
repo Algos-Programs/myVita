@@ -47,7 +47,7 @@ static NSString * const KEY_LAST_UPDATE = @"lastUpdated";
 - (void) openDB;
 - (void)createTableNamedDefibrillatori __attribute__ ((deprecated));
 - (void)createTableDefibrillatore __attribute__ ((deprecated));
-- (BOOL)createTableDefibrillatoi;
+- (BOOL)createTableDefibrillatori;
 - (void)riempiTabella:(NSArray *)array;
 - (NSArray *)allObjects __attribute__((deprecated));
 - (NSArray *)objects;

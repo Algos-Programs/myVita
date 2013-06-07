@@ -38,18 +38,29 @@
 
 - (void)testCreateTableDefibrillatori {
     Database *db = [[[Database alloc] init] autorelease];
-    BOOL returnValue = [db createTableDefibrillatoi];
-    NSAssert(returnValue, @"Table creata con successo");
+    BOOL returnValue = [db createTableDefibrillatori];
+    NSAssert(returnValue, @"Table non creata");
 }
 
 - (void)testInsertRecord {
     Database *db = [[[Database alloc] init] autorelease];
     BOOL returnValue = [db insertRecord:dic];
-    NSAssert(returnValue, @"Dictionary inserito con successo");
+    NSAssert(returnValue, @"Dictionary non inserito");
+    
+    //-- Provo ad aggiungere un campo in più
+    [dic setValue:@"Pippo" forKey:@"Pippo"];
+    BOOL returnValue1 = [db insertRecord:dic];
+    NSAssert(returnValue1, @"Dictionary con un capo in più non inserito.");
+    
+    //-- Provo ad aggiungere un campo in meno
+    [dic removeObjectForKey:KEY_TEL_PUNTO_BLU];
+    [dic removeObjectForKey:@"Pippo"];
+    BOOL returnValue2 = [db insertRecord:dic];
+    NSAssert(returnValue2, @"Dictionary con un capo in meno non inserito.");
 }
 
 - (void)testCountOfDb {
-   // STFail(@"Da implementare");
+    //STFail(@"Da implementare");
 }
 
 - (void)testObjects {

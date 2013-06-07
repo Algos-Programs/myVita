@@ -173,11 +173,8 @@ static BOOL WITH_REFRESH = YES;
         Database *db = [[Database alloc] init];
         [db openDB];
         
-#warning QUESTE 2 RIGHE
-        //[db DeleteTable:@"Defibrillatore"];
-        //[db createTableDefibrillatore];
         [db DeleteTable:@"Defibrillatori"];
-        [db createTableDefibrillatoi];
+        [db createTableDefibrillatori];
         
         NSLog(@"-.- Inzio Carico Dati -.-");
         

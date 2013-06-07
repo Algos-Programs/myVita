@@ -46,7 +46,7 @@ BOOL viewAll = YES;
     Database *db = [[Database alloc] init];
     [db openDB];
     
-    [db createTableDefibrillatoi];
+    [db createTableDefibrillatori];
     arrayDefibrillatori = (NSMutableArray *)[db objectsV2];
     self.navigationItem.title = [NSString stringWithFormat:@"%i su 356", arrayDefibrillatori.count];
     
@@ -69,8 +69,7 @@ BOOL viewAll = YES;
     }
     self.navigationItem.title = @"Lista Defibrillatori";
     titleFooter = [NSString stringWithFormat:@"%i/%i su 356 - <100.000 km", arrayDefibrillatoriToView.count,arrayDefibrillatori.count];
-        
-    int k =0;
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -273,7 +272,7 @@ BOOL viewAll = YES;
 {
     if (indexPath.row != 0) {
         DetailViewController *detailViewController = [[DetailViewController alloc] init];
-        detailViewController.arrayInfo = [arrayDefibrillatori objectAtIndex:indexPath.row-1];
+
         detailViewController.dicInfo = [arrayDefibrillatori objectAtIndex:indexPath.row-1];
         [self.navigationController pushViewController:detailViewController animated:YES];
         [detailViewController release];

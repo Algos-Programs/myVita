@@ -43,7 +43,7 @@ static NSString * const DATABASE_NAME = @"database.sql";
 /**
  @deprecated Obsoleto utilizzare createTableDefibrillatoi:
  */
-- (void)createTableDefibrillatore {
+- (void)createTableDefibrillatore __attribute__ ((deprecated)) {
     
     char *err;
     NSString *sql = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS '%@' ('%@' "
@@ -86,9 +86,9 @@ static NSString * const DATABASE_NAME = @"database.sql";
         sqlite3_close(db);
         NSLog(@"*****ERRORE:Table %@ falied create. - %s", TABLE_NAME_DEFIBRILLATORE, err);
     }
-}
+} 
 
-- (BOOL)createTableDefibrillatoi {
+- (BOOL)createTableDefibrillatori {
     char *err;
     NSString *query = [[[NSString alloc] initWithFormat:@"CREATE TABLE IF NOT EXISTS '%@' ('%@' "
                         "INTEGER PRIMARY KEY, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' REAL, '%@' TEXT, '%@' REAL, '%@' TEXT, '%@' TEXT, '%@' INTEGER, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT);",
@@ -793,7 +793,7 @@ static NSString * const DATABASE_NAME = @"database.sql";
 }
 
 
-- (NSArray *)allObjectsInDictionary{
+- (NSArray *)allObjectsInDictionary __attribute__ ((deprecated)){
     
     NSString * qsql = [NSString stringWithFormat:@"SELECT %@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@ FROM '%@'", KEY_CARTELLI, KEY_CATEGORIA, KEY_CODICE, KEY_COLLOCAZIONE, KEY_COMUNE, KEY_DISPONIBILITA, KEY_IMMAGINE, KEY_INDIRIZZO, KEY_LAST_UPDATE, KEY_LATITUDINE, KEY_LOCALITA, KEY_LONGITUDINE, KEY_MAIL, KEY_MODELLO, KEY_NOME, KEY_NOTE, KEY_OK, KEY_PROVINCIA, KEY_RIFERIMENTO, KEY_SCAD_BATT, KEY_SCAD_ELET, KEY_SERIE, KEY_STATO, KEY_TECA, KEY_TEL_PUNTO_BLU, KEY_TELEFONO, KEY_ULTIMA_MODIFICA, KEY_ULTIMA_VERIFICA, KEY_ULTIMO_CORSO,TABLE_NAME_DEFIBRILLATORE];
     sqlite3_stmt *statment;

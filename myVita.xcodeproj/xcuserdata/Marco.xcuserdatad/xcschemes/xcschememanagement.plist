@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>myVita copy 2 2.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
 		<key>myVita copy 2.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -22,6 +27,11 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>A9390455176B945E00EE5F3D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>A998117F171AF48100DA20AC</key>
 		<dict>
 			<key>primary</key>

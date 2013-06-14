@@ -25,9 +25,7 @@
         locationManager.desiredAccuracy = kCLLocationAccuracyBest;
         locationManager.distanceFilter = kCLDistanceFilterNone;
     }
-    CLLocation *location = [locationManager location];
-    
-    return location;
+    return [locationManager location];
 }
 
 /**

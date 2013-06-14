@@ -37,6 +37,8 @@
 		A98CE111176B977700DCBF48 /* IconaMyVita_29x29.png in Resources */ = {isa = PBXBuildFile; fileRef = A98CE10E176B977700DCBF48 /* IconaMyVita_29x29.png */; };
 		A98CE114176B977700DCBF48 /* IconaMyVita_58x58.png in Resources */ = {isa = PBXBuildFile; fileRef = A98CE10F176B977700DCBF48 /* IconaMyVita_58x58.png */; };
 		A98CE115176B977700DCBF48 /* IconaMyVita_58x58.png in Resources */ = {isa = PBXBuildFile; fileRef = A98CE10F176B977700DCBF48 /* IconaMyVita_58x58.png */; };
+		A98CE11A176B99BD00DCBF48 /* IconaMyVita_120x120.png in Resources */ = {isa = PBXBuildFile; fileRef = A98CE119176B99BD00DCBF48 /* IconaMyVita_120x120.png */; };
+		A98CE11B176B99BD00DCBF48 /* IconaMyVita_120x120.png in Resources */ = {isa = PBXBuildFile; fileRef = A98CE119176B99BD00DCBF48 /* IconaMyVita_120x120.png */; };
 		A98DE3811702430D00604EEF /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A98DE3801702430D00604EEF /* libsqlite3.0.dylib */; };
 		A98DE3841702431D00604EEF /* Database.m in Sources */ = {isa = PBXBuildFile; fileRef = A98DE3831702431D00604EEF /* Database.m */; };
 		A998117C171AF42F00DA20AC /* dae114x114.png in Resources */ = {isa = PBXBuildFile; fileRef = A998117B171AF42F00DA20AC /* dae114x114.png */; };
@@ -147,6 +149,8 @@
 		A98CE10C176B968D00DCBF48 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Media.xcassets; path = myVita/Media.xcassets; sourceTree = "<group>"; };
 		A98CE10E176B977700DCBF48 /* IconaMyVita_29x29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IconaMyVita_29x29.png; sourceTree = "<group>"; };
 		A98CE10F176B977700DCBF48 /* IconaMyVita_58x58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IconaMyVita_58x58.png; sourceTree = "<group>"; };
+		A98CE118176B98FF00DCBF48 /* myVita.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = myVita.entitlements; sourceTree = "<group>"; };
+		A98CE119176B99BD00DCBF48 /* IconaMyVita_120x120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IconaMyVita_120x120.png; sourceTree = "<group>"; };
 		A98DE3801702430D00604EEF /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		A98DE3821702431D00604EEF /* Database.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Database.h; sourceTree = "<group>"; };
 		A98DE3831702431D00604EEF /* Database.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Database.m; sourceTree = "<group>"; };
@@ -250,6 +254,7 @@
 		A939048A176B948600EE5F3D /* Icone */ = {
 			isa = PBXGroup;
 			children = (
+				A98CE119176B99BD00DCBF48 /* IconaMyVita_120x120.png */,
 				A98CE10E176B977700DCBF48 /* IconaMyVita_29x29.png */,
 				A98CE10F176B977700DCBF48 /* IconaMyVita_58x58.png */,
 				A939048B176B949300EE5F3D /* iconaMyVita57x57.png */,
@@ -388,6 +393,7 @@
 		A9A3145017023A7C0081BC88 /* myVita */ = {
 			isa = PBXGroup;
 			children = (
+				A98CE118176B98FF00DCBF48 /* myVita.entitlements */,
 				A9999364173031E70070D259 /* Images */,
 				A950890717034EDC006AC00F /* Controllers */,
 				A950890517034757006AC00F /* Location */,
@@ -519,6 +525,19 @@
 			attributes = {
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = Algos;
+				TargetAttributes = {
+					A9A3144617023A7C0081BC88 = {
+						DevelopmentTeam = E6SK3ZTKK6;
+						SystemCapabilities = {
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+							com.apple.iOS = {
+								enabled = 1;
+							};
+						};
+					};
+				};
 			};
 			buildConfigurationList = A9A3144217023A7C0081BC88 /* Build configuration list for PBXProject "myVita" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -553,6 +572,7 @@
 				A9390497176B949300EE5F3D /* iconaMyVita.png in Resources */,
 				A9981198171AF48100DA20AC /* MainStoryboard.storyboard in Resources */,
 				A9981199171AF48100DA20AC /* first.png in Resources */,
+				A98CE11B176B99BD00DCBF48 /* IconaMyVita_120x120.png in Resources */,
 				A98CE111176B977700DCBF48 /* IconaMyVita_29x29.png in Resources */,
 				A998119A171AF48100DA20AC /* first@2x.png in Resources */,
 				A98CE115176B977700DCBF48 /* IconaMyVita_58x58.png in Resources */,
@@ -589,6 +609,7 @@
 				A9C580BA171C663300F60071 /* greenColor.png in Resources */,
 				A9C580C5171C67C500F60071 /* greenColor1.png in Resources */,
 				A9157E161725A20C0001DACE /* loadingImage.png in Resources */,
+				A98CE11A176B99BD00DCBF48 /* IconaMyVita_120x120.png in Resources */,
 				A9157E181725A3180001DACE /* Senza titolo-1.png in Resources */,
 				A98B3D4E172B277C001EAC04 /* Default-568h@2x.png in Resources */,
 				A98B3D4F172B277C001EAC04 /* Default.png in Resources */,
@@ -796,6 +817,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = myVita/myVita.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "myVita/myVita-Prefix.pch";
 				INFOPLIST_FILE = "myVita/myVita-Info.plist";
@@ -808,6 +831,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = myVita/myVita.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "myVita/myVita-Prefix.pch";
 				INFOPLIST_FILE = "myVita/myVita-Info.plist";

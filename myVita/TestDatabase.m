@@ -99,8 +99,6 @@
     [array addObject:dic1];
     [array addObject:dic2];
     [array addObject:dic3];
-    NSArray *reuturnArray = [Database sortWithArray2:array];
-    int k = 0;
 }
 
 

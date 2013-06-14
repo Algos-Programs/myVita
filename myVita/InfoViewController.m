@@ -293,7 +293,7 @@ BOOL viewAll = YES;
 
 - (int)calcoloDistanza:(CLLocation *)location {
     
-    float f = [[LibLocation findCurrentLocation] distanceFromLocation:location];
+    float f = [[LibLocation location] distanceFromLocation:location];
     return f;
 }
 

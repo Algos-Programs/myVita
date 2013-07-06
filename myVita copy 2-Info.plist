@@ -14,10 +14,7 @@
 		<dict>
 			<key>CFBundleIconFiles</key>
 			<array>
-				<string>iconaMyVita</string>
-				<string>iconaMyVita_114x114</string>
-				<string>iconaMyVita57x57</string>
-				<string>dae114x114.png</string>
+				<string>Cuore icona.png</string>
 				<string>dae57x57.png</string>
 			</array>
 		</dict>

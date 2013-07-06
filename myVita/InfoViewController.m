@@ -5,12 +5,14 @@
 //  Created by Marco Velluto on 27/03/13.
 //  Copyright (c) 2013 Algos. All rights reserved.
 //
+// Classe che controlla la vista "Lista DAE"
 
 #import "InfoViewController.h"
 #import "FirstViewController.h"
 #import "LibLocation.h"
 #import "DetailViewController.h"
 #import "Database.h"
+#import "LibSort.h"
 
 @interface InfoViewController ()
 
@@ -18,12 +20,16 @@
 
 @implementation InfoViewController
 
+#define kBgQueue dispatch_get_global_queue (DISPATCH_QUEUE_PRIORITY_DEFAULT, 0) //1
+#define kLatestKivaLoansURL [NSURL URLWithString:@"http://77.43.32.198:8080/myvitaback/mappa/datidefinitivi"] //2
+
+
 NSString *titleFooter = @"";
 
 BOOL viewAll = YES;
+BOOL limitazioneDistanza = NO;
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
+- (id)initWithStyle:(UITableViewStyle)style {
     self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
@@ -31,23 +37,25 @@ BOOL viewAll = YES;
     return self;
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
+    Database *db = [[Database alloc] init];
     
     [self.navigationController.navigationBar setTintColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"greenColor1.png"]]]; //Red as an example.
 
     arrayDefibrillatori = [[[NSMutableArray alloc] init] autorelease];
     arraySort = [[[NSMutableArray alloc] init] autorelease];
     arrayDefibrillatoriToView = [[NSMutableArray alloc] init];
+    
+    //-- Prendo i defibrillatori che sono visualizzati nella vista FirstViewController.
     FirstViewController *fvc = [self.tabBarController.viewControllers objectAtIndex:0];
     arrayDefibrillatori = [fvc.posizionrDef copy];
     
-    Database *db = [[Database alloc] init];
-    [db openDB];
+    //arrayDefibrillatori = (NSMutableArray *)[db objects];
     
+    [db openDB];
     [db createTableDefibrillatori];
-    arrayDefibrillatori = (NSMutableArray *)[db objectsV2];
+    arrayDefibrillatori = (NSMutableArray *)[db objectsV3];
     self.navigationItem.title = [NSString stringWithFormat:@"%i su 356", arrayDefibrillatori.count];
     
     
@@ -57,15 +65,8 @@ BOOL viewAll = YES;
         coordinate.latitude = [[tempDic valueForKey:KEY_LATITUDINE] doubleValue];
         coordinate.longitude = [[tempDic valueForKey:KEY_LONGITUDINE] doubleValue];
         
-        if ((coordinate.longitude || coordinate.longitude) != 0) {
-            CLLocation *tempLocation = [[CLLocation alloc] initWithLatitude:
-                                        coordinate.latitude longitude:coordinate.longitude];
-            if (viewAll) {
-                if ([[LibLocation location] distanceFromLocation:tempLocation] < 100000) {
-                    [arrayDefibrillatoriToView addObject:tempDic];
-                }
-            }
-        }
+        //TODO: Scelgo se mostrare tutti i dae o solo quelli con le coordinate.
+        [self inserisciDaeConCoordinate:tempDic coordinate:coordinate];
     }
     self.navigationItem.title = @"Lista Defibrillatori";
     titleFooter = [NSString stringWithFormat:@"%i/%i su 356 - <100.000 km", arrayDefibrillatoriToView.count,arrayDefibrillatori.count];
@@ -74,12 +75,11 @@ BOOL viewAll = YES;
 
 - (void)viewWillAppear:(BOOL)animated {
     
-    arraySort = [Database sortWithArray2:arrayDefibrillatoriToView];
+    //arraySort = [Database sortWithArray2:arrayDefibrillatoriToView];
+    arraySort = (NSMutableArray *)[LibSort oridinamentoArrayV3:arrayDefibrillatoriToView];
 }
 
-
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
@@ -141,23 +141,22 @@ BOOL viewAll = YES;
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
     return 1;
 }
+
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
     return titleFooter;
     
 }
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
     return arrayDefibrillatoriToView.count + 1;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *text = @"";
     NSString *detail = @"";
     static NSString *CellIdentifier = @"";
@@ -268,8 +267,7 @@ BOOL viewAll = YES;
 
 #pragma mark - Table view delegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row != 0) {
         DetailViewController *detailViewController = [[DetailViewController alloc] init];
 
@@ -290,11 +288,10 @@ BOOL viewAll = YES;
     
 }
 
-
 - (int)calcoloDistanza:(CLLocation *)location {
     
-    float f = [[LibLocation location] distanceFromLocation:location];
-    return f;
+    //float f = [[LibLocation findCurrentLocation] distanceFromLocation:location];
+    return [[LibLocation location] distanceFromLocation:location];
 }
 
 //**********************************************
@@ -314,8 +311,43 @@ BOOL viewAll = YES;
 }
 
 - (IBAction)pressButtonRefresh:(id)sender {
-    //UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Aggiornamento" message:@"La lista è gia aggiornata" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-    //[alertView show];
     
+    FirstViewController *fvc = [[FirstViewController alloc] init];
+    [fvc getData];
+   
+    /*
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Aggiornamento" message:@"La lista è gia aggiornata" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    [alertView show];
+    */
 }
+
+//**********************************************
+#pragma mark - Metodi di comodo
+//**********************************************
+
+
+/**
+ Inserisce i dati nell'array dei dati da visalizzare soltanto se ci sono ENTRAMBE le coordinate del DAE nel record.
+ */
+- (void)inserisciDaeConCoordinate:(NSDictionary *)tempDic coordinate:(CLLocationCoordinate2D)coordinate {
+    if ((coordinate.longitude || coordinate.longitude) != 0) {
+        CLLocation *tempLocation = [[CLLocation alloc] initWithLatitude:
+                                    coordinate.latitude longitude:coordinate.longitude];
+        if (viewAll) {
+            if ([[LibLocation location] distanceFromLocation:tempLocation] < 100000) {
+                [arrayDefibrillatoriToView addObject:tempDic];
+            }        
+        }
+    }
+}
+
+/**
+ Inserisce i dati nell'array dei dati da visualizzare anche se non sono prensenti le coordinate del DAE nel record.
+ Questa funzione verrà utilizzata solo in caso di debug e non verrà mai resa disponibile al pubblico.
+ */
+- (void)inserisciDaeSenzaCoordinate:(NSDictionary *)tempDic coordinate:(CLLocationCoordinate2D)coordinate {
+    [arrayDefibrillatoriToView addObject:tempDic];
+}
+
+
 @end

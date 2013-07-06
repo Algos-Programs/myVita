@@ -16,7 +16,7 @@
 
 @end
 
-@interface FirstViewController : UIViewController <CLLocationManagerDelegate, MKMapViewDelegate, MKAnnotation> {
+@interface FirstViewController : UIViewController <CLLocationManagerDelegate, MKMapViewDelegate, MKAnnotation, UIAlertViewDelegate> {
     
     //-- Localizzazione
     CLGeocoder *gecoder;
@@ -47,7 +47,7 @@
 @property (nonatomic, strong)NSString *country;
 
 @property (nonatomic, strong)NSArray *posizionrDef;
-
+@property (nonatomic)BOOL datiDefinitivi;
 @property (nonatomic, strong)NSMutableArray *arr;
 
 @property (nonatomic)double latitude;

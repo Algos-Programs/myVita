@@ -11,6 +11,8 @@
 #import "LibMap.h"
 #import "Database.h"
 #import "Annotation.h"
+#import "LibUtil.h"
+#import "Costanti.h"
 
 
 
@@ -22,6 +24,7 @@
 
 #define kBgQueue dispatch_get_global_queue (DISPATCH_QUEUE_PRIORITY_DEFAULT, 0) //1
 #define kLatestKivaLoansURL [NSURL URLWithString:@"http://77.43.32.198:8080/myvitaback/mappa"] //2
+#define kDatiDefinitivi [NSURL URLWithString:@"http://77.43.32.198:8080/myvitaback/mappa/datidefinitivi"] //2
 
 @implementation FirstViewController
 @synthesize mapView;
@@ -36,18 +39,10 @@ static BOOL WITH_REFRESH = YES;
 
 
 
-- (void)getData {
-    dispatch_sync(kBgQueue, ^{
-        
-        NSData* data = [NSData dataWithContentsOfURL:
-                        kLatestKivaLoansURL];
-        [self performSelectorOnMainThread:@selector(fetchedData:)
-                               withObject:data waitUntilDone:YES];
-    });
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self getBool];
     [self.mapView setDelegate:self];
     self.mapView.mapType = MKMapTypeStandard;
     
@@ -60,66 +55,23 @@ static BOOL WITH_REFRESH = YES;
     }
     else {
         WITH_REFRESH = NO;
-        [self loadDae:db daeArray:daeArray];
+        [self loadDae];
         [self.loadImage setHidden:YES];
     }
     
     
-//    if (WITH_REFRESH) {
-//        dispatch_async(kBgQueue, ^{
-//            
-//            NSData* data = [NSData dataWithContentsOfURL:
-//                            kLatestKivaLoansURL];
-//            [self performSelectorOnMainThread:@selector(fetchedData:)
-//                                   withObject:data waitUntilDone:YES];
-//        });
-//    }
-//    else
-//        [self.loadImage setHidden:YES];
-
-    
-
     // Mostro all'utente la sua posizione sulla mappa.
     self.mapView.showsUserLocation = YES;
     
 }
-
-- (void)loadDae { //OK
-    Database *db = [[Database alloc] init];
-    NSArray *daeArray = [db objects];
-    [self loadDae:db daeArray:daeArray];
-}
-- (void)loadDae:(Database *)db daeArray:(NSArray *)daeArray {
-    int distanceMin = MAXFLOAT;
-    NSArray *locationArray = [db allLocation];
-    
-    for (int i=0; i<locationArray.count; i++) {
-        CLLocation *location = [[locationArray objectAtIndex:i] autorelease];
-        Annotation *newAnnotation = [[Annotation alloc] init];
-        NSNumber *distance = [[[NSNumber alloc] initWithFloat:[[LibLocation location] distanceFromLocation:location]] autorelease];
-        NSString *indirizzo = [[daeArray objectAtIndex:i] valueForKey:KEY_INDIRIZZO];
-        NSString *disponibilita = [[daeArray objectAtIndex:i] valueForKey:KEY_DISPONIBILITA];
-        newAnnotation.title = [NSString stringWithFormat:@"%i metri", [distance intValue]];
-        newAnnotation.subtitle = [NSString stringWithFormat:@"%@ - %@", disponibilita, indirizzo];
-        newAnnotation.coordinate = location.coordinate;
-        if ([distance intValue] < distanceMin) {
-            distanceMin = [distance intValue];
-            daePiuVicino = location;
-        }
-        [self.mapView addAnnotation:newAnnotation];
-        
-    }
-    
-    self.distanceLabel.text = [NSString stringWithFormat:@"%i metri", distanceMin];
-}
-
 
 - (void)viewWillAppear:(BOOL)animated {
     [self loadDae];
     // Init Geocoder.
     gecoder = [[CLGeocoder alloc] init];
     
-    [self localizedMe]; //init manager.
+    [LibLocation location];
+    //[self localizedMe]; //init manager.
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -153,54 +105,6 @@ static BOOL WITH_REFRESH = YES;
 #pragma mark - Fetch Data Methods
 //************************************
 
-- (void)fetchedData:(NSData *)responseData {
-    
-    if (responseData) {
-        //parse out the json data
-        NSError* error;
-        
-        //Array di Dictionary.
-        NSArray* json = [NSJSONSerialization
-                         JSONObjectWithData:responseData //1
-                         options:kNilOptions
-                         error:&error];
-        
-        NSLog(@"DESCR_JSON: %@", [json description]); //3
-        NSLog(@"COUNT_JSON: %lu", (unsigned long)[json count]); //3
-        NSLog(@"COUNT_KEY_JSON: %i", [[[json objectAtIndex:0] allKeys] count]);
-        
-        Database *db = [[Database alloc] init];
-        [db openDB];
-        
-        [db DeleteTable:@"Defibrillatori"];
-        [db createTableDefibrillatori];
-        
-        NSLog(@"-.- Inzio Carico Dati -.-");
-        
-        CGFloat progressBarCount = 1.0000 / json.count;
-        
-        int c =0;
-        for (int i=0; i<json.count; i++) {
-            [self.progressBar setProgress:progressBarCount * i];
-
-            if (![db insertRecord:[json objectAtIndex:i]]) {
-                NSLog(@"--- i = %i", i);
-                c++;
-            }
-
-        }
-        
-        NSLog(@"-.- Fine Carico Dati -.-");
-        //NSLog(@"c = %i", c);
-        
-    }
-    
-    [self.progressIndicatorView stopAnimating];
-    [self.progressIndicatorView setHidesWhenStopped:YES];
-    self.loadImage.hidden = YES;
-    [self.view reloadInputViews];
-    [self pressButtonSeeDaeAndActualPosition:nil];
-}
 
 //************************************
 #pragma mark - Localization Methods
@@ -310,6 +214,214 @@ static BOOL WITH_REFRESH = YES;
 }
 
 //************************************
+#pragma mark - Carico Dati
+//************************************
+
+/**
+ Prepara il metodo loadDae:deaAray
+ */
+- (void)loadDae { //OK
+    Database *db = [[Database alloc] init];
+    NSArray *daeArray = [db objectsV3];
+    [self loadDaeWithDaeArray:daeArray];
+}
+
+/**
+ Inserisce i DAE nella mappa.
+ SOLO I DAE CON LE LE LOCALIZZAZIONI VERRANNO INSERITE NELLA MAPPA.
+ @param db -> Database da cui prendere tutti i dati con le relative localizzazioni.
+ @param daeArray -> array contentente tutti i dati presenti del database.
+ @deprecated
+ */
+//TODO: Carico Dae sulla mappa.
+- (void)loadDae:(Database *)db daeArray:(NSArray *)daeArray {
+    int distanceMin = MAXFLOAT;
+    NSArray *locationArray = [db allLocation];
+    
+    for (int i=0; i<locationArray.count; i++) {
+        CLLocation *location = [[locationArray objectAtIndex:i] autorelease];
+        Annotation *newAnnotation = [[Annotation alloc] init];
+        NSNumber *distance = [[[NSNumber alloc] initWithFloat:[[LibLocation location] distanceFromLocation:location]] autorelease];
+        NSString *indirizzo = [[daeArray objectAtIndex:i] valueForKey:KEY_INDIRIZZO];
+        NSString *disponibilita = [[daeArray objectAtIndex:i] valueForKey:KEY_DISPONIBILITA];
+        newAnnotation.title = [NSString stringWithFormat:@"%i metri", [distance intValue]];
+        newAnnotation.subtitle = [NSString stringWithFormat:@"%@ - %@", disponibilita, indirizzo];
+        newAnnotation.coordinate = location.coordinate;
+        if ([distance intValue] < distanceMin) {
+            distanceMin = [distance intValue];
+            daePiuVicino = location;
+        }
+        [self.mapView addAnnotation:newAnnotation];
+        
+    }
+    if (distanceMin > 100000 || distanceMin < 0) {
+        [self.distanceLabel setFont:[UIFont systemFontOfSize:10]];
+        self.distanceLabel.text = @"Distanza non disponibile";
+    }
+    else
+        self.distanceLabel.text = [NSString stringWithFormat:@"%i metri", distanceMin];
+}
+
+/**
+ Inserisce nella mappa i DAE contenuti nell'array passato come parametro.
+ */
+//TODO: Carico Dae sulla mappa.
+- (void)loadDaeWithDaeArray:(NSArray *)daeArray {
+    int distanceMin = MAXFLOAT;
+    for (NSDictionary *dic in daeArray) {
+        double latituidine = (double)[[dic objectForKey:KEY_LATITUDINE] doubleValue];
+        double longituidine = (double)[[dic objectForKey:KEY_LONGITUDINE] doubleValue];
+        CLLocation *location = [[CLLocation alloc] initWithLatitude:latituidine longitude:longituidine];
+        Annotation *newAnnotation = [[Annotation alloc] init];
+        NSNumber *distance = [[[NSNumber alloc] initWithFloat:[[LibLocation location] distanceFromLocation:location]] autorelease];
+        NSString *indirizzo = [dic valueForKey:KEY_INDIRIZZO];
+        NSString *disponibilita = [dic valueForKey:KEY_DISPONIBILITA];
+        newAnnotation.title = [NSString stringWithFormat:@"%i metri", [distance intValue]];
+        newAnnotation.subtitle = [NSString stringWithFormat:@"%@ - %@", disponibilita, indirizzo];
+        newAnnotation.coordinate = location.coordinate;
+        if ([distance intValue] < distanceMin) {
+            distanceMin = [distance intValue];
+            daePiuVicino = location;
+        }
+        [self.mapView addAnnotation:newAnnotation];
+    }
+    self.distanceLabel.text = [NSString stringWithFormat:@"%i metri", distanceMin];
+
+}
+
+
+//** Prendo il BOOL dati definitivi
+
+/**
+ Prende la risposta dal server
+ SI -> se i dati sono quelli definitivi,
+ di conseguenza visualizzerò soltanto quelli con il flag ok settato su YES.
+ */
+- (void)getBool {
+    dispatch_sync(kBgQueue, ^{
+        
+        NSData* data = [NSData dataWithContentsOfURL:
+                        kDatiDefinitivi];
+        [self performSelectorOnMainThread:@selector(fetchedBool:)
+                               withObject:data waitUntilDone:YES];
+    });
+}
+- (void)fetchedBool:(NSData *)responseData {
+    
+    if (responseData) {
+        //parse out the json data
+        NSError* error;
+        
+        //Array di Dictionary.
+        NSArray* json = [NSJSONSerialization
+                         JSONObjectWithData:responseData //1
+                         options:kNilOptions
+                         error:&error];
+        
+        
+        NSLog(@"DESCR_JSON: %@", [json description]); //3
+        
+        self.datiDefinitivi = [LibUtil isTRUE:[json description]];
+    }
+    
+    else {
+        UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"Errore" message:@"Fallita connessione al server \nImpossible scaricare risposta" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        [alerView setTag:1];
+        [alerView show];
+    }
+}
+
+//** Prendo tutti i dati del JSON
+/**
+ Prendo i dati del json.
+ */
+- (void)getData {
+    dispatch_sync(kBgQueue, ^{
+        
+        NSData* data = [NSData dataWithContentsOfURL:
+                        kLatestKivaLoansURL];
+        [self performSelectorOnMainThread:@selector(fetchedData:)
+                               withObject:data waitUntilDone:YES];
+    });
+}
+- (void)inseriscoDati:(int)c i:(int)i json:(NSArray *)json db:(Database *)db {
+    if (![db insertRecord:[json objectAtIndex:i]]) {
+        
+        
+        NSLog(@"--- i = %i", i);
+        c++;
+    }
+}
+
+- (void)fetchedData:(NSData *)responseData {
+    
+    if (responseData) {
+        //parse out the json data
+        NSError* error;
+        
+        //Array di Dictionary.
+        NSArray* json = [NSJSONSerialization
+                         JSONObjectWithData:responseData //1
+                         options:kNilOptions
+                         error:&error];
+        
+        NSLog(@"DESCR_JSON: %@", [json description]); //3
+        NSLog(@"COUNT_JSON: %lu", (unsigned long)[json count]); //3
+        NSLog(@"COUNT_KEY_JSON: %i", [[[json objectAtIndex:0] allKeys] count]);
+        
+        Database *db = [[Database alloc] init];
+        [db openDB];
+        
+        [db DeleteTable:@"Defibrillatori"];
+        [db createTableDefibrillatori];
+        
+        NSLog(@"-.- Inzio Carico Dati -.-");
+        
+        CGFloat progressBarCount = 1.0000 / json.count;
+        
+        int c =0;
+        for (int i=0; i<json.count; i++) {
+            [self.progressBar setProgress:progressBarCount * i];
+            
+            //TODO: Flag dati definitivi
+            if (/*self.datiDefinitivi*/false) { //Controllo il flag "dati definitivi"
+                NSDictionary *tempDic = [[[NSDictionary alloc] init] autorelease];
+                tempDic = [json objectAtIndex:i];
+                
+                if ([LibUtil isOK:[tempDic objectForKey:KEY_OK]]) { //inserisco solo quel col flag ok definitivo
+                    [self inseriscoDati:c i:i json:json db:db];
+                }
+            }
+            else //inserisco tutti i dati nel db
+                [self inseriscoDati:c i:i json:json db:db];
+            
+        }
+        
+        NSLog(@"-.- Fine Carico Dati -.-");
+        //NSLog(@"c = %i", c);
+        
+        [self.progressIndicatorView stopAnimating];
+        [self.progressIndicatorView setHidesWhenStopped:YES];
+        [self.view reloadInputViews];
+        [self pressButtonSeeDaeAndActualPosition:nil];
+        self.loadImage.hidden = YES;
+        
+        
+         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Aggiornamento" message:@"La lista è gia aggiornata" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alertView setTag:DATI_AGGIORNATI_SUCCESSFULL];
+        [alertView show];
+         
+    }
+    
+    else {
+        UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"Errore" message:@"Fallita connessione al server \nImpossibile scaricare le posizion dei DAE" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        [alerView setTag: DATI_AGGIORNATI_ERROR];
+        [alerView show];
+        self.loadImage.hidden = YES;
+    }
+}
+
+//************************************
 #pragma mark - Action Methods
 //************************************
 
@@ -338,4 +450,25 @@ static BOOL WITH_REFRESH = YES;
     UIBarButtonItem *barButtonItem = (UIBarButtonItem *)sender;
     [LibMap zoomMap:self.mapView withLatitudinalMeters:barButtonItem.tag + 100 andLongitudinalMeters:barButtonItem.tag + 100];
 }
+
+//************************************
+#pragma mark - Alert view delegate
+//************************************
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    int k = 0;
+    switch (alertView.tag) {
+        case DATI_AGGIORNATI_SUCCESSFULL:
+            
+            [self viewWillAppear:NO];
+            
+            //[LibMap zoomMap:self.mapView];
+            [self pressButtonSeeDaeAndActualPosition:nil];
+            break;
+            
+        default:
+            break;
+    }
+}
+
 @end

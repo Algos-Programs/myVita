@@ -9,6 +9,11 @@
 			<key>orderHint</key>
 			<integer>3</integer>
 		</dict>
+		<key>myVita copy 2 copy.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>4</integer>
+		</dict>
 		<key>myVita copy 2.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -27,7 +32,7 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>A9390455176B945E00EE5F3D</key>
+		<key>A92E8B1E1767789300AF35D2</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -47,7 +52,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A9D0A4D9176752500097E534</key>
+		<key>A9C8CDE1177C65BD00FADC83</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A9C8CE18177C677400FADC83</key>
 		<dict>
 			<key>primary</key>
 			<true/>

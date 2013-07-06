@@ -15,6 +15,7 @@
 
 @implementation DetailViewController
 
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -37,6 +38,7 @@
     [arrayNameInfo addObject:@"Disponibilità"];
     [arrayNameInfo addObject:@"Posizione"];
     [arrayNameInfo addObject:@"Indirizzo"];
+    [arrayNameInfo addObject:@"Comune"];
     [arrayNameInfo addObject:@"Riferimento"];
     [arrayNameInfo addObject:@"Telefono Punto Blu"];
     
@@ -45,6 +47,7 @@
     [arrayValueTV addObject:[_dicInfo valueForKey:KEY_DISPONIBILITA]];
     [arrayValueTV addObject:[_dicInfo valueForKey:KEY_LOCALITA]];
     [arrayValueTV addObject:[_dicInfo valueForKey:KEY_INDIRIZZO]];
+    [arrayValueTV addObject:[_dicInfo valueForKey:KEY_COMUNE]];
     if ([_dicInfo valueForKey:KEY_RIFERIMENTO]) {
         [arrayValueTV addObject:[_dicInfo valueForKey:KEY_RIFERIMENTO]];
     }

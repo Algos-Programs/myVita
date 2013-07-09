@@ -285,7 +285,12 @@ static BOOL WITH_REFRESH = YES;
         }
         [self.mapView addAnnotation:newAnnotation];
     }
-    self.distanceLabel.text = [NSString stringWithFormat:@"%i metri", distanceMin];
+    if (distanceMin > 100000) {
+        self.distanceLabel.text = @"Distanza non disponibile";
+        [self.distanceLabel setFont:[UIFont systemFontOfSize:10.0]];
+    }
+    else
+        self.distanceLabel.text = [NSString stringWithFormat:@"%i metri", distanceMin];
 
 }
 
@@ -446,6 +451,12 @@ static BOOL WITH_REFRESH = YES;
     }
 }
 
+- (IBAction)pressButtonChiama118:(id)sender {
+    UIAlertView *aletView = [[[UIAlertView alloc] initWithTitle:@"Attenzione" message:@"Stai per chiamare il 118" delegate:self cancelButtonTitle:@"Annulla" otherButtonTitles:@"Chiama", nil] autorelease];
+    [aletView setTag:CHIAMA_118];
+    [aletView show];
+}
+
 - (IBAction)pressButtonsItemBar:(id)sender {
     UIBarButtonItem *barButtonItem = (UIBarButtonItem *)sender;
     [LibMap zoomMap:self.mapView withLatitudinalMeters:barButtonItem.tag + 100 andLongitudinalMeters:barButtonItem.tag + 100];
@@ -456,14 +467,24 @@ static BOOL WITH_REFRESH = YES;
 //************************************
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
-    int k = 0;
     switch (alertView.tag) {
         case DATI_AGGIORNATI_SUCCESSFULL:
-            
             [self viewWillAppear:NO];
-            
-            //[LibMap zoomMap:self.mapView];
             [self pressButtonSeeDaeAndActualPosition:nil];
+            break;
+            
+        default:
+            break;
+    }
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    switch (alertView.tag) {
+        case CHIAMA_118:
+            if (buttonIndex==1) { //Chiama 118.
+                UIAlertView *aletView = [[[UIAlertView alloc] initWithTitle:@"PERFTTO" message:@"HAI PREMUTO SU CHIAMA" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] autorelease];
+                [aletView show]; 
+            }
             break;
             
         default:

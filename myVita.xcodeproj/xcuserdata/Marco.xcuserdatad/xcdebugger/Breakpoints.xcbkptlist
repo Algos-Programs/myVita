@@ -385,11 +385,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "myVita/Database.m"
-         timestampString = "394805182.004273"
+         timestampString = "395069218.977462"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "832"
-         endingLineNumber = "832"
+         startingLineNumber = "906"
+         endingLineNumber = "906"
          landmarkName = "+minInArray:withI:withZ:withCurrentPosition:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -489,11 +489,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "myVita/Database.m"
-         timestampString = "394805182.004273"
+         timestampString = "395069218.977462"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "796"
-         endingLineNumber = "796"
+         startingLineNumber = "870"
+         endingLineNumber = "870"
          landmarkName = "+minInArray2:withI:withZ:withCurrentPosition:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -502,11 +502,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "myVita/Database.m"
-         timestampString = "394805182.004273"
+         timestampString = "395069218.977462"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "804"
-         endingLineNumber = "804"
+         startingLineNumber = "878"
+         endingLineNumber = "878"
          landmarkName = "+minInArray2:withI:withZ:withCurrentPosition:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -515,11 +515,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "myVita/Database.m"
-         timestampString = "394805182.004273"
+         timestampString = "395069218.977462"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "805"
-         endingLineNumber = "805"
+         startingLineNumber = "879"
+         endingLineNumber = "879"
          landmarkName = "+minInArray2:withI:withZ:withCurrentPosition:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -528,11 +528,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "myVita/Database.m"
-         timestampString = "394805182.004273"
+         timestampString = "395069218.977462"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "822"
-         endingLineNumber = "822"
+         startingLineNumber = "896"
+         endingLineNumber = "896"
          landmarkName = "+minInArray:withI:withZ:withCurrentPosition:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -541,11 +541,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "myVita/Database.m"
-         timestampString = "394805182.004273"
+         timestampString = "395069218.977462"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "828"
-         endingLineNumber = "828"
+         startingLineNumber = "902"
+         endingLineNumber = "902"
          landmarkName = "+minInArray:withI:withZ:withCurrentPosition:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -554,11 +554,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "myVita/Database.m"
-         timestampString = "394805182.004273"
+         timestampString = "395069218.977462"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "797"
-         endingLineNumber = "797"
+         startingLineNumber = "871"
+         endingLineNumber = "871"
          landmarkName = "+minInArray2:withI:withZ:withCurrentPosition:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -879,11 +879,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "myVita/FirstViewController.m"
-         timestampString = "394805357.01159"
+         timestampString = "395069444.458945"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "474"
-         endingLineNumber = "474"
+         startingLineNumber = "495"
+         endingLineNumber = "495"
          landmarkName = "@implementation FirstViewController"
          landmarkType = "3">
       </FileBreakpoint>
@@ -905,11 +905,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "myVita/FirstViewController.m"
-         timestampString = "394805357.01159"
+         timestampString = "395069444.458945"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "447"
-         endingLineNumber = "447"
+         startingLineNumber = "452"
+         endingLineNumber = "452"
          landmarkName = "-pressButtonSeeDaeAndActualPosition:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -918,24 +918,24 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "myVita/FirstViewController.m"
-         timestampString = "394805357.01159"
+         timestampString = "395069444.458945"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "448"
-         endingLineNumber = "448"
-         landmarkName = "@implementation FirstViewController"
-         landmarkType = "3">
+         startingLineNumber = "454"
+         endingLineNumber = "454"
+         landmarkName = "-pressButtonChiama118:"
+         landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "myVita/FirstViewController.m"
-         timestampString = "394805357.01159"
+         timestampString = "395069444.458945"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "445"
-         endingLineNumber = "445"
+         startingLineNumber = "450"
+         endingLineNumber = "450"
          landmarkName = "-pressButtonSeeDaeAndActualPosition:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -944,11 +944,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "myVita/FirstViewController.m"
-         timestampString = "394805357.01159"
+         timestampString = "395069444.458945"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "449"
-         endingLineNumber = "449"
+         startingLineNumber = "460"
+         endingLineNumber = "460"
          landmarkName = "-pressButtonsItemBar:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1035,11 +1035,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "myVita/Database.m"
-         timestampString = "394805182.004273"
+         timestampString = "395069218.977462"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "983"
-         endingLineNumber = "983"
+         startingLineNumber = "1057"
+         endingLineNumber = "1057"
          landmarkName = "@implementation Database"
          landmarkType = "3">
       </FileBreakpoint>
@@ -1139,11 +1139,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "myVita/Database.m"
-         timestampString = "394805182.004273"
+         timestampString = "395069218.977462"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "780"
-         endingLineNumber = "780"
+         startingLineNumber = "854"
+         endingLineNumber = "854"
          landmarkName = "+minInArray2:withI:withZ:withCurrentPosition:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1152,11 +1152,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "myVita/Database.m"
-         timestampString = "394805182.004273"
+         timestampString = "395069218.977462"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "766"
-         endingLineNumber = "766"
+         startingLineNumber = "840"
+         endingLineNumber = "840"
          landmarkName = "+sortWithArray2:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1165,11 +1165,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "myVita/Database.m"
-         timestampString = "394805182.004273"
+         timestampString = "395069218.977462"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "767"
-         endingLineNumber = "767"
+         startingLineNumber = "841"
+         endingLineNumber = "841"
          landmarkName = "+sortWithArray2:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1178,11 +1178,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "myVita/Database.m"
-         timestampString = "394805182.004273"
+         timestampString = "395069218.977462"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "768"
-         endingLineNumber = "768"
+         startingLineNumber = "842"
+         endingLineNumber = "842"
          landmarkName = "+sortWithArray2:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1230,11 +1230,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "myVita/Database.m"
-         timestampString = "394805182.004273"
+         timestampString = "395069218.977462"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "772"
-         endingLineNumber = "772"
+         startingLineNumber = "846"
+         endingLineNumber = "846"
          landmarkName = "+sortWithArray2:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1295,11 +1295,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "myVita/Database.m"
-         timestampString = "394805182.004273"
+         timestampString = "395069218.977462"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "760"
-         endingLineNumber = "760"
+         startingLineNumber = "834"
+         endingLineNumber = "834"
          landmarkName = "+sortWithArray2:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1321,11 +1321,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "myVita/FirstViewController.m"
-         timestampString = "394805357.01159"
+         timestampString = "395069444.458945"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "302"
-         endingLineNumber = "302"
+         startingLineNumber = "307"
+         endingLineNumber = "307"
          landmarkName = "-getBool"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1334,11 +1334,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "myVita/FirstViewController.m"
-         timestampString = "394805357.01159"
+         timestampString = "395069444.458945"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "312"
-         endingLineNumber = "312"
+         startingLineNumber = "317"
+         endingLineNumber = "317"
          landmarkName = "-fetchedBool:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1347,11 +1347,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "myVita/FirstViewController.m"
-         timestampString = "394805357.01159"
+         timestampString = "395069444.458945"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "325"
-         endingLineNumber = "325"
+         startingLineNumber = "330"
+         endingLineNumber = "330"
          landmarkName = "-fetchedBool:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1561,19 +1561,6 @@
          startingLineNumber = "46"
          endingLineNumber = "46"
          landmarkName = "-viewDidLoad"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "myVita/FirstViewController.m"
-         timestampString = "394805357.01159"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "459"
-         endingLineNumber = "459"
-         landmarkName = "-alertView:didDismissWithButtonIndex:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

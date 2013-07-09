@@ -11,6 +11,7 @@
 typedef enum {
     DATI_AGGIORNATI_SUCCESSFULL,
     DATI_AGGIORNATI_ERROR,
+    CHIAMA_118,
 }TagAlertView;
 
 @interface Costanti : NSObject

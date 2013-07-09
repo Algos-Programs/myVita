@@ -734,9 +734,83 @@ static NSString * const DATABASE_NAME = @"database.sql";
         NSLog(@"Non ci sono elementi nella tabella %@", TABLE_NAME_DEFIBRILLATORI);
     }
     return returnArray;
-    
 }
 
+/**
+ Ritorna un array di dictionary dove sono presenti tutti gli oggetti con COORDINATE > 0 e il falg OK = SI.
+ */
+- (NSArray *)objectsV3WithOk {
+    [self openDB];
+    NSMutableArray *returnArray = [[NSMutableArray alloc] init];
+    NSString * qsql = [NSString stringWithFormat:@"SELECT %@,%@,%@,%@,%@,%@,%@,%@,%@ FROM %@ WHERE %@ > 0 AND %@ > 0 AND %@ == SI",
+                       KEY_DISPONIBILITA, KEY_LOCALITA, KEY_INDIRIZZO ,KEY_NOME, KEY_TELEFONO, KEY_TEL_PUNTO_BLU, KEY_LATITUDINE, KEY_LONGITUDINE, KEY_COMUNE, TABLE_NAME_DEFIBRILLATORI,KEY_LATITUDINE, KEY_LONGITUDINE, KEY_OK];
+    sqlite3_stmt *statment;
+    if (sqlite3_prepare_v2(db, [qsql UTF8String], -1, &statment, nil) == SQLITE_OK) {
+        
+        while (sqlite3_step(statment) == SQLITE_ROW) {
+            NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+            NSString *strValue = [[[NSString alloc] init] autorelease];
+            char *charValue;
+            
+            //-- Disponibilità
+            charValue = (char *) sqlite3_column_text(statment, 0);
+            strValue = [strValue initWithUTF8String:charValue];
+            [dic setValue:strValue forKey:KEY_DISPONIBILITA];
+            
+            //-- Posizione/Località
+            charValue = (char *) sqlite3_column_text(statment, 1);
+            strValue = [strValue initWithUTF8String:charValue];
+            [dic setValue:strValue forKey:KEY_LOCALITA];
+            
+            //-- Indirizzo
+            charValue = (char *) sqlite3_column_text(statment, 2);
+            strValue = [strValue initWithUTF8String:charValue];
+            [dic setValue:strValue forKey:KEY_INDIRIZZO];
+            
+            //-- Nome Referente
+            charValue = (char *) sqlite3_column_text(statment, 3);
+            strValue = [strValue initWithUTF8String:charValue];
+            [dic setValue:strValue forKey:KEY_NOME];
+            
+            //-- Telefono
+            charValue = (char *) sqlite3_column_text(statment, 4);
+            strValue = [strValue initWithUTF8String:charValue];
+            [dic setValue:strValue forKey:KEY_TELEFONO];
+            
+            //-- Telefono Punto Blu
+            charValue = (char *) sqlite3_column_text(statment, 5);
+            strValue = [strValue initWithUTF8String:charValue];
+            [dic setValue:strValue forKey:KEY_TEL_PUNTO_BLU];
+            
+            //-- Latitudine
+            charValue = (char *) sqlite3_column_text(statment, 6);
+            strValue = [strValue initWithUTF8String:charValue];
+            [dic setValue:strValue forKey:KEY_LATITUDINE];
+            
+            //-- Longitudine
+            charValue = (char *) sqlite3_column_text(statment, 7);
+            strValue = [strValue initWithUTF8String:charValue];
+            [dic setValue:strValue forKey:KEY_LONGITUDINE];
+            
+            //-- Telefono Punto Blu
+            charValue = (char *) sqlite3_column_text(statment, 8);
+            strValue = [strValue initWithUTF8String:charValue];
+            [dic setValue:strValue forKey:KEY_COMUNE];
+            
+            
+            [returnArray addObject:dic];
+        }//end while
+        sqlite3_finalize(statment);
+    }//end if
+    else
+        NSLog(@"***** Error do not possible get all objs");
+    
+    if ([returnArray count] == 0) {
+        
+        NSLog(@"Non ci sono elementi nella tabella %@", TABLE_NAME_DEFIBRILLATORI);
+    }
+    return returnArray;
+}
 
 + (NSMutableArray *)sortWithArray:(NSMutableArray *)mArray {
     NSMutableArray *returnArray = [[NSMutableArray alloc] init];

@@ -63,6 +63,7 @@
 - (IBAction)pressButtonZoom:(id)sender;
 - (IBAction)pressButtonZoomDAE:(id)sender;
 - (IBAction)pressButtonSeeDaeAndActualPosition:(id)sender;
+- (IBAction)pressButtonChiama118:(id)sender;
 
 - (IBAction)pressButtonsItemBar:(id)sender;
 @end

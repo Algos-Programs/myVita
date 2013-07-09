@@ -40,7 +40,14 @@
                             <navigationBar contentMode="scaleToFill" barStyle="blackOpaque" translatesAutoresizingMaskIntoConstraints="NO" id="PBa-Kb-50U">
                                 <color key="tintColor" red="0.0" green="0.47390396659707723" blue="9.8240520880495618e-05" alpha="1" colorSpace="calibratedRGB"/>
                                 <items>
-                                    <navigationItem title="myVita" id="2Hv-xG-oZh"/>
+                                    <navigationItem title="myVita" id="2Hv-xG-oZh">
+                                        <barButtonItem key="rightBarButtonItem" title="Chiama 118" id="sLF-WW-M2m">
+                                            <color key="tintColor" red="1" green="0.18380987460000001" blue="0.02988233169" alpha="1" colorSpace="calibratedRGB"/>
+                                            <connections>
+                                                <action selector="pressButtonChiama118:" destination="2" id="38j-4O-Dqp"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
                                 </items>
                             </navigationBar>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oY2-ap-K0d">
@@ -103,18 +110,11 @@
                                 </items>
                                 <color key="tintColor" red="0.0" green="0.47390396659707723" blue="9.8240520880495618e-05" alpha="1" colorSpace="calibratedRGB"/>
                             </toolbar>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Senza titolo-1.png" translatesAutoresizingMaskIntoConstraints="NO" id="Ywf-s1-q1l">
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="419" id="JIH-Db-djW"/>
-                                </constraints>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="etB-Ze-Neq" firstAttribute="top" secondItem="16" secondAttribute="top" constant="49" id="0T7-ni-9Jb"/>
-                            <constraint firstItem="Ywf-s1-q1l" firstAttribute="bottom" secondItem="jNN-wq-D7g" secondAttribute="bottom" type="default" id="2al-XU-Hx8"/>
                             <constraint firstItem="oY2-ap-K0d" firstAttribute="leading" secondItem="16" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="8xE-d8-sAh"/>
-                            <constraint firstItem="Ywf-s1-q1l" firstAttribute="leading" secondItem="16" secondAttribute="leading" type="default" id="91h-zM-xcl"/>
                             <constraint firstAttribute="bottom" secondItem="9I0-4u-nMg" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="9jy-Z1-6ji"/>
                             <constraint firstItem="PBa-Kb-50U" firstAttribute="leading" secondItem="16" secondAttribute="leading" type="default" id="Dfg-QX-aI1"/>
                             <constraint firstAttribute="bottom" secondItem="oY2-ap-K0d" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="KG3-TH-S5L"/>
@@ -122,7 +122,6 @@
                             <constraint firstItem="jNN-wq-D7g" firstAttribute="leading" secondItem="16" secondAttribute="leading" type="default" id="PEb-3X-fLs"/>
                             <constraint firstItem="jNN-wq-D7g" firstAttribute="top" secondItem="NdA-rC-GiR" secondAttribute="bottom" type="default" id="PNz-Mp-8wV"/>
                             <constraint firstItem="etB-Ze-Neq" firstAttribute="centerX" secondItem="PBa-Kb-50U" secondAttribute="centerX" type="default" id="Vw2-Ha-Djj"/>
-                            <constraint firstItem="Ywf-s1-q1l" firstAttribute="trailing" secondItem="16" secondAttribute="trailing" type="default" id="Z8v-IU-Djk"/>
                             <constraint firstAttribute="trailing" secondItem="7l1-ft-0fK" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="bRr-t4-6cD"/>
                             <constraint firstItem="9I0-4u-nMg" firstAttribute="leading" secondItem="16" secondAttribute="leading" constant="83" id="bnt-rF-CLs"/>
                             <constraint firstItem="jNN-wq-D7g" firstAttribute="trailing" secondItem="16" secondAttribute="trailing" type="default" id="gpf-si-UjY"/>
@@ -136,13 +135,12 @@
                     <tabBarItem key="tabBarItem" title="Mappa" image="globe.png" id="7"/>
                     <connections>
                         <outlet property="distanceLabel" destination="etB-Ze-Neq" id="MAs-hO-Q0G"/>
-                        <outlet property="loadImage" destination="Ywf-s1-q1l" id="B8B-q3-LzW"/>
                         <outlet property="mapView" destination="NdA-rC-GiR" id="FFf-f8-vRw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="10" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="721" y="166"/>
+            <point key="canvasLocation" x="271" y="186"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="QO3-iC-dNv">
@@ -156,7 +154,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5BW-3t-ZYU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1106" y="166"/>
+            <point key="canvasLocation" x="656" y="186"/>
         </scene>
         <!--Info View Controller - Root View Controller-->
         <scene sceneID="XkK-NK-ljL">
@@ -226,7 +224,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zli-Kc-oIl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="320" y="911"/>
+            <point key="canvasLocation" x="702" y="999"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="i5O-RX-eqx">
@@ -288,7 +286,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IY0-EW-D4f" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="762" y="911"/>
+            <point key="canvasLocation" x="1144" y="999"/>
         </scene>
         <!--Navigation Controller - Lista DAE-->
         <scene sceneID="TNB-7v-7aP">
@@ -304,7 +302,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x1T-EZ-Jc6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-111" y="911"/>
+            <point key="canvasLocation" x="271" y="999"/>
         </scene>
         <!--Prova View Controller-->
         <scene sceneID="sfT-m6-cVE">
@@ -350,51 +348,14 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="14" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="132" y="180"/>
+            <point key="canvasLocation" x="-268" y="172"/>
         </scene>
     </scenes>
     <resources>
         <image name="33-cabinet.png" width="20" height="26"/>
-        <image name="Senza titolo-1.png" width="649" height="960"/>
         <image name="dae2.png" width="50" height="50"/>
         <image name="globe.png" width="26" height="26"/>
     </resources>
-    <classes>
-        <class className="DetailViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/DetailViewController.h"/>
-        </class>
-        <class className="FirstViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/FirstViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="pressButtonSeeDaeAndActualPosition:"/>
-                <relationship kind="action" name="pressButtonZoom:"/>
-                <relationship kind="action" name="pressButtonZoomDAE:"/>
-                <relationship kind="action" name="pressButtonsItemBar:"/>
-                <relationship kind="outlet" name="distanceLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="loadImage" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
-                <relationship kind="outlet" name="progressBar" candidateClass="UIProgressView"/>
-                <relationship kind="outlet" name="progressIndicatorView" candidateClass="UIActivityIndicatorView"/>
-            </relationships>
-        </class>
-        <class className="InfoViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/InfoViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="pressButtonRefresh:"/>
-                <relationship kind="action" name="pressButtonSelect:"/>
-                <relationship kind="outlet" name="buttonSelect" candidateClass="UIBarButtonItem"/>
-            </relationships>
-        </class>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-        <class className="ProvaViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ProvaViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="o" candidateClass="UIActivityIndicatorView"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

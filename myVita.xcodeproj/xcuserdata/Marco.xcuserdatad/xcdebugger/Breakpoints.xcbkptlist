@@ -883,9 +883,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "495"
-         endingLineNumber = "495"
-         landmarkName = "@implementation FirstViewController"
-         landmarkType = "3">
+         endingLineNumber = "495">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -910,7 +908,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "452"
          endingLineNumber = "452"
-         landmarkName = "-pressButtonSeeDaeAndActualPosition:"
+         landmarkName = "-pressButtonsItemBar:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -923,8 +921,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "454"
          endingLineNumber = "454"
-         landmarkName = "-pressButtonChiama118:"
-         landmarkType = "5">
+         landmarkName = "@implementation FirstViewController"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -936,7 +934,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "450"
          endingLineNumber = "450"
-         landmarkName = "-pressButtonSeeDaeAndActualPosition:"
+         landmarkName = "-pressButtonsItemBar:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -949,7 +947,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "460"
          endingLineNumber = "460"
-         landmarkName = "-pressButtonsItemBar:"
+         landmarkName = "-alertView:didDismissWithButtonIndex:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
